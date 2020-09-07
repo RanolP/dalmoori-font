@@ -1,0 +1,12 @@
+{
+    "right": 4,
+    "bottom": 4,
+    "variant": {
+        "short": {
+            "bottom": 3
+        },
+        "no-margin": {
+            "right": 3
+        }
+    }
+}

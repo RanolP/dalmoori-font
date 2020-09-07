@@ -1,0 +1,11 @@
+{
+    "right": 0,
+    "bottom": 4,
+    "variant": {
+        "right": {},
+        "short": {
+            "bottom": 3
+        },
+        "cut-right": {}
+    }
+}
