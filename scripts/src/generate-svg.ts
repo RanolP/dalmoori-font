@@ -1,7 +1,7 @@
 import { join, mkdirs, writeFile, rimraf } from './util/fs';
 import Svgo from 'svgo';
 import { Syllable } from './core/syllable';
-export async function generateSvg(): Promise<void> {
+export async function generateSvg(): Promise<number> {
   const svgo = new Svgo({});
   const paths = {
     glyphBase: './glyph',
@@ -15,7 +15,7 @@ export async function generateSvg(): Promise<void> {
   let current = 0;
   for (const onset of 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ'.substring(0, 12)) {
     for (const nucleus of 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ') {
-      for (const coda of [undefined, ...'ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ'.substring(0, 2)]) {
+      for (const coda of [undefined, ...'ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ'.substring(0, 16)]) {
         current += 1;
         const syllable = await Syllable.of(paths.glyphBase, onset, nucleus, coda);
         const svgPath = join(
@@ -49,4 +49,5 @@ export async function generateSvg(): Promise<void> {
 
   console.log(`Processed ${current} (whole ${whole}) but error ${error}`);
   console.log(`${((current - error) * 100 / whole).toFixed(2)}% covered.`);
+  return (current - error) * 100 / whole;
 }

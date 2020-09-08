@@ -32,3 +32,8 @@ img.character {
     height: 4rem;
     width: 4rem;
 }
+
+img.icon {
+    height: 1em;
+    width: 1em;
+}

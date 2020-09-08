@@ -1,7 +1,7 @@
 import dedent from 'dedent';
 import { readdir, mkdirs, exists, writeFile, copyFile } from './util/fs';
 
-export async function generatePreview(): Promise<void> {
+export async function generatePreview(donePercentage: number): Promise<void> {
   const pageAvailable = await readdir('./build/svg-glyph');
   for (const page of pageAvailable) {
     const pageId = parseInt(page, 16);
@@ -42,6 +42,11 @@ export async function generatePreview(): Promise<void> {
           <a href="/dalmoori-font">
             달무리 v1.0.0
           </a>
+
+          <a href="https://github.com/RanolP/dalmoori-font">
+            <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            GitHub에서 확인하기
+          </a>
         </header>
         
         <main>
@@ -73,13 +78,18 @@ export async function generatePreview(): Promise<void> {
         <a href="/dalmoori-font/">
           달무리 v1.0.0
         </a>
+
+        <a href="https://github.com/RanolP/dalmoori-font">
+          <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+          GitHub에서 확인하기
+        </a>
       </header>
       
       <main>
         8×8 한글 글꼴, 달무리.
         <br>
         <br>
-        미리 보기
+        미리 보기 (현대 한글 ${donePercentage.toFixed(2)}% 지원)
         <ul>
           ${pageAvailable.map(page => dedent`
             <li>
