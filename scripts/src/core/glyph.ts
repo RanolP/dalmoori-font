@@ -1,90 +1,146 @@
-import dedent from 'dedent';
-import { PathLike, readFile } from 'fs';
+import { basename, join, PathLike, readdir } from '../util/fs';
+import { AsciiFont } from './asciiFont';
 
-export type GlyphData = Array<[x: number, y: number]>;
+const ONSET_REGEX = /onset-(\d+)-(\d+)/;
+const CODA_REGEX = /coda-(\d+)/;
 
-export class Glyph {
-  private static FileCache: Record<string, Glyph> = {};
-  private constructor(private readonly data: GlyphData) { }
-
-  static async fromFile(file: PathLike): Promise<Glyph> {
-    const key = file.toString();
-    if (!(key in Glyph.FileCache)) {
-      const result = await new Promise<Glyph>((resolve, reject) => {
-        readFile(file, { encoding: 'utf8' }, (err, data) => {
-          if (err) {
-            reject(err);
-            return;
+export class Consonant {
+  private static Cache: Record<string, Consonant> = {};
+  private constructor(
+     public readonly onset: Onset,
+     public readonly coda: Coda,
+  ) { }
+  
+  public static async from(basepath: PathLike, compatPhoneme: string): Promise<Consonant> {
+    const path = join(basepath.toString(), compatPhoneme);
+    if (!(path in Consonant.Cache)) {
+      const onsetParts: Record<number, Record<number, OnsetPart>> = {};
+      const codaheightFontMap: Record<number, AsciiFont> = {};
+      for (const file of await readdir(path)) {
+        const name = basename(file, '.txt');
+        const onset = ONSET_REGEX.exec(name);
+        if (onset !== null) {
+          const [width, height] = onset.slice(1).map(Number);
+          const asciiFont = await AsciiFont.fromFile(join(path, file));
+          const variantsRequirementsMap: Record<string, string[]> = {};
+          for (const target of Object.keys(asciiFont.meta['variant'] ?? {})) {
+            variantsRequirementsMap[target] = asciiFont.meta['variant'][target] ?? [];
           }
-          try {
-            resolve(this.parse(data));
-          } catch (e) {
-            reject(file + ', ' + e);
+          if (!(width in onsetParts)) {
+            onsetParts[width] = {};
           }
-        })
-      });
-      if (!(key in Glyph.FileCache)) {
-        Glyph.FileCache[key] = result;
-      }
-    }
-    return Glyph.FileCache[key];
-  }
-
-  private static parse(source: string): Glyph {
-    const data = [] as GlyphData;
-    let index = 0;
-    for (const c of source) {
-      switch (c) {
-        case '\r':
-        case '\n':
-        case '\t':
-        case ' ': {
+          onsetParts[width][height] =new OnsetPart(asciiFont, variantsRequirementsMap);
           continue;
         }
-        case '#': {
-          data.push([Math.floor(index / 8), index % 8]);
-          index += 1;
-          break;
-        }
-        case 'x':
-        case '.': {
-          index += 1;
-          break;
-        }
-        default: {
-          throw new Error(`Invalid character: ${c}`);
+        const coda = CODA_REGEX.exec(name);
+        if (coda !== null) {
+          const asciiFont = await AsciiFont.fromFile(join(path, file));
+          const [height] = coda.slice(1).map(Number);
+          codaheightFontMap[height] = asciiFont;
         }
       }
-      if (index > 64) {
-        throw new Error('Too many characters');
+  
+      const convertOnset = 'ᄀᄁ ᄂ  ᄃᄄᄅ       ᄆᄇᄈ ᄉᄊᄋᄌᄍᄎᄏᄐᄑᄒ';
+      const convertCoda = 'ᆨᆩᆪᆫᆬᆭᆮ ᆯᆰᆱᆲᆳᆴᆵᆶᆷᆸ ᆹᆺᆻᆼᆽ ᆾᆿᇀᇁᇂ';
+  
+      const compatConsonant = 'ㄱㄲㄳㄴㄵㄶㄷㄸㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅃㅄㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
+  
+      if (!(path in Consonant.Cache)) {
+        Consonant.Cache[path] = new Consonant(
+          new Onset(new PhonemeName(convertOnset[compatConsonant.indexOf(compatPhoneme)],compatPhoneme), onsetParts),
+          new Coda(new PhonemeName(convertCoda[compatConsonant.indexOf(compatPhoneme)],compatPhoneme), codaheightFontMap)
+        );
       }
     }
-
-    return new Glyph(data);
+    return Consonant.Cache[path];
   }
-  with(other: Glyph | undefined): Glyph {
-    if (other === undefined) {
-      return this;
-    } else {
-      return new Glyph([...new Set([...this.data, ...other.data])]);
+}
+
+export class PhonemeName {
+  constructor(
+    public readonly std: string,
+    public readonly compat: string
+  ) { }
+}
+
+export class OnsetPart {
+  constructor(
+    public readonly font: AsciiFont,
+    public readonly variantRequirementsMap: Record<string, string[]>,
+  ) { }
+}
+export class Onset {
+  constructor(
+    public readonly name: PhonemeName,
+    public readonly onsetParts: Record<number, Record<number, OnsetPart>>,
+  ) {}
+
+  public find(width: number, height: number): OnsetPart | undefined {
+    return this.onsetParts[width]?.[height];
+  }
+}
+
+export class NucleusVariant {
+  constructor(
+    public readonly font: AsciiFont,
+    public readonly variantsApplied: Record<string, boolean>,
+    public readonly widthOccupying: number,
+    public readonly marginLeft: number[],
+    public readonly heightOccupying: number,
+    public readonly marginTop: number[],
+  ) { }
+}
+export class Nucleus {
+  private static Cache: Record<string, Nucleus> = {};
+  constructor(
+    public readonly name: PhonemeName,
+    public readonly variants: NucleusVariant[]
+  ) { }
+
+  public static async from(basepath: PathLike, compatPhoneme: string): Promise<Nucleus> {
+    const path = join(basepath.toString(), compatPhoneme);
+    if (!(path in Nucleus.Cache)) {
+      const variants: NucleusVariant[] = [];
+
+      for (const file of await readdir(path)) {
+        const font = await AsciiFont.fromFile(join(path, file));
+
+        const marginLeft = font.meta['margin-left'] ? [font.meta['margin-left']].flat().sort((a, b) => b - a) : [0];
+        const marginTop = font.meta['margin-top'] ? [font.meta['margin-top']].flat().sort((a, b) => b - a) : [0];
+
+        variants.push(new NucleusVariant(
+          font,
+          basename(file, '.txt').split(',').reduce((acc, curr) => ({ ...acc, [curr]: true }), {}),
+          font.meta['width-occupying'] ?? 0,
+          marginLeft,
+          font.meta['height-occupying'] ?? 0,
+          marginTop,
+        ));
+      }
+
+      if (!(path in Nucleus.Cache)) {
+        const standardNucleus = 'ᅡᅢᅣᅤᅥᅦᅧᅨᅩᅪᅫᅬᅭᅮᅯᅰᅱᅲᅳᅴᅵ';
+        const compatVowel = 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
+        Nucleus.Cache[path] = new Nucleus(
+          new PhonemeName(standardNucleus[compatVowel.indexOf(compatPhoneme)], compatPhoneme),
+          variants
+        );
+      }
     }
+    return Nucleus.Cache[path];
+  }
+}
+
+export class Coda {
+  public readonly heightList: number[];
+  constructor(
+    public readonly name: PhonemeName,
+    private readonly heightFontMap: Record<number, AsciiFont>
+  ) {
+    this.heightList = Object.keys(this.heightFontMap).map(Number).sort((a, b) => b - a);
   }
 
-  renderAsciiFont(): string {
-    return Array.from({ length: 8 }).map((_, x) =>
-      Array.from({ length: 8 }).map((_, y) =>
-        this.data.some(([ox, oy]) => ox === x && oy === y) ? '#' : '.'
-      ).join(' ')
-    ).join('\n');
-  }
-
-  renderSvg(): string {
-    return dedent`
-      <svg viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        ${this.data.map(([x, y]) => dedent`
-          <rect x="${y}" y="${x}" width="1" height="1" />
-        `).join('\n')}
-      </svg>
-    `;
+  public fontForHeight(height: number): AsciiFont {
+    return this.heightFontMap[height];
   }
 }

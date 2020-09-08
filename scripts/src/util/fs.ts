@@ -1,10 +1,10 @@
-import { mkdir, access } from 'fs/promises';
+import { mkdir, access, readdir, stat, rmdir, unlink } from 'fs/promises';
 import { PathLike, constants } from 'fs';
-import { dirname, resolve } from 'path';
+import { dirname, resolve, join} from 'path';
 
-export { readFile, writeFile } from 'fs/promises';
+export { readFile, writeFile, readdir, copyFile } from 'fs/promises';
 export { PathLike } from 'fs';
-export { join } from 'path';
+export { join, basename } from 'path';
 
 export const exists = async (path: PathLike): Promise<boolean> => {
   try {
@@ -17,7 +17,7 @@ export const exists = async (path: PathLike): Promise<boolean> => {
       throw error;
     }
   }
-}
+};
 
 export const notExists = async (path: PathLike): Promise<boolean> => !(await exists(path));
 
@@ -29,4 +29,20 @@ export const mkdirs = async (path: PathLike): Promise<void> => {
   if (await notExists(path)) {
     await mkdir(path);
   }
-}
+};
+
+export const rimraf = async (path: PathLike): Promise<void> => {
+  if (await notExists(path)) {
+    return;
+  }
+  if ((await stat(path)).isFile()) {
+    await unlink(path);
+    return;
+  }
+
+  for (const file of await readdir(path)) {
+    await rimraf(join(path.toString(), file));
+  }
+
+  await rmdir(path);
+};

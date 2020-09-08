@@ -1,0 +1,12 @@
+---
+height-occupying = 3
+margin-top = 1
+---
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+. . . . . . . .
+# # # # # # # .
+. . # . # . . .
+. . # . # . . .

@@ -1,0 +1,29 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: hsl(230, 5%, 90%);
+}
+
+header {
+    background-color: white;
+    font-size: 1.5rem;
+    padding: 0.4rem 1.2rem;
+    margin: 1.5rem 3rem;
+    border-radius: 0.5rem;
+}
+
+a:not(.link) {
+    text-decoration: initial;
+    color: initial;
+}
+
+main {
+    background-color: white;
+    font-size: 1.2rem;
+    padding: 0.4rem 1.2rem;
+    margin: 3rem;
+    border-radius: 0.5rem;
+}

@@ -1,3 +1,6 @@
+---
+width-occupying = 3
+---
 x x x x x . # .
 x x x x x . # .
 x x x x x . # .
