@@ -123,7 +123,14 @@ export class Nucleus {
         const compatVowel = 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
         Nucleus.Cache[path] = new Nucleus(
           new PhonemeName(standardNucleus[compatVowel.indexOf(compatPhoneme)], compatPhoneme),
-          variants
+          variants.sort((a, b) => {
+            if (a.variantsApplied['default']) {
+              return -1;
+            } else if (b.variantsApplied['default']) {
+              return 1;
+            }
+            return Object.keys(a.variantsApplied).length - Object.keys(b.variantsApplied).length;
+          })
         );
       }
     }
