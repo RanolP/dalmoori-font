@@ -27,3 +27,8 @@ main {
     margin: 3rem;
     border-radius: 0.5rem;
 }
+
+img.character {
+    height: 4rem;
+    width: 4rem;
+}

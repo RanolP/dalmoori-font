@@ -22,7 +22,7 @@ export async function generatePreview(): Promise<void> {
       } 
       
       characterRendered.push(dedent`
-        <img src="${src}" />
+        <img class="character" src="${src}" />
       `);
     }
     
@@ -70,12 +70,16 @@ export async function generatePreview(): Promise<void> {
     
     <body>
       <header>
-        <a href="/dalmoori-font">
+        <a href="/dalmoori-font/">
           달무리 v1.0.0
         </a>
       </header>
       
       <main>
+        8×8 한글 글꼴, 달무리.
+        <br>
+        <br>
+        미리 보기
         <ul>
           ${pageAvailable.map(page => dedent`
             <li>
