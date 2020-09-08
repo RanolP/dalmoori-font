@@ -33,7 +33,12 @@ img.character {
     width: 4rem;
 }
 
+a.github {
+    margin-left: auto;
+}
+
 img.icon {
     height: 1em;
     width: 1em;
+    vertical-align: middle;
 }

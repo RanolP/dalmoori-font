@@ -43,7 +43,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
             달무리 v1.0.0
           </a>
 
-          <a href="https://github.com/RanolP/dalmoori-font">
+          <a class="github" href="https://github.com/RanolP/dalmoori-font">
             <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
             GitHub에서 확인하기
           </a>
@@ -79,7 +79,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
           달무리 v1.0.0
         </a>
 
-        <a href="https://github.com/RanolP/dalmoori-font">
+        <a class="github" href="https://github.com/RanolP/dalmoori-font">
           <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
           GitHub에서 확인하기
         </a>
