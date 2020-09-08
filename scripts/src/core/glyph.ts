@@ -129,6 +129,13 @@ export class Nucleus {
             } else if (b.variantsApplied['default']) {
               return 1;
             }
+            if (a.variantsApplied['coda'] !== b.variantsApplied['coda']) {
+              if (a.variantsApplied['coda']) {
+                return 1;
+              } else if (b.variantsApplied['coda']) {
+                return -1;
+              }
+            }
             return Object.keys(a.variantsApplied).length - Object.keys(b.variantsApplied).length;
           })
         );
