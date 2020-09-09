@@ -35,10 +35,13 @@ main {
 
 a.github {
     float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .icon {
-    height: 1em;
-    width: 1em;
+    height: 2em;
+    width: 2em;
     vertical-align: middle;
 }

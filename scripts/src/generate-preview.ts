@@ -15,14 +15,14 @@ export async function generatePreview(donePercentage: number): Promise<void> {
       const charCode = (pageId << 8) | id;
       const character = String.fromCharCode(charCode);
       const file = `./build/svg-glyph/${page}/${character}.svg`;
-      let data ='/dalmoori-font/tofu.svg';
+      let src = '/dalmoori-font/tofu.svg';
       if (await exists(file)) {
-        data =`/dalmoori-font/${page}/${character}.svg`;
+        src = `/dalmoori-font/${page}/${character}.svg`;
         await copyFile(file, `../docs/${page}/${character}.svg`);
       } 
       
       characterRendered.push(dedent`
-        <object class="character" type="image/svg+xml" data="${data}"></object>
+        <img class="character" src="${src}" />
       `);
     }
     
@@ -44,7 +44,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
           </a>
 
           <a class="github" href="https://github.com/RanolP/dalmoori-font">
-            <object class="icon" type="image/svg+xml" data="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></object>
+            <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
             GitHub에서 확인하기
           </a>
         </header>
@@ -80,7 +80,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
         </a>
 
         <a class="github" href="https://github.com/RanolP/dalmoori-font">
-        <object class="icon" type="image/svg+xml" data="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></object>
+          <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
           GitHub에서 확인하기
         </a>
       </header>
