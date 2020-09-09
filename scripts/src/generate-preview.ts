@@ -22,7 +22,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
       } 
       
       characterRendered.push(dedent`
-        <img class="character" src="${src}" />
+        <object class="character" src="${src}"></object>
       `);
     }
     
@@ -44,7 +44,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
           </a>
 
           <a class="github" href="https://github.com/RanolP/dalmoori-font">
-            <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+            <object class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></object>
             GitHub에서 확인하기
           </a>
         </header>
@@ -80,7 +80,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
         </a>
 
         <a class="github" href="https://github.com/RanolP/dalmoori-font">
-          <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
+        <object class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></object>
           GitHub에서 확인하기
         </a>
       </header>
