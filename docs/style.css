@@ -28,7 +28,7 @@ main {
     border-radius: 0.5rem;
 }
 
-img.character {
+.character {
     height: 4rem;
     width: 4rem;
 }
@@ -37,7 +37,7 @@ a.github {
     float: right;
 }
 
-img.icon {
+.icon {
     height: 1em;
     width: 1em;
     vertical-align: middle;
