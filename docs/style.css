@@ -34,7 +34,7 @@ img.character {
 }
 
 a.github {
-    margin-left: auto;
+    float: right;
 }
 
 img.icon {
