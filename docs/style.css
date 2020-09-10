@@ -31,6 +31,7 @@ main {
 .character {
     height: 4rem;
     width: 4rem;
+    display: inline-block;
 }
 
 @font-face {
@@ -38,9 +39,18 @@ main {
     src: url('/dalmoori-font/dalmoori.ttf') format('truetype');
 }
 
+main.codepage {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 span.character {
     font-size: 3rem;
     font-family: 'dalmoori';
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 a.github {
