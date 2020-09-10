@@ -33,9 +33,14 @@ main {
     width: 4rem;
 }
 
+@font-face {
+    font-family: 'dalmoori';
+    font-family: url('/dalmoori-font/dalmoori.ttf') format('truetype');
+}
+
 span.character {
     font-size: 3rem;
-    font-family: url('/dalmoori-font/dalmoori.ttf') format('truetype');
+    font-family: 'dalmoori';
 }
 
 a.github {
