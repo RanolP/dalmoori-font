@@ -35,7 +35,7 @@ main {
 
 @font-face {
     font-family: 'dalmoori';
-    font-family: url('/dalmoori-font/dalmoori.ttf') format('truetype');
+    src: url('/dalmoori-font/dalmoori.ttf') format('truetype');
 }
 
 span.character {
