@@ -14,9 +14,9 @@ export class Syllable {
   public static async of(basepath: PathLike, onset: string, nucleus: string, coda?: string): Promise<Syllable> {
     return new Syllable(
       basepath,
-      (await Consonant.from(join(basepath.toString(), 'base', 'consonant'), onset)).onset,
-      await Nucleus.from(join(basepath.toString(), 'base', 'vowel'), nucleus),
-      coda ? (await Consonant.from(join(basepath.toString(), 'base', 'consonant'), coda)).coda : undefined,
+      (await Consonant.from(join(basepath.toString(), 'hangul-phoneme', 'consonant'), onset)).onset,
+      await Nucleus.from(join(basepath.toString(), 'hangul-phoneme', 'vowel'), nucleus),
+      coda ? (await Consonant.from(join(basepath.toString(), 'hangul-phoneme', 'consonant'), coda)).coda : undefined,
     );
   }
 
