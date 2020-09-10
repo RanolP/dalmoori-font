@@ -7,5 +7,5 @@ import { renderAsciiFont } from './render-ascii-font';
   const [map, status] = await renderAsciiFont();
   await generateSvg(map);
   await generateFont(map);
-  await generatePreview(status.ok / status.whole);
+  await generatePreview(100 * status.ok / status.whole);
 })();
