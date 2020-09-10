@@ -48,7 +48,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
           </a>
         </header>
         
-        <main>
+        <main class="codepage">
           ${characterRendered.join('\n')}
         </main>
       </body>
