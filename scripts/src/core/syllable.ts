@@ -38,8 +38,4 @@ export class Syllable {
   async renderAsciiFont(): Promise<string> {
     return (await this.renderGlyph()).renderAsciiFont();
   }
-
-  async renderSvg(): Promise<string> {
-    return (await this.renderGlyph()).renderSvg();
-  }
 }

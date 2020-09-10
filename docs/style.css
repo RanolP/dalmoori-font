@@ -33,6 +33,11 @@ main {
     width: 4rem;
 }
 
+span.character {
+    font-size: 3rem;
+    font-family: url('/dalmoori-font/dalmoori.ttf') format('truetype');
+}
+
 a.github {
     float: right;
     display: flex;

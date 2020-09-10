@@ -1,11 +1,13 @@
 import dedent from 'dedent';
 import { readdir, mkdirs, exists, writeFile, copyFile } from './util/fs';
+import { Version } from './constants';
 
 export async function generatePreview(donePercentage: number): Promise<void> {
+  await copyFile('../font/dalmoori.ttf', '../docs/dalmoori.ttf');
+
   const pageAvailable = await readdir('./build/svg-glyph');
   for (const page of pageAvailable) {
     const pageId = parseInt(page, 16);
-    await mkdirs(`../docs/${page}/`);
 
     const characterRendered = [];
 
@@ -15,15 +17,12 @@ export async function generatePreview(donePercentage: number): Promise<void> {
       const charCode = (pageId << 8) | id;
       const character = String.fromCharCode(charCode);
       const file = `./build/svg-glyph/${page}/${character}.svg`;
-      let src = '/dalmoori-font/tofu.svg';
+      let tag = '<img class="character" src="/dalmoori-font/tofu.svg" />';
       if (await exists(file)) {
-        src = `/dalmoori-font/${page}/${character}.svg`;
-        await copyFile(file, `../docs/${page}/${character}.svg`);
+        tag = `<span class="character">${character}</span>`;
       } 
       
-      characterRendered.push(dedent`
-        <img class="character" src="${src}" />
-      `);
+      characterRendered.push(tag);
     }
     
     const previewData = dedent`
@@ -40,12 +39,12 @@ export async function generatePreview(donePercentage: number): Promise<void> {
       <body>
         <header>
           <a href="/dalmoori-font">
-            달무리 v1.0.0
+            달무리 ${Version}
           </a>
 
           <a class="github" href="https://github.com/RanolP/dalmoori-font">
             <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
-            GitHub에서 확인하기
+            GitHub에서 보기
           </a>
         </header>
         
@@ -57,7 +56,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
       </html>
     `;
 
-    await writeFile(`../docs/${page}/index.html`, previewData);
+    await writeFile(`../docs/codepage/${page}.html`, previewData);
   }
   
   console.log('Generating index');
@@ -76,12 +75,12 @@ export async function generatePreview(donePercentage: number): Promise<void> {
     <body>
       <header>
         <a href="/dalmoori-font/">
-          달무리 v1.0.0
+          달무리 ${Version}
         </a>
 
         <a class="github" href="https://github.com/RanolP/dalmoori-font">
           <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
-          GitHub에서 확인하기
+          GitHub에서 보기
         </a>
       </header>
       
@@ -93,7 +92,7 @@ export async function generatePreview(donePercentage: number): Promise<void> {
         <ul>
           ${pageAvailable.map(page => dedent`
             <li>
-              <a class="link" href="/dalmoori-font/${page}">U+${page}00 ~ U+${page}FF</a>
+              <a class="link" href="/dalmoori-font/codepage/${page}">U+${page}00 ~ U+${page}FF</a>
             </li>
           `).join('\n')}
         </ul>

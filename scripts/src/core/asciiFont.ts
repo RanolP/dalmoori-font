@@ -1,10 +1,33 @@
-import dedent from 'dedent';
 import { PathLike, readFile } from 'fs';
+import Svgo from 'svgo';
+import { CompoundPath, PathItem, Shape, Project, Size, Point } from 'paper';
+import dedent from 'dedent';
+import { ScaleFactor } from '../constants';
+
+type PathItemT = Parameters<ReturnType<typeof PathItem['create']>['unite']>[0];
 
 export type AsciiFontData = Array<[x: number, y: number]>;
 
+const svgo = new Svgo({
+  plugins: [
+    {
+      removeAttrs: {
+        attrs: [
+          'fill',
+          'font-family',
+          'font-weight',
+          'font-size',
+          'text-anchor',
+          'style'
+        ]
+      }
+    }
+  ]
+});
+
 export class AsciiFont {
   private static FileCache: Record<string, AsciiFont> = {};
+  private svgRenderCache: string | undefined = undefined;
   private constructor(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public readonly meta: any,
@@ -36,7 +59,7 @@ export class AsciiFont {
     return AsciiFont.FileCache[key];
   }
 
-  private static parse(source: string): AsciiFont {
+  public static parse(source: string): AsciiFont {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const meta: any = {};
     if (!source.startsWith('---')) {
@@ -49,8 +72,9 @@ export class AsciiFont {
     const metaSet = source
       .substring(3, metaEnd)
       .split('\n')
+      .map(s => s.trim())
       .filter(Boolean)
-      .map(s => s.trim().split('='));
+      .map(s => s.split('='));
 
     for (const metaItem of metaSet) {
       if (metaItem.length !== 2) {
@@ -134,13 +158,32 @@ export class AsciiFont {
     ).join('\n');
   }
 
-  renderSvg(): string {
-    return dedent`
-      <svg viewBox="0 0 ${this.width} ${this.height}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        ${this.data.map(([x, y]) => dedent`
-          <rect x="${x}" y="${y}" width="1" height="1" />
-        `).join('\n')}
-      </svg>
-    `;
+  async renderSvg(): Promise<string> {
+    if (this.svgRenderCache === undefined) {
+      const project = new Project(new Size(this.width, this.height));
+      const path = this.data.reduce<PathItemT>((acc, point) => acc.unite(new Shape.Rectangle({
+        point,
+        size: [1 + 1e-5, 1 + 1e-5],
+        insert: false,
+        project,
+      }).toPath(false)), new CompoundPath({
+        insert: false,
+        project,
+      }));
+      path.scale(ScaleFactor);
+      path.position = new Point(this.width * ScaleFactor / 2, this.height * ScaleFactor / 2);
+      const pathRendered = path.exportSVG({
+        asString: true
+      });
+      const optimized = await svgo.optimize(dedent`
+        <svg viewBox="0 0 ${this.width * ScaleFactor} ${this.height * ScaleFactor}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          ${pathRendered}
+        </svg>
+      `);
+      if (this.svgRenderCache === undefined) {
+        this.svgRenderCache = optimized.data;
+      }
+    }
+    return this.svgRenderCache;
   }
 }
