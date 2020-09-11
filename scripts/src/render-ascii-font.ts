@@ -1,4 +1,4 @@
-import { Syllable } from './core/syllable';
+import { Syllable } from './core/hangul-syllable';
 import { AsciiFont } from './core/asciiFont';
 import { Paths } from './constants';
 

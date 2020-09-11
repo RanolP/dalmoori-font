@@ -1,7 +1,7 @@
 import { PathLike, join } from '../util/fs';
 import { AsciiFont } from './asciiFont';
 import { combine } from './combine';
-import { Coda, Consonant, Nucleus, Onset } from './glyph';
+import { Coda, Consonant, Nucleus, Onset } from './hangul-phoneme';
 
 export class Syllable {
   private constructor(

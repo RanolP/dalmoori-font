@@ -1,5 +1,5 @@
 import { AsciiFont } from './asciiFont';
-import { Coda, Nucleus, Onset } from './glyph';
+import { Coda, Nucleus, Onset } from './hangul-phoneme';
 
 export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont {
   const WIDTH = 8;
