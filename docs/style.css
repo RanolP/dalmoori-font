@@ -28,6 +28,14 @@ main {
     border-radius: 0.5rem;
 }
 
+#test { 
+    resize: none;
+    width: 80%;
+    height: 20rem;
+    font-family: dalmoori;
+    font-size: 1.5rem;
+}
+
 .character {
     height: 4rem;
     width: 4rem;

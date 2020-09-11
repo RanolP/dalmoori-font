@@ -5,18 +5,45 @@ import { AsciiFont } from './core/asciiFont';
 import { createWriteStream } from 'fs';
 import { readFile, writeFile } from './util/fs';
 import { Version } from './constants';
+import ProgressBar from 'progress';
+import chalk from 'chalk';
 
 export async function generateFont(map: Record<string, AsciiFont>): Promise<void> {
+  const entries = Object.entries(map);
+  const bar = new ProgressBar(
+    [
+      chalk.green('Rendering SVG'.padEnd(30)),
+      ':bar',
+      '·',
+      chalk.green(':current/:total'),
+      '·',
+      chalk.magenta(':percent'),
+      '·',
+      chalk.yellow(':rate char/s'),
+      '·',
+      chalk.blue(':etas'),
+      '·',
+      ':text',
+    ].join(' '),
+    {
+      total: entries.length,
+      complete: chalk.green('━'),
+      incomplete: chalk.gray('━'),
+    }
+  );
   const svgFontStream = new SVGIcons2SVGFont({
     fontName: 'dalmoori',
-    descent: 8
+    descent: 8,
+    log: undefined,
   });
-  for (const [syllable, font] of Object.entries(map)) {
+  for (const [character, font] of Object.entries(map)) {
+    const id = character.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0');
     const glyphs = Readable.from(await font.renderSvg()) as Glyphs;
     glyphs.metadata = {
-      name: 'uni'+syllable.charCodeAt(0).toString(16).toUpperCase(),
-      unicode: [...syllable],
+      name: 'uni'+id,
+      unicode: [...character],
     };
+    bar.tick({ text: `${character} (U+${id})` });
     svgFontStream.write(glyphs);
   }
 

@@ -1,30 +1,97 @@
 import { Syllable } from './core/hangul-syllable';
 import { AsciiFont } from './core/asciiFont';
 import { Paths } from './constants';
+import { AllUnicodeBlocks } from './core/unicode-block';
+import { join } from './util/fs';
+import ProgressBar from 'progress';
+import chalk from 'chalk';
 
-export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, AsciiFont>, status: { ok: number, error: number, whole: number }]> {
-  const result: Record<string, AsciiFont> = {};
-
-  const whole = 11172;
-  let error = 0;
-  let current = 0;
+function* hangulPhonemeCombination(): Generator<[onset: string, nucleus: string, coda: string | undefined]> {
   for (const onset of 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ') {
     for (const nucleus of 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ') {
       for (const coda of [undefined, ...'ㄱㄲㄳㄴㄵㄶㄷㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅄㅅㅆㅇㅈㅊㅋㅌㅍㅎ']) {
-        current += 1;
-        const syllable = await Syllable.of(Paths.glyphBase, onset, nucleus, coda);
-        try {
-          result[syllable.text] = await syllable.renderGlyph();
-
-          console.log(`${syllable.text} (${(100 * current / whole).toFixed(2)}%)`);
-        } catch (e) {
-          console.log(`${syllable.text} (${(100 * current / whole).toFixed(2)}%)`, e instanceof Error ? e.message : e);
-          error += 1;
-        }
-
+        yield [onset, nucleus, coda];
       }
     }
   }
+}
 
-  return [result, { ok: current - error, error, whole }];
+export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, AsciiFont>, status: { error: number, total: number }]> {
+  const result: Record<string, AsciiFont> = {};
+
+  for (const block of AllUnicodeBlocks) {
+    const length = block.to - block.from + 1;
+    const bar = new ProgressBar(
+      [
+        chalk.green(`Render ${block.name}`.padEnd(30)),
+        ':bar',
+        '·',
+        chalk.green(':current/:total'),
+        '·',
+        chalk.magenta(':percent'),
+        '·',
+        chalk.yellow(':rate char/s'),
+        '·',
+        chalk.blue('ETA :etas')
+      ].join(' '),
+      {
+        total: length,
+        complete: chalk.green('━'),
+        incomplete: chalk.gray('━'),
+      }
+    );
+    for (let charCode = block.from; charCode <= block.to; charCode++) {
+      const char = String.fromCharCode(charCode);
+      const id = charCode.toString(16).toUpperCase().padStart(4, '0');
+      let font: AsciiFont | undefined = undefined;
+      try {
+        font = await AsciiFont.fromFile(join(Paths.glyphBase, block.id, `${char}.txt`));
+      } catch {
+        try {
+          font = await AsciiFont.fromFile(join(Paths.glyphBase, block.id, `U+${id}.txt`));
+        } catch {
+        /* do nothing */
+        }
+      }
+      bar.tick();
+      if (font === undefined) {
+        continue;
+      }
+      result[char] = font;
+    }
+  }
+  const total = 11172;
+  let error = 0;
+
+  const bar = new ProgressBar(
+    [
+      chalk.green('Render Hangul Syllable'.padEnd(30)),
+      ':bar',
+      '·',
+      chalk.green(':current/:total'),
+      '·',
+      chalk.magenta(':percent'),
+      '·',
+      chalk.yellow(':rate char/s'),
+      '·',
+      chalk.blue('ETA :etas')
+    ].join(' '),
+    {
+      total: total,
+      complete: chalk.green('━'),
+      incomplete: chalk.gray('━'),
+    }
+  );
+
+  for (const [onset, nucleus, coda] of hangulPhonemeCombination()) {
+    const syllable = await Syllable.of(Paths.glyphBase, onset, nucleus, coda);
+    try {
+      result[syllable.text] = await syllable.renderGlyph();
+    } catch (e) {
+      error += 1;
+    }
+    bar.tick();
+  }
+
+  return [result, { error, total }];
 }

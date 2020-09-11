@@ -1,11 +1,11 @@
-import { generateSvg } from './generate-svg';
 import { generatePreview } from './generate-preview';
 import { generateFont } from './generate-font';
+import { generateAsciiFont } from './generate-ascii-font';
 import { renderAsciiFont } from './render-ascii-font';
 
 (async () => {
   const [map, status] = await renderAsciiFont();
-  await generateSvg(map);
+  await generateAsciiFont(map);
   await generateFont(map);
-  await generatePreview(100 * status.ok / status.whole);
+  await generatePreview(new Set(Object.keys(map)), 100 * (status.total - status.error) / status.total);
 })();

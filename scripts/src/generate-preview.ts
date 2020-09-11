@@ -1,11 +1,11 @@
 import dedent from 'dedent';
-import { readdir, exists, writeFile, copyFile } from './util/fs';
+import { readdir, writeFile, copyFile } from './util/fs';
 import { Version } from './constants';
 
-export async function generatePreview(donePercentage: number): Promise<void> {
+export async function generatePreview(availableCharacters: Set<string>, donePercentage: number): Promise<void> {
   await copyFile('../font/dalmoori.ttf', '../docs/dalmoori.ttf');
 
-  const pageAvailable = await readdir('./build/svg-glyph');
+  const pageAvailable = await readdir('./build');
   for (const page of pageAvailable) {
     const pageId = parseInt(page, 16);
 
@@ -16,9 +16,8 @@ export async function generatePreview(donePercentage: number): Promise<void> {
     for (const id of Array.from({ length: 256 }).map((_, index) => index)) {
       const charCode = (pageId << 8) | id;
       const character = String.fromCharCode(charCode);
-      const file = `./build/svg-glyph/${page}/${character}.svg`;
       let tag = '<img class="character" src="/dalmoori-font/tofu.svg" />';
-      if (await exists(file)) {
+      if (availableCharacters.has(character)) {
         tag = `<span class="character">${character}</span>`;
       } 
       
@@ -85,10 +84,11 @@ export async function generatePreview(donePercentage: number): Promise<void> {
       </header>
       
       <main>
-        8×8 한글 글꼴, 달무리.
-        <br>
-        <br>
-        미리 보기 (현대 한글 ${donePercentage.toFixed(2)}% 지원)
+        <h1>8×8 한글 글꼴, 달무리.</h1>
+        <h3>써보기</h3>
+        <textarea id="test" placeholder="다람쥐 헌 쳇바퀴에 타고파\nThe quick brown fox jumped over the lazy dog"></textarea>
+
+        <h3>코드페이지 열람 (현대 한글 ${donePercentage.toFixed(2)}% 지원)</h3>
         <ul>
           ${pageAvailable.map(page => dedent`
             <li>
