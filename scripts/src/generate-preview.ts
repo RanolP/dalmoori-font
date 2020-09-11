@@ -1,5 +1,5 @@
 import dedent from 'dedent';
-import { readdir, mkdirs, exists, writeFile, copyFile } from './util/fs';
+import { readdir, exists, writeFile, copyFile } from './util/fs';
 import { Version } from './constants';
 
 export async function generatePreview(donePercentage: number): Promise<void> {

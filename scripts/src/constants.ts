@@ -6,3 +6,8 @@
  */
 export const ScaleFactor = 8;
 export const Version = '0.1';
+
+export const Paths = {
+  glyphBase: './glyph',
+  build: './build',
+};
