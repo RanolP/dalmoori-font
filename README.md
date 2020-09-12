@@ -17,3 +17,7 @@
 
 - 소스 코드: MIT
 - 글꼴 파일: SIL OFL 1.1
+
+## 도움을 주신 분들
+
+- [@EatChangmyeong](https://ithub.com/EatChangMyeong)
