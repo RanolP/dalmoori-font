@@ -4,7 +4,7 @@ import { Readable } from 'stream';
 import { AsciiFont } from './core/asciiFont';
 import { createWriteStream } from 'fs';
 import { readFile, writeFile } from './util/fs';
-import { Version } from './constants';
+import { TotalHeight, Version } from './constants';
 import ProgressBar from 'progress';
 import chalk from 'chalk';
 
@@ -12,7 +12,7 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
   const entries = Object.entries(map);
   const bar = new ProgressBar(
     [
-      chalk.green('Rendering SVG'.padEnd(30)),
+      'Rendering SVG'.padEnd(25),
       ':bar',
       '·',
       chalk.green(':current/:total'),
@@ -21,20 +21,19 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
       '·',
       chalk.yellow(':rate char/s'),
       '·',
-      chalk.blue(':etas'),
-      '·',
-      ':text',
+      chalk.blue('ETA :etas'),
     ].join(' '),
     {
       total: entries.length,
       complete: chalk.green('━'),
       incomplete: chalk.gray('━'),
+      width: 150,
     }
   );
   const svgFontStream = new SVGIcons2SVGFont({
     fontName: 'dalmoori',
-    descent: 8,
-    log: undefined,
+    descent: TotalHeight / 8,
+    log: ()=>{ /* do nothing */},
   });
   for (const [character, font] of Object.entries(map)) {
     const id = character.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0');
@@ -43,7 +42,7 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
       name: 'uni'+id,
       unicode: [...character],
     };
-    bar.tick({ text: `${character} (U+${id})` });
+    bar.tick();
     svgFontStream.write(glyphs);
   }
 

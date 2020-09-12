@@ -23,7 +23,7 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
     const length = block.to - block.from + 1;
     const bar = new ProgressBar(
       [
-        chalk.green(`Render ${block.name}`.padEnd(30)),
+        `Render ${block.name}`.padEnd(25),
         ':bar',
         '·',
         chalk.green(':current/:total'),
@@ -38,6 +38,7 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
         total: length,
         complete: chalk.green('━'),
         incomplete: chalk.gray('━'),
+        width: 150,
       }
     );
     for (let charCode = block.from; charCode <= block.to; charCode++) {
@@ -65,7 +66,7 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
 
   const bar = new ProgressBar(
     [
-      chalk.green('Render Hangul Syllable'.padEnd(30)),
+      'Render Hangul Syllable'.padEnd(25),
       ':bar',
       '·',
       chalk.green(':current/:total'),
@@ -80,6 +81,7 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
       total: total,
       complete: chalk.green('━'),
       incomplete: chalk.gray('━'),
+      width: 150,
     }
   );
 
