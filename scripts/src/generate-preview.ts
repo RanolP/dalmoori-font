@@ -32,12 +32,14 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/dalmoori-font/style.css">
+        <link rel="icon" href="/dalmoori-font/logo.png">
         <title>달무리 글꼴</title>
       </head>
       
       <body>
         <header>
           <a href="/dalmoori-font">
+            <img class="icon" src="/dalmoori-font/logo.png" />
             달무리 ${Version}
           </a>
 
@@ -68,12 +70,14 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="/dalmoori-font/style.css">
+      <link rel="icon" href="/dalmoori-font/logo.png">
       <title>달무리 글꼴</title>
     </head>
     
     <body>
       <header>
         <a href="/dalmoori-font/">
+          <img class="icon" src="/dalmoori-font/logo.png" />
           달무리 ${Version}
         </a>
 
