@@ -10,7 +10,7 @@ export const BasicLatin: UnicodeBlock = {
   name: 'Basic Latin',
   id: 'basic-latin',
   from: 0x0000,
-  to: 0x00FF,
+  to: 0x007F,
   partial: true,
 };
 
