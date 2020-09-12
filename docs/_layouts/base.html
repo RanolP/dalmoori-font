@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    {% include head.html %}
+</head>
+<body class="dalmoori">
+    <header>
+        <h1><a href="/">달무리</a></h1>
+        <a href="https://github.com/{{ site.data.copyrights.github_repo }}">
+            <img src="/assets/img/github.svg" alt="">
+        </a>
+    </header>
+    <section class="main">
+        {% include tools.html %}
+        {{ content }}
+    </section>
+    <section class="copyright trans">
+        <div>{{ site.data.copyrights.footer }}</div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,75 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background: hsl(230, 5%, 90%);
+}
+
+header {
+    background-color: white;
+    font-size: 1.5rem;
+    padding: 0.4rem 1.2rem;
+    margin: 1.5rem 3rem;
+    border-radius: 0.5rem;
+}
+
+a:not(.link) {
+    text-decoration: initial;
+    color: initial;
+}
+
+main {
+    background-color: white;
+    font-size: 1.2rem;
+    padding: 0.4rem 1.2rem;
+    margin: 3rem;
+    border-radius: 0.5rem;
+}
+
+#test { 
+    resize: none;
+    width: 80%;
+    height: 20rem;
+    font-family: dalmoori;
+    font-size: 1.5rem;
+}
+
+.character {
+    height: 4rem;
+    width: 4rem;
+    display: inline-block;
+}
+
+@font-face {
+    font-family: 'dalmoori';
+    src: url('/dalmoori-font/dalmoori.ttf') format('truetype');
+}
+
+main.codepage {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+span.character {
+    font-size: 3rem;
+    font-family: 'dalmoori';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.github {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.icon {
+    height: 2rem;
+    width: 2rem;
+    vertical-align: middle;
+}
