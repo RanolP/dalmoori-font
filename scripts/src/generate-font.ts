@@ -7,12 +7,13 @@ import { readFile, writeFile } from './util/fs';
 import { TotalHeight, Version } from './constants';
 import ProgressBar from 'progress';
 import chalk from 'chalk';
+import { formatHex, LabelWidth, TotalBarWidth } from './util/format';
 
 export async function generateFont(map: Record<string, AsciiFont>): Promise<void> {
   const entries = Object.entries(map);
   const bar = new ProgressBar(
     [
-      'Rendering SVG'.padEnd(25),
+      'Render SVG'.padEnd(LabelWidth),
       ':bar',
       '·',
       chalk.green(':current/:total'),
@@ -27,7 +28,7 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
       total: entries.length,
       complete: chalk.green('━'),
       incomplete: chalk.gray('━'),
-      width: 150,
+      width: TotalBarWidth,
     }
   );
   const svgFontStream = new SVGIcons2SVGFont({
@@ -36,7 +37,7 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
     log: ()=>{ /* do nothing */},
   });
   for (const [character, font] of Object.entries(map)) {
-    const id = character.charCodeAt(0).toString(16).toUpperCase().padStart(4, '0');
+    const id = formatHex(character.charCodeAt(0), 4);
     const glyphs = Readable.from(await font.renderSvg()) as Glyphs;
     glyphs.metadata = {
       name: 'uni'+id,

@@ -5,6 +5,7 @@ import { AllUnicodeBlocks } from './core/unicode-block';
 import { join } from './util/fs';
 import ProgressBar from 'progress';
 import chalk from 'chalk';
+import { formatHex, LabelWidth, TotalBarWidth } from './util/format';
 
 function* hangulPhonemeCombination(): Generator<[onset: string, nucleus: string, coda: string | undefined]> {
   for (const onset of 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ') {
@@ -23,7 +24,7 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
     const length = block.to - block.from + 1;
     const bar = new ProgressBar(
       [
-        `Render ${block.name}`.padEnd(25),
+        `Render ${block.name}`.padEnd(LabelWidth),
         ':bar',
         '·',
         chalk.green(':current/:total'),
@@ -38,12 +39,12 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
         total: length,
         complete: chalk.green('━'),
         incomplete: chalk.gray('━'),
-        width: 150,
+        width: TotalBarWidth,
       }
     );
     for (let charCode = block.from; charCode <= block.to; charCode++) {
       const char = String.fromCharCode(charCode);
-      const id = charCode.toString(16).toUpperCase().padStart(4, '0');
+      const id = formatHex(charCode, 4);
       let font: AsciiFont | undefined = undefined;
       try {
         font = await AsciiFont.fromFile(join(Paths.glyphBase, block.id, `${char}.txt`));
@@ -66,7 +67,7 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
 
   const bar = new ProgressBar(
     [
-      'Render Hangul Syllable'.padEnd(25),
+      'Render Hangul Syllable'.padEnd(LabelWidth),
       ':bar',
       '·',
       chalk.green(':current/:total'),
@@ -78,10 +79,10 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
       chalk.blue('ETA :etas')
     ].join(' '),
     {
-      total: total,
+      total,
       complete: chalk.green('━'),
       incomplete: chalk.gray('━'),
-      width: 150,
+      width: TotalBarWidth,
     }
   );
 
