@@ -5,11 +5,18 @@ permalink: "/code/C7"
 description: "코드 페이지 - 코드 범위: U+C700 ~ U+C7FF"
 ---
 
-<span class="code tofu"></span>
+<span class="character">윀</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="character">위</span>
+<span class="character">윅</span>
+<span class="character">윆</span>
+<span class="code tofu"></span>
+<span class="character">윈</span>
+<span class="code tofu"></span>
+<span class="code tofu"></span>
+<span class="character">윋</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -18,22 +25,15 @@ description: "코드 페이지 - 코드 범위: U+C700 ~ U+C7FF"
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
+<span class="character">윔</span>
+<span class="character">윕</span>
+<span class="character">윖</span>
+<span class="character">윗</span>
+<span class="character">윘</span>
+<span class="character">윙</span>
+<span class="character">윚</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">윜</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

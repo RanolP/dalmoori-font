@@ -5,15 +5,15 @@ permalink: "/code/B7"
 description: "코드 페이지 - 코드 범위: U+B700 ~ U+B7FF"
 ---
 
+<span class="character">뜀</span>
+<span class="character">뜁</span>
+<span class="character">뜂</span>
+<span class="character">뜃</span>
+<span class="character">뜄</span>
+<span class="character">뜅</span>
+<span class="character">뜆</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">뜈</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
