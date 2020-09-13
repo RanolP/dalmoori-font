@@ -28,8 +28,10 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
 
   svgFontStream.end();
 
-  const svgFontPath = join(Paths.build, 'font', 'dalmoori.svg');
-  await mkdirs(svgFontPath);
+  const fontPath = join(Paths.build, 'font');
+  await mkdirs(fontPath);
+
+  const svgFontPath = join(fontPath, 'dalmoori.svg');
 
   await new Promise((resolve, reject) => {
     svgFontStream.pipe(createWriteStream(svgFontPath))
@@ -50,5 +52,5 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
     version: Version,
   });
   const ttfBuffer = Buffer.from(ttf.buffer);
-  await writeFile(join(Paths.build, 'font', 'dalmoori.ttf'), ttfBuffer);
+  await writeFile(join(fontPath, 'dalmoori.ttf'), ttfBuffer);
 }
