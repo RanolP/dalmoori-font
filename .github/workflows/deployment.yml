@@ -15,13 +15,12 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: Enter ./scripts
-        run: cd ./scripts
-
       - name: Install
+        working-directory: ./scripts
         run: npm install
 
       - name: Build
+        working-directory: ./scripts
         run: npm run build:with-pages
 
       - name: Deploy
