@@ -27,3 +27,16 @@ code-xx.md (코드페이지(svg only)) => codepage (코드페이지 레이아웃
 <span class="character">a</span>
 <div class="code tofu"></div>
 ```
+
+## 재사용 가능한 HTML 요소
+토글 버튼
+
+```html
+<label for="##input-id##">
+    <span class="switch">
+        <input id="##input-id##" type="checkbox" checked>
+        <span class="slider"></span>
+    </span>
+    <p>##description##</p>
+</label>
+```
