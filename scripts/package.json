@@ -28,7 +28,6 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "dedent": "^0.7.0",
-    "entities": "^2.0.3",
     "paper-jsdom": "^0.12.11",
     "progress": "^2.0.3",
     "readable-glyph-names": "^1.1.0",

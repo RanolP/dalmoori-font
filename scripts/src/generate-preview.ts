@@ -1,6 +1,5 @@
 import dedent from 'dedent';
 import { readdir, writeFile, copyFile } from './util/fs';
-import { encodeHTML } from 'entities';
 
 export async function generatePreview(availableCharacters: Set<string>, donePercentage: number): Promise<void> {
   await copyFile('../font/dalmoori.ttf', '../docs/dalmoori.ttf');
@@ -18,7 +17,7 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
       const character = String.fromCharCode(charCode);
       let tag = '<div class="code tofu"></div>';
       if (availableCharacters.has(character)) {
-        tag = `<span class="character">${encodeHTML(character)}</span>`;
+        tag = `<span class="character">\\${character}</span>`;
       } 
       
       characterRendered.push(tag);
