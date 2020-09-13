@@ -1,6 +1,8 @@
+---
+---
 @font-face {
     font-family: 'dalmoori';
-    src: url('/assets/dalmoori.ttf') format('truetype');
+    src: url('{{ site.baseurl }}/assets/dalmoori.ttf') format('truetype');
 }
 @font-face {
     font-family: 'NanumBarunGothic';

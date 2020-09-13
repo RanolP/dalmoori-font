@@ -48,7 +48,7 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
   현대 한글 ${donePercentage.toFixed(2)}% 지원  
 
   ${pageAvailable.map(page => dedent`
-    ![U+${page}00 ~ U+${page}FF](/code/${page})  
+    - [U+${page}00 ~ U+${page}FF](/code/${page})  
   `).join('\n')}
   `;
 
