@@ -22,16 +22,10 @@ code-xx.md (코드페이지(svg only)) => codepage (코드페이지 레이아웃
 ```
 
 ## 코드페이지 작성 방법
-svg fill을 직접 수정하는건 좋은 생각이 아닌것 같아 흰배경 `div` 요소에 svg 마스크를 씌우는 방식으로 작성함. (예시 페이지 참조)
 
 ```html
-<style>
-#codeid {
-    mask: url(/assets/img/tofu.svg) no-repeat center;
-    -webkit-mask: url(/assets/img/tofu.svg) no-repeat center;
-}
-</style>
-<div class="code" id="codeid">
+<span class="character">a</span>
+<div class="code tofu"></div>
 ```
 
 ## Jekyll 코드 문의
