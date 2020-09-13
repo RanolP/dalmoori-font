@@ -27,7 +27,3 @@ code-xx.md (코드페이지(svg only)) => codepage (코드페이지 레이아웃
 <span class="character">a</span>
 <div class="code tofu"></div>
 ```
-
-## Jekyll 코드 문의
-RanloP/dalmoori-font [Issue 생성](https://github.com/RanolP/dalmoori-font/issues/new) 후 [@ShapeLayer](https://github.com/ShapeLayer) Assign 또는  
-ShapeLayer/dalmoori-font [Issue 생성](https://github.com/ShapeLayer/dalmoori-font/issues/new)

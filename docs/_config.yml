@@ -1,11 +1,9 @@
 title: 달무리 글꼴 - Dalmoori
 email: public.ranolp@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
 baseurl: "/dalmoori-font" # the subpath of your site, e.g. /blog
 url: "https://ranolp.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+  달무리는 현대 한글 전체를 지원하는 것을 목표로 개발중인 8*8 한글 글꼴입니다.
 github_username: RanolP
 
 # Build settings
