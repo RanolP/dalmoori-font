@@ -5,45 +5,24 @@ import { AsciiFont } from './core/asciiFont';
 import { createWriteStream } from 'fs';
 import { readFile, writeFile } from './util/fs';
 import { OnePixel, Version } from './constants';
-import ProgressBar from 'progress';
-import chalk from 'chalk';
-import { formatHex, LabelWidth, TotalBarWidth } from './util/format';
+import { createProgressIndicator, formatHex } from './util/format';
 
 export async function generateFont(map: Record<string, AsciiFont>): Promise<void> {
   const entries = Object.entries(map);
-  const bar = new ProgressBar(
-    [
-      'Render SVG'.padEnd(LabelWidth),
-      ':bar',
-      '·',
-      chalk.green(':current/:total'),
-      '·',
-      chalk.magenta(':percent'),
-      '·',
-      chalk.yellow(':rate char/s'),
-      '·',
-      chalk.blue('ETA :etas'),
-    ].join(' '),
-    {
-      total: entries.length,
-      complete: chalk.green('━'),
-      incomplete: chalk.gray('━'),
-      width: TotalBarWidth,
-    }
-  );
+  const { tick } = createProgressIndicator('Render SVG', entries.length,);
   const svgFontStream = new SVGIcons2SVGFont({
     fontName: 'dalmoori',
     descent: OnePixel,
-    log: ()=>{ /* do nothing */},
+    log: () => { /* do nothing */ },
   });
   for (const [character, font] of Object.entries(map)) {
     const id = formatHex(character.charCodeAt(0), 4);
     const glyphs = Readable.from(await font.renderSvg()) as Glyphs;
     glyphs.metadata = {
-      name: 'uni'+id,
+      name: 'uni' + id,
       unicode: [...character],
     };
-    bar.tick();
+    tick();
     svgFontStream.write(glyphs);
   }
 

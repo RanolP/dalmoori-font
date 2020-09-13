@@ -11,3 +11,5 @@ export const Paths = {
   glyphBase: './glyph',
   build: './build',
 };
+
+export const IsCI = Boolean(process.env['CI']);
