@@ -107,9 +107,11 @@ div.tools p {
 .codepage {
     padding-top: 30px;
     padding-bottom: 30px;
-    background-color: rgba(256, 256, 256, 0.5);
+    /*background-color: rgba(256, 256, 256, 0.5);*/
 }
+.codepage .code,
 .codepage img {
+    background-color: white;
     height: 4rem;
     width: 4rem;
     display: inline-block;
