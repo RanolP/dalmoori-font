@@ -3,7 +3,7 @@ import SVGIcons2SVGFont, { Glyphs } from 'svgicons2svgfont';
 import { Readable } from 'stream';
 import { AsciiFont } from './core/asciiFont';
 import { createWriteStream } from 'fs';
-import { join, readFile, writeFile } from './util/fs';
+import { join, mkdirs, readFile, writeFile } from './util/fs';
 import { OnePixel, Paths, Version } from './constants';
 import { createProgressIndicator, formatHex } from './util/format';
 
@@ -29,6 +29,7 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
   svgFontStream.end();
 
   const svgFontPath = join(Paths.build, 'font', 'dalmoori.svg');
+  await mkdirs(svgFontPath);
 
   await new Promise((resolve, reject) => {
     svgFontStream.pipe(createWriteStream(svgFontPath))
