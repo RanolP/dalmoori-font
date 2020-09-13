@@ -3,7 +3,7 @@ import { generateAsciiFont } from '../generate-ascii-font';
 import { renderAsciiFont } from '../render-ascii-font';
 
 (async () => {
-  const [map] = await renderAsciiFont();
-  await generateAsciiFont(map);
-  await generateFont(map);
+  const { asciiFontMap } = await renderAsciiFont();
+  await generateAsciiFont(asciiFontMap);
+  await generateFont(asciiFontMap);
 })();

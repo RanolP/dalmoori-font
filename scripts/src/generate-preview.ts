@@ -39,10 +39,9 @@ function escapeMarkdown(char: string): string {
   }
 }
 
-export async function generatePreview(availableCharacters: Set<string>, donePercentage: number): Promise<void> {
+export async function generatePreview(availableCharacters: Set<string>, pageAvailable: Set<string>, donePercentage: number): Promise<void> {
   await copyFile(join(Paths.build, 'font', 'dalmoori.ttf'), '../docs/dalmoori.ttf');
 
-  const pageAvailable = await readdir('./build');
   for (const page of pageAvailable) {
     const pageId = parseInt(page, 16);
 
@@ -83,7 +82,7 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
   ---
   현대 한글 ${donePercentage.toFixed(2)}% 지원  
 
-  ${pageAvailable.map(page => dedent`
+  ${[...pageAvailable].map(page => dedent`
     - [U+${page}00 ~ U+${page}FF]({{ site.baseurl }}/code/${page})  
   `).join('\n')}
   `;

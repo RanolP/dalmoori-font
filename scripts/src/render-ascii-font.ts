@@ -3,9 +3,7 @@ import { AsciiFont } from './core/asciiFont';
 import { Paths } from './constants';
 import { AllUnicodeBlocks } from './core/unicode-block';
 import { join } from './util/fs';
-import ProgressBar from 'progress';
-import chalk from 'chalk';
-import { createProgressIndicator, formatHex, LabelWidth, TotalBarWidth } from './util/format';
+import { createProgressIndicator, formatHex } from './util/format';
 
 function* hangulPhonemeCombination(): Generator<[onset: string, nucleus: string, coda: string | undefined]> {
   for (const onset of 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ') {
@@ -17,13 +15,21 @@ function* hangulPhonemeCombination(): Generator<[onset: string, nucleus: string,
   }
 }
 
-export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, AsciiFont>, status: { error: number, total: number }]> {
-  const result: Record<string, AsciiFont> = {};
+export interface RenderResult {
+  asciiFontMap: Record<string, AsciiFont>
+  pageAvailable: Set<string>,
+  status: { error: number, total: number }
+}
+
+export async function renderAsciiFont(): Promise<RenderResult> {
+  const pageAvailable = new Set<string>();
+  const asciiFontMap: Record<string, AsciiFont> = {};
 
   for (const block of AllUnicodeBlocks) {
     const length = block.to - block.from + 1;
     const { tick } = createProgressIndicator(`Render ${block.name}`, length);
     for (let charCode = block.from; charCode <= block.to; charCode++) {
+      pageAvailable.add(formatHex(charCode >> 8, 2));
       const char = String.fromCharCode(charCode);
       const id = formatHex(charCode, 4);
       let font: AsciiFont | undefined = undefined;
@@ -40,7 +46,7 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
       if (font === undefined) {
         continue;
       }
-      result[char] = font;
+      asciiFontMap[char] = font;
     }
   }
   const total = 11172;
@@ -51,12 +57,13 @@ export async function renderAsciiFont(): Promise<[asciiFontMap: Record<string, A
   for (const [onset, nucleus, coda] of hangulPhonemeCombination()) {
     const syllable = await Syllable.of(Paths.glyphBase, onset, nucleus, coda);
     try {
-      result[syllable.text] = await syllable.renderGlyph();
+      asciiFontMap[syllable.text] = await syllable.renderGlyph();
+      pageAvailable.add(formatHex(syllable.text.charCodeAt(0) >> 8, 2));
     } catch (e) {
       error += 1;
     }
     tick();
   }
 
-  return [result, { error, total }];
+  return { asciiFontMap, pageAvailable, status: { error, total } };
 }
