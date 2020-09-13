@@ -9,6 +9,7 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
     .flatMap(height =>
       [coda.fontForHeight(height).meta['margin-top'] ?? 0]
         .flat()
+        .sort((a, b) => b - a)
         .map(marginTop => marginTop + height)
     ) ?? [0];
 
