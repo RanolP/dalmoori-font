@@ -9,7 +9,7 @@ export async function generateAsciiFont(map: Record<string, AsciiFont>): Promise
   for (const [character, font] of entries) {
     const page = formatHex(character.charCodeAt(0) >> 8, 2);
     const id = formatHex(character.charCodeAt(0), 4);
-    const path = join(Paths.build, page);
+    const path = join(Paths.build, 'ascii-font', page);
 
     await mkdirs(path);
     await writeFile(join(path, `${id}.txt`), font.renderAsciiFont(), { encoding: 'utf8' });

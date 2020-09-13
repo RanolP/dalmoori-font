@@ -1,5 +1,6 @@
 import dedent from 'dedent';
-import { readdir, writeFile, copyFile } from './util/fs';
+import { Paths } from './constants';
+import { readdir, writeFile, copyFile, join } from './util/fs';
 
 function escapeMarkdown(char: string): string {
   switch (char) {
@@ -39,7 +40,7 @@ function escapeMarkdown(char: string): string {
 }
 
 export async function generatePreview(availableCharacters: Set<string>, donePercentage: number): Promise<void> {
-  await copyFile('../font/dalmoori.ttf', '../docs/dalmoori.ttf');
+  await copyFile(join(Paths.build, 'font', 'dalmoori.ttf'), '../docs/dalmoori.ttf');
 
   const pageAvailable = await readdir('./build');
   for (const page of pageAvailable) {

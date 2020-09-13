@@ -3,8 +3,8 @@ import SVGIcons2SVGFont, { Glyphs } from 'svgicons2svgfont';
 import { Readable } from 'stream';
 import { AsciiFont } from './core/asciiFont';
 import { createWriteStream } from 'fs';
-import { readFile, writeFile } from './util/fs';
-import { OnePixel, Version } from './constants';
+import { join, readFile, writeFile } from './util/fs';
+import { OnePixel, Paths, Version } from './constants';
 import { createProgressIndicator, formatHex } from './util/format';
 
 export async function generateFont(map: Record<string, AsciiFont>): Promise<void> {
@@ -28,8 +28,10 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
 
   svgFontStream.end();
 
+  const svgFontPath = join(Paths.build, 'font', 'dalmoori.svg');
+
   await new Promise((resolve, reject) => {
-    svgFontStream.pipe(createWriteStream('../font/dalmoori.svg'))
+    svgFontStream.pipe(createWriteStream(svgFontPath))
       .on('finish', () => {
         resolve();
       })
@@ -40,12 +42,12 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
       });
   });
 
-  const ttf = svg2ttf(await readFile('../font/dalmoori.svg', { encoding: 'utf8' }), {
+  const ttf = svg2ttf(await readFile(svgFontPath, { encoding: 'utf8' }), {
     description: 'dalmoori: 8x8 dot graphic hangul font',
     copyright: 'Copyright (c) 2020 RanolP and contributors',
     url: 'https://github.com/RanolP/dalmoori-font/',
     version: Version,
   });
   const ttfBuffer = Buffer.from(ttf.buffer);
-  await writeFile('../font/dalmoori.ttf', ttfBuffer);
+  await writeFile(join(Paths.build, 'font', 'dalmoori.ttf'), ttfBuffer);
 }

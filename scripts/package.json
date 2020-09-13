@@ -6,7 +6,7 @@
   "scripts": {
     "build": "ts-node --files src/commands/build.ts",
     "clean": "ts-node --files src/commands/clean.ts",
-    "build:with-pages": "ts-node --files src/commands/build-with-pages.ts",
+    "build:pages": "ts-node --files src/commands/build-pages.ts",
     "check": "eslint \"src/**\"",
     "fix": "eslint \"src/**\" --fix"
   },

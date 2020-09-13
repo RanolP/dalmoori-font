@@ -21,7 +21,7 @@ jobs:
 
       - name: Build
         working-directory: ./scripts
-        run: npm run build:with-pages
+        run: npm run build:pages
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
