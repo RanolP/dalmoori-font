@@ -1,6 +1,6 @@
 ---
 layout: home
 ---
+현대 한글 71.91% 지원  
 
-\#\# 이곳에 코드스페이스 목록 넣기 \#\#  
-[Code Page Example](/code/ex)
+- [U+font00 ~ U+fontFF]({{ site.baseurl }}/code/font)
