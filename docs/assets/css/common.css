@@ -78,6 +78,18 @@ div.tools p {
     display: inline;
 }
 
+span.toggle {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    height: 14px;
+}
+
+label, label p, label span {
+    position: relative;
+    vertical-align: middle;
+}
+
 .copyright {
     background-color: rgba(256, 256, 256, 0.15)
 }
@@ -86,10 +98,11 @@ div.tools p {
 }
 
 
-.trans, .trans:hover, .trans:focus {
+.trans,
+.trans:hover, .trans:focus {
     transition: .5s ease-in-out;
 }
-/**/
+
 .demo {
     padding: 30px;
     width: 80%;
@@ -102,14 +115,14 @@ div.tools p {
 .demo:hover, .demo:focus {
     background-color: rgba(256, 256, 256, 0.3);
 }
-.demo, .demo::placeholder {
+.demo,
+.demo::placeholder {
     font-family: 'dalmoori', sans-serif;
 }
 
 .codepage {
     padding-top: 30px;
     padding-bottom: 30px;
-    /*background-color: rgba(256, 256, 256, 0.5);*/
 }
 .codepage .code,
 .codepage .character,
@@ -134,4 +147,47 @@ div.tools p {
 .tofu{
     mask: url('{{ site.baseurl }}/assets/img/tofu.svg') no-repeat center;
     -webkit-mask: url('{{ site.baseurl }}/assets/img/tofu.svg') no-repeat center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    margin-right: 5px;
+    width: 36px;
+    height: 16px;
+    border: 1px #ddd solid;
+    vertical-align: middle;
+}
+.switch input {
+    display: none;
+}
+.switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #888;
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+.switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 14px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+input:checked + .slider {
+    background-color: #A488CF;
+}
+input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
 }
