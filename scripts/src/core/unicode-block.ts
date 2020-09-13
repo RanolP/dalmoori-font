@@ -13,7 +13,15 @@ export const BasicLatin: UnicodeBlock = {
   to: 0x007F,
   partial: true,
 };
+export const HangulCompatiblityJamo: UnicodeBlock = {
+  name: 'Hangul Compatibility Jamo',
+  id: 'hangul-compatibility-jamo',
+  from: 0x3130,
+  to: 0x318F,
+  partial: true,
+};
 
 export const AllUnicodeBlocks = [
   BasicLatin,
+  HangulCompatiblityJamo
 ];

@@ -1,4 +1,4 @@
-export const LabelWidth = 25;
+export const LabelWidth = 35;
 export const TotalBarWidth = 150;
 
 export function formatHex(n: number, pad: number): string {
