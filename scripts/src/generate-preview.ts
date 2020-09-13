@@ -1,6 +1,35 @@
 import dedent from 'dedent';
 import { readdir, writeFile, copyFile } from './util/fs';
 
+function escapeMarkdown(char: string): string {
+  switch (char) {
+    case '<':
+      return '&lt;';
+    case '>':
+      return '&gt;';
+    case '\\':
+    case '`':
+    case '*':
+    case '{':
+    case '}':
+    case '[':
+    case ']':
+    case '(':
+    case ')':
+    case '#':
+    case '+':
+    case '-':
+    case '.':
+    case '!':
+    case '_':
+    case '~':
+    case '|':
+      return '\\' + char;
+    default:
+      return char;
+  }
+}
+
 export async function generatePreview(availableCharacters: Set<string>, donePercentage: number): Promise<void> {
   await copyFile('../font/dalmoori.ttf', '../docs/dalmoori.ttf');
 
@@ -17,12 +46,12 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
       const character = String.fromCharCode(charCode);
       let tag = '<div class="code tofu"></div>';
       if (availableCharacters.has(character)) {
-        tag = `<span class="character">\\${character}</span>`;
-      } 
-      
+        tag = `<span class="character">${escapeMarkdown(character)}</span>`;
+      }
+
       characterRendered.push(tag);
     }
-    
+
     const previewData = dedent`
     ---
     title: "코드페이지 Example"
@@ -36,9 +65,9 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
 
     await writeFile(`../docs/_pages/code-${page}.md`, previewData);
   }
-  
+
   console.log('Generating index');
-  
+
   const previewData = dedent`
   ---
   layout: home
