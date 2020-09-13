@@ -110,7 +110,7 @@ div.tools p {
     /*background-color: rgba(256, 256, 256, 0.5);*/
 }
 .codepage .code,
-.codepage .charactor,
+.codepage .character,
 .codepage img {
     height: 4rem;
     width: 4rem;
@@ -120,12 +120,13 @@ div.tools p {
 .codepage .img {
     background-color: white;
 }
-.codepage span.charactor {
+.codepage span.character {
     font-size: 3rem;
     font-family: 'dalmoori';
-    display: flex;
+    display: inline-block;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .tofu{
