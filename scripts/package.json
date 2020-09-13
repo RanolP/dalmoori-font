@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node --files src/index.ts",
+    "build": "ts-node --files src/commands/build.ts",
     "clean": "ts-node --files src/commands/clean.ts",
+    "build:pages": "ts-node --files src/commands/build-pages.ts",
     "check": "eslint \"src/**\"",
     "fix": "eslint \"src/**\" --fix"
   },
@@ -27,7 +28,6 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "dedent": "^0.7.0",
-    "entities": "^2.0.3",
     "paper-jsdom": "^0.12.11",
     "progress": "^2.0.3",
     "readable-glyph-names": "^1.1.0",

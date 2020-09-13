@@ -20,4 +20,4 @@
 
 ## 도움을 주신 분들
 
-- [@EatChangmyeong](https://ithub.com/EatChangMyeong)
+- [@EatChangmyeong](https://github.com/EatChangmyeong)

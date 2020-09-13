@@ -3,54 +3,38 @@ import SVGIcons2SVGFont, { Glyphs } from 'svgicons2svgfont';
 import { Readable } from 'stream';
 import { AsciiFont } from './core/asciiFont';
 import { createWriteStream } from 'fs';
-import { readFile, writeFile } from './util/fs';
-import { TotalHeight, Version } from './constants';
-import ProgressBar from 'progress';
-import chalk from 'chalk';
-import { formatHex, LabelWidth, TotalBarWidth } from './util/format';
+import { join, mkdirs, readFile, writeFile } from './util/fs';
+import { OnePixel, Paths, Version } from './constants';
+import { createProgressIndicator, formatHex } from './util/format';
 
 export async function generateFont(map: Record<string, AsciiFont>): Promise<void> {
   const entries = Object.entries(map);
-  const bar = new ProgressBar(
-    [
-      'Render SVG'.padEnd(LabelWidth),
-      ':bar',
-      '·',
-      chalk.green(':current/:total'),
-      '·',
-      chalk.magenta(':percent'),
-      '·',
-      chalk.yellow(':rate char/s'),
-      '·',
-      chalk.blue('ETA :etas'),
-    ].join(' '),
-    {
-      total: entries.length,
-      complete: chalk.green('━'),
-      incomplete: chalk.gray('━'),
-      width: TotalBarWidth,
-    }
-  );
+  const { tick } = createProgressIndicator('Render SVG', entries.length,);
   const svgFontStream = new SVGIcons2SVGFont({
     fontName: 'dalmoori',
-    descent: TotalHeight / 8,
-    log: ()=>{ /* do nothing */},
+    descent: OnePixel,
+    log: () => { /* do nothing */ },
   });
   for (const [character, font] of Object.entries(map)) {
     const id = formatHex(character.charCodeAt(0), 4);
     const glyphs = Readable.from(await font.renderSvg()) as Glyphs;
     glyphs.metadata = {
-      name: 'uni'+id,
+      name: 'uni' + id,
       unicode: [...character],
     };
-    bar.tick();
+    tick();
     svgFontStream.write(glyphs);
   }
 
   svgFontStream.end();
 
+  const fontPath = join(Paths.build, 'font');
+  await mkdirs(fontPath);
+
+  const svgFontPath = join(fontPath, 'dalmoori.svg');
+
   await new Promise((resolve, reject) => {
-    svgFontStream.pipe(createWriteStream('../font/dalmoori.svg'))
+    svgFontStream.pipe(createWriteStream(svgFontPath))
       .on('finish', () => {
         resolve();
       })
@@ -61,12 +45,12 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
       });
   });
 
-  const ttf = svg2ttf(await readFile('../font/dalmoori.svg', { encoding: 'utf8' }), {
+  const ttf = svg2ttf(await readFile(svgFontPath, { encoding: 'utf8' }), {
     description: 'dalmoori: 8x8 dot graphic hangul font',
     copyright: 'Copyright (c) 2020 RanolP and contributors',
     url: 'https://github.com/RanolP/dalmoori-font/',
     version: Version,
   });
   const ttfBuffer = Buffer.from(ttf.buffer);
-  await writeFile('../font/dalmoori.ttf', ttfBuffer);
+  await writeFile(join(fontPath, 'dalmoori.ttf'), ttfBuffer);
 }

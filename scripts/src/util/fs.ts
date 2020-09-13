@@ -1,10 +1,17 @@
-import { mkdir, access, readdir, stat, rmdir, unlink } from 'fs/promises';
+import { promises } from 'fs';
 import { PathLike, constants } from 'fs';
-import { dirname, resolve, join} from 'path';
+import { dirname, resolve, join, basename } from 'path';
 
-export { readFile, writeFile, readdir, copyFile } from 'fs/promises';
-export { PathLike } from 'fs';
-export { join, basename } from 'path';
+const { readFile, writeFile, readdir, copyFile, access, mkdir, stat, unlink, rmdir } = promises;
+
+export {
+  readFile,
+  writeFile,
+  readdir,
+  copyFile
+};
+export { PathLike };
+export { join, basename, dirname };
 
 export const exists = async (path: PathLike): Promise<boolean> => {
   try {

@@ -1,8 +1,8 @@
 import { PathLike, readFile } from 'fs';
 import Svgo from 'svgo';
-import { CompoundPath, PathItem, Shape, Project, Size, Point } from 'paper';
+import { CompoundPath, PathItem, Shape, Project, Size } from 'paper';
 import dedent from 'dedent';
-import { TotalHeight } from '../constants';
+import { FullWidthSize } from '../constants';
 
 type PathItemT = Parameters<ReturnType<typeof PathItem['create']>['unite']>[0];
 
@@ -160,8 +160,12 @@ export class AsciiFont {
 
   async renderSvg(): Promise<string> {
     if (this.svgRenderCache === undefined) {
-      const factor = TotalHeight / this.height;
-      const project = new Project(new Size(this.width * factor, this.height * factor));
+      const factor = FullWidthSize / this.height;
+
+      const actualWidth = this.width * factor;
+      const actualHeight = this.height * factor;
+
+      const project = new Project(new Size(actualWidth, actualHeight));
       const path = this.data.reduce<PathItemT>((acc, [x, y]) => acc.unite(new Shape.Rectangle({
         point: [x * factor, y * factor],
         size: [1 * factor + 1e-5, 1 * factor + 1e-5],
@@ -175,7 +179,7 @@ export class AsciiFont {
         asString: true
       });
       const optimized = await svgo.optimize(dedent`
-        <svg viewBox="0 0 ${this.width * factor} ${this.height * factor}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg viewBox="0 0 ${actualWidth} ${actualHeight}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
           ${pathRendered}
         </svg>
       `);

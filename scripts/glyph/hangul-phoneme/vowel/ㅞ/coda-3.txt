@@ -1,0 +1,12 @@
+---
+width-occupying = 3
+height-occupying = 2
+---
+x x x x x # . #
+x x x x x # . #
+x x x x x # . #
+# # # # . # . #
+. . # . # # . #
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x

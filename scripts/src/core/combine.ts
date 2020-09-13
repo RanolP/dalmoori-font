@@ -4,7 +4,16 @@ import { Coda, Nucleus, Onset } from './hangul-phoneme';
 export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont {
   const WIDTH = 8;
   const HEIGHT = 8;
-  for (const codaHeight of coda?.heightList ?? [0]) {
+
+  const heightList = coda?.heightList
+    .flatMap(height =>
+      [coda.fontForHeight(height).meta['margin-top'] ?? 0]
+        .flat()
+        .sort((a, b) => b - a)
+        .map(marginTop => marginTop + height)
+    ) ?? [0];
+
+  for (const codaHeight of heightList) {
     for (const nucleusVariant of nucleus.variants) {
       if (HEIGHT < codaHeight + nucleusVariant.heightOccupying) {
         continue;
@@ -24,7 +33,7 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
 
           const requirements = onsetPart.variantRequirementsMap[nucleus.name.compat] ?? [];
           if (coda !== undefined) {
-            requirements.push('coda');
+            requirements.push(`coda-${codaHeight}`);
           }
           if (requirements.some(requirement => !nucleusVariant.variantsApplied[requirement])) {
             continue;
@@ -32,6 +41,7 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
 
           return onsetPart.font.with(nucleusVariant.font).with(coda?.fontForHeight(codaHeight));
         }
+
       }
     }
   }
