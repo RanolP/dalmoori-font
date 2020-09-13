@@ -24,7 +24,7 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
 
           const requirements = onsetPart.variantRequirementsMap[nucleus.name.compat] ?? [];
           if (coda !== undefined) {
-            requirements.push('coda');
+            requirements.push(`coda-${codaHeight}`);
           }
           if (requirements.some(requirement => !nucleusVariant.variantsApplied[requirement])) {
             continue;
