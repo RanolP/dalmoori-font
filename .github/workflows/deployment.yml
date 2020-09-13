@@ -1,0 +1,31 @@
+name: Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14.x
+
+      - name: Enter ./scripts
+        run: cd ./scripts
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build:with-pages
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.PUBLISH_TOKEN }}
+          publish_dir: ./docs

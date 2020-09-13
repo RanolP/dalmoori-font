@@ -1,7 +1,7 @@
-import { generatePreview } from './generate-preview';
-import { generateFont } from './generate-font';
-import { generateAsciiFont } from './generate-ascii-font';
-import { renderAsciiFont } from './render-ascii-font';
+import { generatePreview } from '../generate-preview';
+import { generateFont } from '../generate-font';
+import { generateAsciiFont } from '../generate-ascii-font';
+import { renderAsciiFont } from '../render-ascii-font';
 
 (async () => {
   const [map, status] = await renderAsciiFont();

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node --files src/index.ts",
+    "build": "ts-node --files src/commands/build.ts",
     "clean": "ts-node --files src/commands/clean.ts",
+    "deploy": "ts-node --files src/commands/build-with-pages.ts",
     "check": "eslint \"src/**\"",
     "fix": "eslint \"src/**\" --fix"
   },

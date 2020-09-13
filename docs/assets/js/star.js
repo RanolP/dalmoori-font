@@ -1,4 +1,4 @@
-function genStar () {
+function genStar() {
   this.obj = document.createElement('div')
   this.obj.classList.add('star')
   this.obj.style.top = (window.innerHeight * Math.random()) + 'px'
@@ -8,8 +8,8 @@ function genStar () {
   document.getElementsByClassName('stars')[0].appendChild(this.obj)
 }
 
-function genStars () {
-  for (i = 0; i< 200; i++) {
+function genStars() {
+  for (i = 0; i < 200; i++) {
     new genStar()
   }
 }
