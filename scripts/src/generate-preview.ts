@@ -40,7 +40,7 @@ function escapeMarkdown(char: string): string {
 }
 
 export async function generatePreview(availableCharacters: Set<string>, pageAvailable: Set<string>, donePercentage: number): Promise<void> {
-  await copyFile(join(Paths.build, 'font', 'dalmoori.ttf'), '../docs/dalmoori.ttf');
+  await copyFile(join(Paths.build, 'font', 'dalmoori.ttf'), '../docs/assets/dalmoori.ttf');
 
   for (const page of pageAvailable) {
     const pageId = parseInt(page, 16);
