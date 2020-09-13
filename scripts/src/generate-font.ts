@@ -4,7 +4,7 @@ import { Readable } from 'stream';
 import { AsciiFont } from './core/asciiFont';
 import { createWriteStream } from 'fs';
 import { readFile, writeFile } from './util/fs';
-import { FullWidthSize, Version } from './constants';
+import { OnePixel, Version } from './constants';
 import ProgressBar from 'progress';
 import chalk from 'chalk';
 import { formatHex, LabelWidth, TotalBarWidth } from './util/format';
@@ -33,7 +33,7 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
   );
   const svgFontStream = new SVGIcons2SVGFont({
     fontName: 'dalmoori',
-    descent: FullWidthSize / 8,
+    descent: OnePixel,
     log: ()=>{ /* do nothing */},
   });
   for (const [character, font] of Object.entries(map)) {

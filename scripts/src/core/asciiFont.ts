@@ -2,7 +2,7 @@ import { PathLike, readFile } from 'fs';
 import Svgo from 'svgo';
 import { CompoundPath, PathItem, Shape, Project, Size } from 'paper';
 import dedent from 'dedent';
-import { FullWidthSize, LetterSpacing } from '../constants';
+import { FullWidthSize } from '../constants';
 
 type PathItemT = Parameters<ReturnType<typeof PathItem['create']>['unite']>[0];
 
@@ -160,15 +160,14 @@ export class AsciiFont {
 
   async renderSvg(): Promise<string> {
     if (this.svgRenderCache === undefined) {
-      const isHalfWidth = this.meta['halfwidth'] === true;
       const factor = FullWidthSize / this.height;
 
-      const actualWidth = this.width * factor + (isHalfWidth ? 1 : 2) * LetterSpacing;
+      const actualWidth = this.width * factor;
       const actualHeight = this.height * factor;
 
       const project = new Project(new Size(actualWidth, actualHeight));
       const path = this.data.reduce<PathItemT>((acc, [x, y]) => acc.unite(new Shape.Rectangle({
-        point: [x * factor + (isHalfWidth ? 0 : 1 * LetterSpacing), y * factor],
+        point: [x * factor, y * factor],
         size: [1 * factor + 1e-5, 1 * factor + 1e-5],
         insert: false,
         project,
