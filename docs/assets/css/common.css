@@ -110,9 +110,25 @@ div.tools p {
     /*background-color: rgba(256, 256, 256, 0.5);*/
 }
 .codepage .code,
+.codepage .charactor,
 .codepage img {
-    background-color: white;
     height: 4rem;
     width: 4rem;
     display: inline-block;
+}
+.codepage .code,
+.codepage .img {
+    background-color: white;
+}
+.codepage span.charactor {
+    font-size: 3rem;
+    font-family: 'dalmoori';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tofu{
+    mask: url(/assets/img/tofu.svg) no-repeat center;
+    -webkit-mask: url(/assets/img/tofu.svg) no-repeat center;
 }

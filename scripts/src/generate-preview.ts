@@ -17,7 +17,7 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
     for (const id of Array.from({ length: 256 }).map((_, index) => index)) {
       const charCode = (pageId << 8) | id;
       const character = String.fromCharCode(charCode);
-      let tag = '<img class="character" src="/dalmoori-font/tofu.svg" />';
+      let tag = '<div class="code tofu"></div>';
       if (availableCharacters.has(character)) {
         tag = `<span class="character">${encodeHTML(character)}</span>`;
       } 
@@ -26,86 +26,31 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
     }
     
     const previewData = dedent`
-      <!DOCTYPE html>
-      <html lang="ko">
-      
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/dalmoori-font/style.css">
-        <link rel="icon" href="/dalmoori-font/logo.png">
-        <title>달무리 글꼴</title>
-      </head>
-      
-      <body>
-        <header>
-          <a href="/dalmoori-font">
-            <img class="icon" src="/dalmoori-font/logo.png" />
-            달무리 ${Version}
-          </a>
-
-          <a class="github" href="https://github.com/RanolP/dalmoori-font">
-            <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
-            GitHub에서 보기
-          </a>
-        </header>
-        
-        <main class="codepage">
-          ${characterRendered.join('\n')}
-        </main>
-      </body>
-      
-      </html>
+    ---
+    title: "코드페이지 Example"
+    layout: codepage
+    permalink: "/code/ex"
+    description: "코드 페이지 - 코드 범위: U+${page}00 ~ U+${page}FF"
+    ---
+    
+    ${characterRendered.join('\n')}
     `;
 
-    await writeFile(`../docs/codepage/${page}.html`, previewData);
+    await writeFile(`../docs/_pages/code-${page}.md`, previewData);
   }
   
   console.log('Generating index');
   
   const previewData = dedent`
-    <!DOCTYPE html>
-    <html lang="ko">
-    
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="/dalmoori-font/style.css">
-      <link rel="icon" href="/dalmoori-font/logo.png">
-      <title>달무리 글꼴</title>
-    </head>
-    
-    <body>
-      <header>
-        <a href="/dalmoori-font/">
-          <img class="icon" src="/dalmoori-font/logo.png" />
-          달무리 ${Version}
-        </a>
+  ---
+  layout: home
+  ---
+  현대 한글 ${donePercentage.toFixed(2)}% 지원  
 
-        <a class="github" href="https://github.com/RanolP/dalmoori-font">
-          <img class="icon" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" />
-          GitHub에서 보기
-        </a>
-      </header>
-      
-      <main>
-        <h1>8×8 한글 글꼴, 달무리.</h1>
-        <h3>써보기</h3>
-        <textarea id="test" placeholder="다람쥐 헌 쳇바퀴에 타고파\nThe quick brown fox jumped over the lazy dog"></textarea>
-
-        <h3>코드페이지 열람 (현대 한글 ${donePercentage.toFixed(2)}% 지원)</h3>
-        <ul>
-          ${pageAvailable.map(page => dedent`
-            <li>
-              <a class="link" href="/dalmoori-font/codepage/${page}">U+${page}00 ~ U+${page}FF</a>
-            </li>
-          `).join('\n')}
-        </ul>
-      </main>
-    </body>
-    
-    </html>
+  ${pageAvailable.map(page => dedent`
+    ![U+${page}00 ~ U+${page}FF](/code/${page})  
+  `).join('\n')}
   `;
 
-  await writeFile('../docs/index.html', previewData);
+  await writeFile('../docs/index.md', previewData);
 }
