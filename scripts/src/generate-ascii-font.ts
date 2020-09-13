@@ -9,7 +9,7 @@ export async function generateAsciiFont(map: Record<string, AsciiFont>): Promise
   const entries = Object.entries(map);
   const bar = new ProgressBar(
     [
-      'Writing Ascii Font'.padEnd(LabelWidth),
+      'Write Ascii Font'.padEnd(LabelWidth),
       ':bar',
       '·',
       chalk.green(':current/:total'),
