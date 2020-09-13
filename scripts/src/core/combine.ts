@@ -5,15 +5,16 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
   const WIDTH = 8;
   const HEIGHT = 8;
 
-  const heightList = coda?.heightList
-    .flatMap(height =>
-      [coda.fontForHeight(height).meta['margin-top'] ?? 0]
+  const heightList: Array<[AsciiFont | undefined, number]> = coda?.heightList
+    .flatMap(height => {
+      const font = coda.fontForHeight(height);
+      return [font.meta['margin-top'] as number | number[] ?? 0]
         .flat()
         .sort((a, b) => b - a)
-        .map(marginTop => marginTop + height)
-    ) ?? [0];
+        .map(marginTop => [font, marginTop + height] as [AsciiFont | undefined, number]);
+    }) ?? [[undefined, 0]];
 
-  for (const codaHeight of heightList) {
+  for (const [codaFont, codaHeight] of heightList) {
     for (const nucleusVariant of nucleus.variants) {
       if (HEIGHT < codaHeight + nucleusVariant.heightOccupying) {
         continue;
@@ -39,7 +40,7 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
             continue;
           }
 
-          return onsetPart.font.with(nucleusVariant.font).with(coda?.fontForHeight(codaHeight));
+          return onsetPart.font.with(nucleusVariant.font).with(codaFont);
         }
 
       }
