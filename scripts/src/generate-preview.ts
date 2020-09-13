@@ -1,6 +1,5 @@
 import dedent from 'dedent';
 import { readdir, writeFile, copyFile } from './util/fs';
-import { Version } from './constants';
 import { encodeHTML } from 'entities';
 
 export async function generatePreview(availableCharacters: Set<string>, donePercentage: number): Promise<void> {
@@ -29,7 +28,7 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
     ---
     title: "코드페이지 Example"
     layout: codepage
-    permalink: "/code/ex"
+    permalink: "/code/${page}"
     description: "코드 페이지 - 코드 범위: U+${page}00 ~ U+${page}FF"
     ---
     
@@ -48,7 +47,7 @@ export async function generatePreview(availableCharacters: Set<string>, donePerc
   현대 한글 ${donePercentage.toFixed(2)}% 지원  
 
   ${pageAvailable.map(page => dedent`
-    - [U+${page}00 ~ U+${page}FF](/code/${page})  
+    - [U+${page}00 ~ U+${page}FF]({{ site.baseurl }}/code/${page})  
   `).join('\n')}
   `;
 
