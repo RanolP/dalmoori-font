@@ -132,6 +132,6 @@ div.tools p {
 }
 
 .tofu{
-    mask: url(/assets/img/tofu.svg) no-repeat center;
-    -webkit-mask: url(/assets/img/tofu.svg) no-repeat center;
+    mask: url('{{ site.baseurl }}/assets/img/tofu.svg') no-repeat center;
+    -webkit-mask: url('{{ site.baseurl }}/assets/img/tofu.svg') no-repeat center;
 }
