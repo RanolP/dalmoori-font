@@ -27,7 +27,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">봓</span>
 <span class="character">봔</span>
 <span class="character">봕</span>
-<span class="code tofu"></span>
+<span class="character">봖</span>
 <span class="character">봗</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -55,7 +55,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">봯</span>
 <span class="character">봰</span>
 <span class="character">봱</span>
-<span class="code tofu"></span>
+<span class="character">봲</span>
 <span class="character">봳</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -83,7 +83,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">뵋</span>
 <span class="character">뵌</span>
 <span class="character">뵍</span>
-<span class="code tofu"></span>
+<span class="character">뵎</span>
 <span class="character">뵏</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -139,7 +139,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">붃</span>
 <span class="character">분</span>
 <span class="character">붅</span>
-<span class="code tofu"></span>
+<span class="character">붆</span>
 <span class="character">붇</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -167,7 +167,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">붟</span>
 <span class="character">붠</span>
 <span class="character">붡</span>
-<span class="code tofu"></span>
+<span class="character">붢</span>
 <span class="character">붣</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -195,7 +195,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">붻</span>
 <span class="character">붼</span>
 <span class="character">붽</span>
-<span class="code tofu"></span>
+<span class="character">붾</span>
 <span class="character">붿</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -223,7 +223,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">뷗</span>
 <span class="character">뷘</span>
 <span class="character">뷙</span>
-<span class="code tofu"></span>
+<span class="character">뷚</span>
 <span class="character">뷛</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -251,7 +251,7 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">뷳</span>
 <span class="character">뷴</span>
 <span class="character">뷵</span>
-<span class="code tofu"></span>
+<span class="character">뷶</span>
 <span class="character">뷷</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

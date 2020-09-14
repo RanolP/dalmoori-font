@@ -195,7 +195,7 @@ description: "코드 페이지 - 코드 범위: U+D200 ~ U+D2FF"
 <span class="character">튻</span>
 <span class="character">튼</span>
 <span class="character">튽</span>
-<span class="code tofu"></span>
+<span class="character">튾</span>
 <span class="character">튿</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

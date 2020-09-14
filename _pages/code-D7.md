@@ -91,7 +91,7 @@ description: "코드 페이지 - 코드 범위: U+D700 ~ U+D7FF"
 <span class="character">흓</span>
 <span class="character">흔</span>
 <span class="character">흕</span>
-<span class="code tofu"></span>
+<span class="character">흖</span>
 <span class="character">흗</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

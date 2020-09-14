@@ -7,7 +7,7 @@ description: "코드 페이지 - 코드 범위: U+B400 ~ U+B4FF"
 
 <span class="character">됀</span>
 <span class="character">됁</span>
-<span class="code tofu"></span>
+<span class="character">됂</span>
 <span class="character">됃</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -35,7 +35,7 @@ description: "코드 페이지 - 코드 범위: U+B400 ~ U+B4FF"
 <span class="character">됛</span>
 <span class="character">된</span>
 <span class="character">됝</span>
-<span class="code tofu"></span>
+<span class="character">됞</span>
 <span class="character">됟</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -91,7 +91,7 @@ description: "코드 페이지 - 코드 범위: U+B400 ~ U+B4FF"
 <span class="character">둓</span>
 <span class="character">둔</span>
 <span class="character">둕</span>
-<span class="code tofu"></span>
+<span class="character">둖</span>
 <span class="character">둗</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -119,7 +119,7 @@ description: "코드 페이지 - 코드 범위: U+B400 ~ U+B4FF"
 <span class="character">둯</span>
 <span class="character">둰</span>
 <span class="character">둱</span>
-<span class="code tofu"></span>
+<span class="character">둲</span>
 <span class="character">둳</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -147,7 +147,7 @@ description: "코드 페이지 - 코드 범위: U+B400 ~ U+B4FF"
 <span class="character">뒋</span>
 <span class="character">뒌</span>
 <span class="character">뒍</span>
-<span class="code tofu"></span>
+<span class="character">뒎</span>
 <span class="character">뒏</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -175,7 +175,7 @@ description: "코드 페이지 - 코드 범위: U+B400 ~ U+B4FF"
 <span class="character">뒧</span>
 <span class="character">뒨</span>
 <span class="character">뒩</span>
-<span class="code tofu"></span>
+<span class="character">뒪</span>
 <span class="character">뒫</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -203,7 +203,7 @@ description: "코드 페이지 - 코드 범위: U+B400 ~ U+B4FF"
 <span class="character">듃</span>
 <span class="character">듄</span>
 <span class="character">듅</span>
-<span class="code tofu"></span>
+<span class="character">듆</span>
 <span class="character">듇</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

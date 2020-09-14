@@ -19,7 +19,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">퐋</span>
 <span class="character">퐌</span>
 <span class="character">퐍</span>
-<span class="code tofu"></span>
+<span class="character">퐎</span>
 <span class="character">퐏</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -47,7 +47,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">퐧</span>
 <span class="character">퐨</span>
 <span class="character">퐩</span>
-<span class="code tofu"></span>
+<span class="character">퐪</span>
 <span class="character">퐫</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -75,7 +75,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">푃</span>
 <span class="character">푄</span>
 <span class="character">푅</span>
-<span class="code tofu"></span>
+<span class="character">푆</span>
 <span class="character">푇</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -131,7 +131,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">푻</span>
 <span class="character">푼</span>
 <span class="character">푽</span>
-<span class="code tofu"></span>
+<span class="character">푾</span>
 <span class="character">푿</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -159,7 +159,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">풗</span>
 <span class="character">풘</span>
 <span class="character">풙</span>
-<span class="code tofu"></span>
+<span class="character">풚</span>
 <span class="character">풛</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -187,7 +187,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">풳</span>
 <span class="character">풴</span>
 <span class="character">풵</span>
-<span class="code tofu"></span>
+<span class="character">풶</span>
 <span class="character">풷</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -215,7 +215,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">퓏</span>
 <span class="character">퓐</span>
 <span class="character">퓑</span>
-<span class="code tofu"></span>
+<span class="character">퓒</span>
 <span class="character">퓓</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -243,7 +243,7 @@ description: "코드 페이지 - 코드 범위: U+D400 ~ U+D4FF"
 <span class="character">퓫</span>
 <span class="character">퓬</span>
 <span class="character">퓭</span>
-<span class="code tofu"></span>
+<span class="character">퓮</span>
 <span class="character">퓯</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

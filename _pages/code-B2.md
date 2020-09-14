@@ -15,7 +15,7 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="character">눇</span>
 <span class="character">눈</span>
 <span class="character">눉</span>
-<span class="code tofu"></span>
+<span class="character">눊</span>
 <span class="character">눋</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -43,7 +43,7 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="character">눣</span>
 <span class="character">눤</span>
 <span class="character">눥</span>
-<span class="code tofu"></span>
+<span class="character">눦</span>
 <span class="character">눧</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -71,7 +71,7 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="character">눿</span>
 <span class="character">뉀</span>
 <span class="character">뉁</span>
-<span class="code tofu"></span>
+<span class="character">뉂</span>
 <span class="character">뉃</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -99,7 +99,7 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="character">뉛</span>
 <span class="character">뉜</span>
 <span class="character">뉝</span>
-<span class="code tofu"></span>
+<span class="character">뉞</span>
 <span class="character">뉟</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -127,7 +127,7 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="character">뉷</span>
 <span class="character">뉸</span>
 <span class="character">뉹</span>
-<span class="code tofu"></span>
+<span class="character">뉺</span>
 <span class="character">뉻</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

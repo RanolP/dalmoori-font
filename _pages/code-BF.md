@@ -75,7 +75,7 @@ description: "코드 페이지 - 코드 범위: U+BF00 ~ U+BFFF"
 <span class="character">뽃</span>
 <span class="character">뽄</span>
 <span class="character">뽅</span>
-<span class="code tofu"></span>
+<span class="character">뽆</span>
 <span class="character">뽇</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -103,7 +103,7 @@ description: "코드 페이지 - 코드 범위: U+BF00 ~ U+BFFF"
 <span class="character">뽟</span>
 <span class="character">뽠</span>
 <span class="character">뽡</span>
-<span class="code tofu"></span>
+<span class="character">뽢</span>
 <span class="character">뽣</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -131,7 +131,7 @@ description: "코드 페이지 - 코드 범위: U+BF00 ~ U+BFFF"
 <span class="character">뽻</span>
 <span class="character">뽼</span>
 <span class="character">뽽</span>
-<span class="code tofu"></span>
+<span class="character">뽾</span>
 <span class="character">뽿</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -159,7 +159,7 @@ description: "코드 페이지 - 코드 범위: U+BF00 ~ U+BFFF"
 <span class="character">뾗</span>
 <span class="character">뾘</span>
 <span class="character">뾙</span>
-<span class="code tofu"></span>
+<span class="character">뾚</span>
 <span class="character">뾛</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -215,7 +215,7 @@ description: "코드 페이지 - 코드 범위: U+BF00 ~ U+BFFF"
 <span class="character">뿏</span>
 <span class="character">뿐</span>
 <span class="character">뿑</span>
-<span class="code tofu"></span>
+<span class="character">뿒</span>
 <span class="character">뿓</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -243,7 +243,7 @@ description: "코드 페이지 - 코드 범위: U+BF00 ~ U+BFFF"
 <span class="character">뿫</span>
 <span class="character">뿬</span>
 <span class="character">뿭</span>
-<span class="code tofu"></span>
+<span class="character">뿮</span>
 <span class="character">뿯</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

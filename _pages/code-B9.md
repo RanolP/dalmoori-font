@@ -127,7 +127,7 @@ description: "코드 페이지 - 코드 범위: U+B900 ~ U+B9FF"
 <span class="character">륷</span>
 <span class="character">른</span>
 <span class="character">륹</span>
-<span class="code tofu"></span>
+<span class="character">륺</span>
 <span class="character">륻</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

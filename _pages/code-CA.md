@@ -199,7 +199,7 @@ description: "코드 페이지 - 코드 범위: U+CA00 ~ U+CAFF"
 <span class="character">쪿</span>
 <span class="character">쫀</span>
 <span class="character">쫁</span>
-<span class="code tofu"></span>
+<span class="character">쫂</span>
 <span class="character">쫃</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -227,7 +227,7 @@ description: "코드 페이지 - 코드 범위: U+CA00 ~ U+CAFF"
 <span class="character">쫛</span>
 <span class="character">쫜</span>
 <span class="character">쫝</span>
-<span class="code tofu"></span>
+<span class="character">쫞</span>
 <span class="character">쫟</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -255,7 +255,7 @@ description: "코드 페이지 - 코드 범위: U+CA00 ~ U+CAFF"
 <span class="character">쫷</span>
 <span class="character">쫸</span>
 <span class="character">쫹</span>
-<span class="code tofu"></span>
+<span class="character">쫺</span>
 <span class="character">쫻</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

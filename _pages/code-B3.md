@@ -207,7 +207,7 @@ description: "코드 페이지 - 코드 범위: U+B300 ~ U+B3FF"
 <span class="character">돇</span>
 <span class="character">돈</span>
 <span class="character">돉</span>
-<span class="code tofu"></span>
+<span class="character">돊</span>
 <span class="character">돋</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -235,7 +235,7 @@ description: "코드 페이지 - 코드 범위: U+B300 ~ U+B3FF"
 <span class="character">돣</span>
 <span class="character">돤</span>
 <span class="character">돥</span>
-<span class="code tofu"></span>
+<span class="character">돦</span>
 <span class="character">돧</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
