@@ -5,7 +5,7 @@ permalink: "/code/D5"
 description: "코드 페이지 - 코드 범위: U+D500 ~ U+D5FF"
 ---
 
-<span class="code tofu"></span>
+<span class="character">픀</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

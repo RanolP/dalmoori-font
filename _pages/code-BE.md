@@ -5,15 +5,15 @@ permalink: "/code/BE"
 description: "코드 페이지 - 코드 범위: U+BE00 ~ U+BEFF"
 ---
 
+<span class="character">븀</span>
+<span class="character">븁</span>
+<span class="character">븂</span>
+<span class="character">븃</span>
+<span class="character">븄</span>
+<span class="character">븅</span>
+<span class="character">븆</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">븈</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
