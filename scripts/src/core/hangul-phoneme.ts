@@ -1,20 +1,20 @@
 import { basename, join, PathLike, readdir } from '../util/fs';
 import { AsciiFont } from './asciiFont';
 
-const ONSET_REGEX = /onset-(\d+)-(\d+)/;
+const ONSET_REGEX = /onset-(\d+)-(\d+)(?:-([a-z]+))?/;
 const CODA_REGEX = /coda-(\d+)/;
 
 export class Consonant {
   private static Cache: Record<string, Consonant> = {};
   private constructor(
-     public readonly onset: Onset,
-     public readonly coda: Coda,
+    public readonly onset: Onset,
+    public readonly coda: Coda,
   ) { }
-  
+
   public static async from(basepath: PathLike, compatPhoneme: string): Promise<Consonant> {
     const path = join(basepath.toString(), compatPhoneme);
     if (!(path in Consonant.Cache)) {
-      const onsetParts: Record<number, Record<number, OnsetPart>> = {};
+      const onsetParts: Record<number, Record<number, OnsetPart[]>> = {};
       const codaheightFontMap: Record<number, AsciiFont> = {};
       for (const file of await readdir(path)) {
         const name = basename(file, '.txt');
@@ -23,13 +23,18 @@ export class Consonant {
           const [width, height] = onset.slice(1).map(Number);
           const asciiFont = await AsciiFont.fromFile(join(path, file));
           const variantsRequirementsMap: Record<string, string[]> = {};
+          const targetFor = asciiFont.meta['for'] ? new RegExp('^' + asciiFont.meta['for'] + '$') : undefined;
+          const notTargetFor = asciiFont.meta['not-for'] ? new RegExp('^' + asciiFont.meta['not-for'] + '$') : undefined;
           for (const target of Object.keys(asciiFont.meta['variant'] ?? {})) {
-            variantsRequirementsMap[target] = asciiFont.meta['variant'][target] ?? [];
+            variantsRequirementsMap[target] = [asciiFont.meta['variant'][target] ?? []].flat();
           }
           if (!(width in onsetParts)) {
             onsetParts[width] = {};
           }
-          onsetParts[width][height] =new OnsetPart(asciiFont, variantsRequirementsMap);
+          if (!(height in onsetParts[width])) {
+            onsetParts[width][height] = [];
+          }
+          onsetParts[width][height].push(new OnsetPart(asciiFont, variantsRequirementsMap, targetFor, notTargetFor));
           continue;
         }
         const coda = CODA_REGEX.exec(name);
@@ -39,16 +44,16 @@ export class Consonant {
           codaheightFontMap[height] = asciiFont;
         }
       }
-  
+
       const convertOnset = 'ᄀᄁ ᄂ  ᄃᄄᄅ       ᄆᄇᄈ ᄉᄊᄋᄌᄍᄎᄏᄐᄑᄒ';
       const convertCoda = 'ᆨᆩᆪᆫᆬᆭᆮ ᆯᆰᆱᆲᆳᆴᆵᆶᆷᆸ ᆹᆺᆻᆼᆽ ᆾᆿᇀᇁᇂ';
-  
+
       const compatConsonant = 'ㄱㄲㄳㄴㄵㄶㄷㄸㄹㄺㄻㄼㄽㄾㄿㅀㅁㅂㅃㅄㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ';
-  
+
       if (!(path in Consonant.Cache)) {
         Consonant.Cache[path] = new Consonant(
-          new Onset(new PhonemeName(convertOnset[compatConsonant.indexOf(compatPhoneme)],compatPhoneme), onsetParts),
-          new Coda(new PhonemeName(convertCoda[compatConsonant.indexOf(compatPhoneme)],compatPhoneme), codaheightFontMap)
+          new Onset(new PhonemeName(convertOnset[compatConsonant.indexOf(compatPhoneme)], compatPhoneme), onsetParts),
+          new Coda(new PhonemeName(convertCoda[compatConsonant.indexOf(compatPhoneme)], compatPhoneme), codaheightFontMap)
         );
       }
     }
@@ -67,16 +72,18 @@ export class OnsetPart {
   constructor(
     public readonly font: AsciiFont,
     public readonly variantRequirementsMap: Record<string, string[]>,
+    public readonly targetFor: RegExp | undefined,
+    public readonly notTargetFor: RegExp | undefined,
   ) { }
 }
 export class Onset {
   constructor(
     public readonly name: PhonemeName,
-    public readonly onsetParts: Record<number, Record<number, OnsetPart>>,
-  ) {}
+    public readonly onsetParts: Record<number, Record<number, OnsetPart[]>>,
+  ) { }
 
-  public find(width: number, height: number): OnsetPart | undefined {
-    return this.onsetParts[width]?.[height];
+  public find(width: number, height: number): OnsetPart[] {
+    return this.onsetParts[width]?.[height] ?? [];
   }
 }
 

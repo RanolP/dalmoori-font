@@ -1,10 +1,10 @@
 ---
-not-for = [ㅚㅙ].
+height-occupying = 2
 ---
-# # # # # x x x
-. . # . # x x x
-. . # . # x x x
 x x x x x x x x
+x x x x x x x x
+# # # # # # # .
+. . # . # . . .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

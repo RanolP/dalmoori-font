@@ -24,29 +24,35 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
           continue;
         }
         for (const marginLeft of nucleusVariant.marginLeft) {
-          const onsetPart = onset.find(
+          for (const onsetPart of onset.find(
             WIDTH - nucleusVariant.widthOccupying - marginLeft,
             HEIGHT - nucleusVariant.heightOccupying - marginTop - codaHeight
-          );
-          if (onsetPart === undefined) {
-            continue;
-          }
+          )) {
+            if (onsetPart.targetFor) {
+              if (!onsetPart.targetFor.test(`${nucleus.name.compat}${coda?.name.compat ?? ''}`)) {
+                continue;
+              }
+            }
+            if (onsetPart.notTargetFor) {
+              if (onsetPart.notTargetFor.test(`${nucleus.name.compat}${coda?.name.compat ?? ''}`)) {
+                continue;
+              }
+            }
+            const requirements = onsetPart.variantRequirementsMap[nucleus.name.compat] ?? [];
+            if (coda !== undefined) {
+              requirements.push(`coda-${codaHeight}`);
+            }
+            if (requirements.some(requirement => !nucleusVariant.variantsApplied[requirement])) {
+              continue;
+            }
 
-          const requirements = onsetPart.variantRequirementsMap[nucleus.name.compat] ?? [];
-          if (coda !== undefined) {
-            requirements.push(`coda-${codaHeight}`);
-          }
-          if (requirements.some(requirement => !nucleusVariant.variantsApplied[requirement])) {
-            continue;
-          }
-
-          try {
-            return onsetPart.font.with(nucleusVariant.font).with(codaFont);
-          } catch {
-            /* do nothing */
+            try {
+              return onsetPart.font.with(nucleusVariant.font).with(codaFont);
+            } catch {
+              /* do nothing */
+            }
           }
         }
-
       }
     }
   }

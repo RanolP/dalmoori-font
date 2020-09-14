@@ -1,9 +1,9 @@
 ---
-variant.ㅗ = right
+for = [ㅜㅝㅟㅠㅡ][ㄹㄺㄻㄼㄽㄾㄿㅀ]
 ---
 . # # # # # # .
-. . . # . . # .
 . . . . . . # .
+x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

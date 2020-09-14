@@ -1,4 +1,5 @@
 ---
+variant.ㅘ = right
 ---
 # # # # # x x x
 . . # . # x x x

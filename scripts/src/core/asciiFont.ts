@@ -85,9 +85,10 @@ export class AsciiFont {
       while (keys.length > 1) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const key = keys.shift()!;
-        if (key in target) {
-          target = target[key];
+        if (!(key in target)) {
+          target[key] = {};
         }
+        target = target[key];
       }
 
       const k = keys[0];
@@ -100,7 +101,7 @@ export class AsciiFont {
       } else if (v === 'true' || v === 'false') {
         target[k] = Boolean(v);
       } else {
-        throw new Error(`Invalid meta value: ${v}`);
+        target[k] = v;
       }
     }
 
