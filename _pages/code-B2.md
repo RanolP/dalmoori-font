@@ -5,10 +5,10 @@ permalink: "/code/B2"
 description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 ---
 
-<span class="character">눀</span>
-<span class="character">눁</span>
-<span class="character">눂</span>
-<span class="character">눃</span>
+<span class="code tofu"></span>
+<span class="code tofu"></span>
+<span class="code tofu"></span>
+<span class="code tofu"></span>
 <span class="character">누</span>
 <span class="character">눅</span>
 <span class="character">눆</span>
