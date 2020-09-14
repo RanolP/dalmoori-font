@@ -40,7 +40,11 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
             continue;
           }
 
-          return onsetPart.font.with(nucleusVariant.font).with(codaFont);
+          try {
+            return onsetPart.font.with(nucleusVariant.font).with(codaFont);
+          } catch {
+            /* do nothing */
+          }
         }
 
       }

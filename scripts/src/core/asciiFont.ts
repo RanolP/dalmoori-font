@@ -146,7 +146,15 @@ export class AsciiFont {
     } else if (this.width !== other.width || this.height !== other.height) {
       throw new Error(`Cannot combine tiles: this=${this.width}x${this.height}, other=${other.width}x${other.height}`);
     } else {
-      return new AsciiFont({}, this.width, this.height, [...new Set([...this.data, ...other.data])]);
+      const union = [...this.data];
+      for (const [x, y] of other.data) {
+        if (union.some(([ox, oy]) => ox === x && oy === y)) {
+          throw new Error('Character intersects');
+        } else {
+          union.push([x, y]);
+        }
+      }
+      return new AsciiFont({}, this.width, this.height, union);
     }
   }
 
