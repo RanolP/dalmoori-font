@@ -255,8 +255,8 @@ description: "코드 페이지 - 코드 범위: U+CF00 ~ U+CFFF"
 <span class="code tofu"></span>
 <span class="character">쿸</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쿺</span>
+<span class="character">쿻</span>
 <span class="character">쿼</span>
 <span class="character">쿽</span>
 <span class="character">쿾</span>

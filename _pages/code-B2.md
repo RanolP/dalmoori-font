@@ -5,10 +5,10 @@ permalink: "/code/B2"
 description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 ---
 
+<span class="character">눀</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">눂</span>
+<span class="character">눃</span>
 <span class="character">누</span>
 <span class="character">눅</span>
 <span class="character">눆</span>
@@ -35,8 +35,8 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="code tofu"></span>
 <span class="character">눜</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">눞</span>
+<span class="character">눟</span>
 <span class="character">눠</span>
 <span class="character">눡</span>
 <span class="character">눢</span>
@@ -63,8 +63,8 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="code tofu"></span>
 <span class="character">눸</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">눺</span>
+<span class="character">눻</span>
 <span class="character">눼</span>
 <span class="character">눽</span>
 <span class="character">눾</span>
@@ -91,8 +91,8 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="code tofu"></span>
 <span class="character">뉔</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">뉖</span>
+<span class="character">뉗</span>
 <span class="character">뉘</span>
 <span class="character">뉙</span>
 <span class="character">뉚</span>
@@ -119,8 +119,8 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="code tofu"></span>
 <span class="character">뉰</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">뉲</span>
+<span class="character">뉳</span>
 <span class="character">뉴</span>
 <span class="character">뉵</span>
 <span class="character">뉶</span>
@@ -147,8 +147,8 @@ description: "코드 페이지 - 코드 범위: U+B200 ~ U+B2FF"
 <span class="code tofu"></span>
 <span class="character">늌</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">늎</span>
+<span class="character">늏</span>
 <span class="character">느</span>
 <span class="character">늑</span>
 <span class="character">늒</span>

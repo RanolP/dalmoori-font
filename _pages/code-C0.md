@@ -7,8 +7,8 @@ description: "코드 페이지 - 코드 범위: U+C000 ~ U+C0FF"
 
 <span class="character">쀀</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쀂</span>
+<span class="character">쀃</span>
 <span class="code tofu"></span>
 <span class="character">쀅</span>
 <span class="character">쀆</span>
@@ -35,8 +35,8 @@ description: "코드 페이지 - 코드 범위: U+C000 ~ U+C0FF"
 <span class="code tofu"></span>
 <span class="character">쀜</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쀞</span>
+<span class="character">쀟</span>
 <span class="character">쀠</span>
 <span class="character">쀡</span>
 <span class="character">쀢</span>
@@ -63,8 +63,8 @@ description: "코드 페이지 - 코드 범위: U+C000 ~ U+C0FF"
 <span class="code tofu"></span>
 <span class="character">쀸</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쀺</span>
+<span class="character">쀻</span>
 <span class="character">쀼</span>
 <span class="character">쀽</span>
 <span class="character">쀾</span>
@@ -91,8 +91,8 @@ description: "코드 페이지 - 코드 범위: U+C000 ~ U+C0FF"
 <span class="code tofu"></span>
 <span class="character">쁔</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쁖</span>
+<span class="character">쁗</span>
 <span class="character">쁘</span>
 <span class="character">쁙</span>
 <span class="character">쁚</span>

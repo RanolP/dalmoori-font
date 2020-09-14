@@ -15,8 +15,8 @@ description: "코드 페이지 - 코드 범위: U+BE00 ~ U+BEFF"
 <span class="code tofu"></span>
 <span class="character">븈</span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">븊</span>
+<span class="character">븋</span>
 <span class="character">브</span>
 <span class="character">븍</span>
 <span class="character">븎</span>
