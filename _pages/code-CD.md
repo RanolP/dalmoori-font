@@ -156,9 +156,9 @@ description: "코드 페이지 - 코드 범위: U+CD00 ~ U+CDFF"
 <span class="character">추</span>
 <span class="character">축</span>
 <span class="character">춖</span>
-<span class="code tofu"></span>
+<span class="character">춗</span>
 <span class="character">춘</span>
-<span class="code tofu"></span>
+<span class="character">춙</span>
 <span class="code tofu"></span>
 <span class="character">춛</span>
 <span class="code tofu"></span>
@@ -184,9 +184,9 @@ description: "코드 페이지 - 코드 범위: U+CD00 ~ U+CDFF"
 <span class="character">춰</span>
 <span class="character">춱</span>
 <span class="character">춲</span>
-<span class="code tofu"></span>
+<span class="character">춳</span>
 <span class="character">춴</span>
-<span class="code tofu"></span>
+<span class="character">춵</span>
 <span class="code tofu"></span>
 <span class="character">춷</span>
 <span class="code tofu"></span>
@@ -212,9 +212,9 @@ description: "코드 페이지 - 코드 범위: U+CD00 ~ U+CDFF"
 <span class="character">췌</span>
 <span class="character">췍</span>
 <span class="character">췎</span>
-<span class="code tofu"></span>
+<span class="character">췏</span>
 <span class="character">췐</span>
-<span class="code tofu"></span>
+<span class="character">췑</span>
 <span class="code tofu"></span>
 <span class="character">췓</span>
 <span class="code tofu"></span>
@@ -240,9 +240,9 @@ description: "코드 페이지 - 코드 범위: U+CD00 ~ U+CDFF"
 <span class="character">취</span>
 <span class="character">췩</span>
 <span class="character">췪</span>
-<span class="code tofu"></span>
+<span class="character">췫</span>
 <span class="character">췬</span>
-<span class="code tofu"></span>
+<span class="character">췭</span>
 <span class="code tofu"></span>
 <span class="character">췯</span>
 <span class="code tofu"></span>

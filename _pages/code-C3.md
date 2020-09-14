@@ -224,9 +224,9 @@ description: "코드 페이지 - 코드 범위: U+C300 ~ U+C3FF"
 <span class="character">쏘</span>
 <span class="character">쏙</span>
 <span class="character">쏚</span>
-<span class="code tofu"></span>
+<span class="character">쏛</span>
 <span class="character">쏜</span>
-<span class="code tofu"></span>
+<span class="character">쏝</span>
 <span class="code tofu"></span>
 <span class="character">쏟</span>
 <span class="code tofu"></span>
@@ -252,9 +252,9 @@ description: "코드 페이지 - 코드 범위: U+C300 ~ U+C3FF"
 <span class="character">쏴</span>
 <span class="character">쏵</span>
 <span class="character">쏶</span>
-<span class="code tofu"></span>
+<span class="character">쏷</span>
 <span class="character">쏸</span>
-<span class="code tofu"></span>
+<span class="character">쏹</span>
 <span class="code tofu"></span>
 <span class="character">쏻</span>
 <span class="code tofu"></span>

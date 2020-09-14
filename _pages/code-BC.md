@@ -252,9 +252,9 @@ description: "코드 페이지 - 코드 범위: U+BC00 ~ U+BCFF"
 <span class="character">보</span>
 <span class="character">복</span>
 <span class="character">볶</span>
-<span class="code tofu"></span>
+<span class="character">볷</span>
 <span class="character">본</span>
-<span class="code tofu"></span>
+<span class="character">볹</span>
 <span class="code tofu"></span>
 <span class="character">볻</span>
 <span class="code tofu"></span>

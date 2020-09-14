@@ -124,9 +124,9 @@ description: "코드 페이지 - 코드 범위: U+B900 ~ U+B9FF"
 <span class="character">르</span>
 <span class="character">륵</span>
 <span class="character">륶</span>
-<span class="code tofu"></span>
+<span class="character">륷</span>
 <span class="character">른</span>
-<span class="code tofu"></span>
+<span class="character">륹</span>
 <span class="code tofu"></span>
 <span class="character">륻</span>
 <span class="code tofu"></span>

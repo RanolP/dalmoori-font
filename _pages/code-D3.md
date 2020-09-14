@@ -244,9 +244,9 @@ description: "코드 페이지 - 코드 범위: U+D300 ~ U+D3FF"
 <span class="character">포</span>
 <span class="character">폭</span>
 <span class="character">폮</span>
-<span class="code tofu"></span>
+<span class="character">폯</span>
 <span class="character">폰</span>
-<span class="code tofu"></span>
+<span class="character">폱</span>
 <span class="code tofu"></span>
 <span class="character">폳</span>
 <span class="code tofu"></span>

@@ -232,9 +232,9 @@ description: "코드 페이지 - 코드 범위: U+CF00 ~ U+CFFF"
 <span class="character">쿠</span>
 <span class="character">쿡</span>
 <span class="character">쿢</span>
-<span class="code tofu"></span>
+<span class="character">쿣</span>
 <span class="character">쿤</span>
-<span class="code tofu"></span>
+<span class="character">쿥</span>
 <span class="code tofu"></span>
 <span class="character">쿧</span>
 <span class="code tofu"></span>
@@ -260,4 +260,4 @@ description: "코드 페이지 - 코드 범위: U+CF00 ~ U+CFFF"
 <span class="character">쿼</span>
 <span class="character">쿽</span>
 <span class="character">쿾</span>
-<span class="code tofu"></span>
+<span class="character">쿿</span>

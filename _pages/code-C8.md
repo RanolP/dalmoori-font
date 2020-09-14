@@ -260,4 +260,4 @@ description: "코드 페이지 - 코드 범위: U+C800 ~ U+C8FF"
 <span class="character">주</span>
 <span class="character">죽</span>
 <span class="character">죾</span>
-<span class="code tofu"></span>
+<span class="character">죿</span>
