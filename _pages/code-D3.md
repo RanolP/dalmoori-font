@@ -45,7 +45,7 @@ description: "코드 페이지 - 코드 범위: U+D300 ~ U+D3FF"
 <span class="character">팥</span>
 <span class="character">팦</span>
 <span class="character">팧</span>
-<span class="code tofu"></span>
+<span class="character">패</span>
 <span class="character">팩</span>
 <span class="character">팪</span>
 <span class="character">팫</span>
@@ -101,7 +101,7 @@ description: "코드 페이지 - 코드 범위: U+D300 ~ U+D3FF"
 <span class="character">퍝</span>
 <span class="character">퍞</span>
 <span class="character">퍟</span>
-<span class="code tofu"></span>
+<span class="character">퍠</span>
 <span class="character">퍡</span>
 <span class="character">퍢</span>
 <span class="character">퍣</span>

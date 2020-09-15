@@ -12,9 +12,9 @@ description: "코드 페이지 - 코드 범위: U+B000 ~ U+B0FF"
 <span class="character">뀄</span>
 <span class="character">뀅</span>
 <span class="character">뀆</span>
-<span class="code tofu"></span>
+<span class="character">뀇</span>
 <span class="character">뀈</span>
-<span class="code tofu"></span>
+<span class="character">뀉</span>
 <span class="character">뀊</span>
 <span class="character">뀋</span>
 <span class="character">뀌</span>
@@ -40,9 +40,9 @@ description: "코드 페이지 - 코드 범위: U+B000 ~ U+B0FF"
 <span class="character">뀠</span>
 <span class="character">뀡</span>
 <span class="character">뀢</span>
-<span class="code tofu"></span>
+<span class="character">뀣</span>
 <span class="character">뀤</span>
-<span class="code tofu"></span>
+<span class="character">뀥</span>
 <span class="character">뀦</span>
 <span class="character">뀧</span>
 <span class="character">뀨</span>
