@@ -77,15 +77,24 @@ export async function generatePreview(availableCharacters: Set<string>, pageAvai
 
   console.log('Generating index');
 
-  const unsupported2350 = [...Requirements].filter(c => availableCharacters.has(c));
+  const [supported, unsupported] = [...Requirements].reduce(
+    ([s, u], c) =>
+      availableCharacters.has(c)
+        ? [(s.push(c), s), u]
+        : [s, (u.push(c), u)],
+    [[] as string[], [] as string[]]
+  );
 
   const previewData = dedent`
   ---
   layout: home
   ---
   현대 한글 ${donePercentage.toFixed(2)}% 지원
-  KS X 1001에 실린 한글 2350 자, 한글 호환 자모, 아스키 문자 ${(100 * unsupported2350.length / Requirements.length).toFixed(2)}% 지원
-  ${unsupported2350.join(', ')}
+
+  KS X 1001에 실린 한글 2350 자, 한글 호환 자모, 아스키 문자 ${(100 * supported.length / Requirements.length).toFixed(2)}% 지원
+
+  미지원 문자 목록:
+  ${unsupported.join(', ')}
 
   ${[...pageAvailable].map(page => dedent`
     - [U+${page}00 ~ U+${page}FF]({{ site.baseurl }}/code/${page})  
