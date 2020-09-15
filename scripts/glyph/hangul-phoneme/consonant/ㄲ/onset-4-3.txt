@@ -1,9 +1,8 @@
 ---
-not-for = ㅗ.
 ---
-. # # # # # # .
-. . . # . . # .
-. . . . . . # .
+# # # # x x x x
+. # . # x x x x
+. . . . x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

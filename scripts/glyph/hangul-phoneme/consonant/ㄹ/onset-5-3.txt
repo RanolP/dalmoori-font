@@ -1,9 +1,9 @@
 ---
-for = [ㅚㅙ].
+for = [ㅝㅞㅟㅢ].
 ---
 # # # # # x x x
-. . # . # x x x
-. . . . . x x x
+. . . # # x x x
+# # # . . x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
