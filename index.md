@@ -1,7 +1,7 @@
 ---
 layout: home
 ---
-현대 한글 79.23% 지원  
+현대 한글 80.56% 지원  
 
 - [U+0000 ~ U+00FF]({{ site.baseurl }}/code/00)
 - [U+3100 ~ U+31FF]({{ site.baseurl }}/code/31)

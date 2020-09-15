@@ -5,10 +5,10 @@ permalink: "/code/CB"
 description: "코드 페이지 - 코드 범위: U+CB00 ~ U+CBFF"
 ---
 
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쬀</span>
+<span class="character">쬁</span>
+<span class="character">쬂</span>
+<span class="character">쬃</span>
 <span class="character">쬄</span>
 <span class="character">쬅</span>
 <span class="character">쬆</span>
@@ -16,9 +16,9 @@ description: "코드 페이지 - 코드 범위: U+CB00 ~ U+CBFF"
 <span class="character">쬈</span>
 <span class="character">쬉</span>
 <span class="character">쬊</span>
-<span class="code tofu"></span>
+<span class="character">쬋</span>
 <span class="character">쬌</span>
-<span class="code tofu"></span>
+<span class="character">쬍</span>
 <span class="character">쬎</span>
 <span class="character">쬏</span>
 <span class="character">쬐</span>
@@ -29,14 +29,14 @@ description: "코드 페이지 - 코드 범위: U+CB00 ~ U+CBFF"
 <span class="character">쬕</span>
 <span class="character">쬖</span>
 <span class="character">쬗</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쬘</span>
+<span class="character">쬙</span>
+<span class="character">쬚</span>
+<span class="character">쬛</span>
+<span class="character">쬜</span>
+<span class="character">쬝</span>
+<span class="character">쬞</span>
+<span class="character">쬟</span>
 <span class="character">쬠</span>
 <span class="character">쬡</span>
 <span class="character">쬢</span>
@@ -44,9 +44,9 @@ description: "코드 페이지 - 코드 범위: U+CB00 ~ U+CBFF"
 <span class="character">쬤</span>
 <span class="character">쬥</span>
 <span class="character">쬦</span>
-<span class="code tofu"></span>
+<span class="character">쬧</span>
 <span class="character">쬨</span>
-<span class="code tofu"></span>
+<span class="character">쬩</span>
 <span class="character">쬪</span>
 <span class="character">쬫</span>
 <span class="character">쬬</span>

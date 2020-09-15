@@ -257,7 +257,7 @@ description: "코드 페이지 - 코드 범위: U+C300 ~ U+C3FF"
 <span class="character">쏹</span>
 <span class="character">쏺</span>
 <span class="character">쏻</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쏼</span>
+<span class="character">쏽</span>
+<span class="character">쏾</span>
+<span class="character">쏿</span>
