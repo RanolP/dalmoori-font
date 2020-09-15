@@ -82,7 +82,7 @@ export async function generatePreview(availableCharacters: Set<string>, pageAvai
   layout: home
   ---
   현대 한글 ${donePercentage.toFixed(2)}% 지원
-  KS X 1001에 실린 한글 2350 자, 한글 호환 자모, 아스키 문자 ${(100 * [...Requirements].filter(availableCharacters.has).length / Requirements.length).toFixed(2)}% 지원
+  KS X 1001에 실린 한글 2350 자, 한글 호환 자모, 아스키 문자 ${(100 * [...Requirements].filter(c => availableCharacters.has(c)).length / Requirements.length).toFixed(2)}% 지원
 
   ${[...pageAvailable].map(page => dedent`
     - [U+${page}00 ~ U+${page}FF]({{ site.baseurl }}/code/${page})  
