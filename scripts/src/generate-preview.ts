@@ -77,13 +77,16 @@ export async function generatePreview(availableCharacters: Set<string>, pageAvai
 
   console.log('Generating index');
 
-  const [supported, unsupported] = [...Requirements].reduce(
-    ([s, u], c) =>
-      availableCharacters.has(c)
-        ? [(s.push(c), s), u]
-        : [s, (u.push(c), u)],
-    [[] as string[], [] as string[]]
-  );
+  const supported = [];
+  const unsupported = [];
+
+  for (const c of Requirements) { 
+    if (availableCharacters.has(c)) {
+      supported.push(c);
+    } else {
+      unsupported.push(c);
+    }
+  }
 
   const previewData = dedent`
   ---
