@@ -1,12 +1,11 @@
 ---
-for = [ㅗㅛ].
-variant.ㅗ = right
+height-occupying = 2
 ---
-. # # # # # # .
-. . . # . . # .
-. . . . . . . .
 x x x x x x x x
 x x x x x x x x
+x x x x x x x x
+# # # # # # # .
+. . . . # . . .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

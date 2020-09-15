@@ -1,0 +1,14 @@
+---
+for = [ㅘㅙㅚㅝㅞㅟ][ㄹㄺㄻㄼㄽㄾㄿㅀ]
+variant.ㅚ = right
+variant.ㅘ = right
+variant.ㅙ = right
+---
+# # # # # x x x
+. . # . # x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x

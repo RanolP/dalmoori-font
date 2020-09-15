@@ -1,11 +1,9 @@
 ---
-for = [ㅚㅘ].
-variant.ㅚ = right
-variant.ㅘ = right
+for = [ㅗㅛㅜㅠ][ㄹㄺㄻㄼㄽㄾㄿㅀ]
 ---
+# . . . . x x x
+# . . . . x x x
 # # # # # x x x
-. . # . # x x x
-. . . . . x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

@@ -1,10 +1,8 @@
 ---
-for = [ㅗㅛ].
-variant.ㅗ = right
 ---
-. # # # # # # .
-. . . # . . # .
-. . . . . . . .
+# # # # # x x x
+. . . . # x x x
+x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
