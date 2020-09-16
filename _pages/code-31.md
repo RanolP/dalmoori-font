@@ -89,9 +89,9 @@ description: "코드 페이지 - 코드 범위: U+3100 ~ U+31FF"
 <span class="character">ㅑ</span>
 <span class="character">ㅒ</span>
 <span class="character">ㅓ</span>
-<span class="code tofu"></span>
+<span class="character">ㅔ</span>
 <span class="character">ㅕ</span>
-<span class="code tofu"></span>
+<span class="character">ㅖ</span>
 <span class="character">ㅗ</span>
 <span class="character">ㅘ</span>
 <span class="character">ㅙ</span>
