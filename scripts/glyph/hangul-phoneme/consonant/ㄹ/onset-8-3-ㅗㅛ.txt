@@ -1,0 +1,11 @@
+---
+for = [ㅗㅛ].
+---
+. # # # # # # .
+. . . . # # # .
+. # # # # # # .
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x

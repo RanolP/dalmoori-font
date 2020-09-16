@@ -1,0 +1,11 @@
+---
+for = [ㅡㅜㅠ].
+---
+. . . . # . . .
+. # # # # # # .
+. . # . . # . .
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
