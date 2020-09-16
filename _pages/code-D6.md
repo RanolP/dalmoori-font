@@ -205,7 +205,7 @@ description: "코드 페이지 - 코드 범위: U+D600 ~ U+D6FF"
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">훈</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
