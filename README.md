@@ -20,4 +20,5 @@
 
 ## 도움을 주신 분들
 
-- [@EatChangmyeong](https://github.com/EatChangmyeong)
+- [@EatChangmyeong](https://github.com/EatChangmyeong): 여러 글리프 제안
+- [@ShapeLayer](https://github.com/ShapeLayer): 웹 페이지 디자인
