@@ -1,9 +1,9 @@
 ---
-for = [ㅡㅜㅠ].
+for = [ㅗ].
 ---
 . . . # . . . .
 # # # # # # # .
-. # . . . # . .
+. . # . # . . .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
