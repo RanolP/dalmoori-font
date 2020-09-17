@@ -1,5 +1,5 @@
 ---
-for = .[ㅗㅘㅚㅙㅛㅜㅠㅡ]
+for = .[ㅗㅘㅚㅙㅢㅛㅜㅠㅡ]
 ---
 x x x x x x x x
 x x x x x x x x

@@ -1,8 +1,8 @@
 ---
 width-occupying = 3
-margin-left = 1
+margin-left = 0, 1
 height-occupying = 3
-margin-top = 1
+margin-top = 0, 1
 ---
 x x x x . # . #
 x x x x . # . #
