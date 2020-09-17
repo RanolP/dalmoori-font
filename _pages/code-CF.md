@@ -238,10 +238,10 @@ description: "코드 페이지 - 코드 범위: U+CF00 ~ U+CFFF"
 <span class="character">쿦</span>
 <span class="character">쿧</span>
 <span class="character">쿨</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">쿩</span>
+<span class="character">쿪</span>
+<span class="character">쿫</span>
+<span class="character">쿬</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

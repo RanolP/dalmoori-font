@@ -46,10 +46,10 @@ description: "코드 페이지 - 코드 범위: U+C700 ~ U+C7FF"
 <span class="character">윦</span>
 <span class="character">윧</span>
 <span class="character">율</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">윩</span>
+<span class="character">윪</span>
+<span class="character">윫</span>
+<span class="character">윬</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

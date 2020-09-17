@@ -18,10 +18,10 @@ description: "코드 페이지 - 코드 범위: U+CE00 ~ U+CEFF"
 <span class="character">츊</span>
 <span class="character">츋</span>
 <span class="character">츌</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">츍</span>
+<span class="character">츎</span>
+<span class="character">츏</span>
+<span class="character">츐</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

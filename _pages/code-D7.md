@@ -66,10 +66,10 @@ description: "코드 페이지 - 코드 범위: U+D700 ~ U+D7FF"
 <span class="character">휺</span>
 <span class="character">휻</span>
 <span class="character">휼</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">휽</span>
+<span class="character">휾</span>
+<span class="character">휿</span>
+<span class="character">흀</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

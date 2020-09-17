@@ -5,7 +5,7 @@ permalink: "/code/BD"
 description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 ---
 
-<span class="code tofu"></span>
+<span class="character">봀</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -30,10 +30,10 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">봖</span>
 <span class="character">봗</span>
 <span class="character">봘</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">봙</span>
+<span class="character">봚</span>
+<span class="character">봛</span>
+<span class="character">봜</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -58,10 +58,10 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">봲</span>
 <span class="character">봳</span>
 <span class="character">봴</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">봵</span>
+<span class="character">봶</span>
+<span class="character">봷</span>
+<span class="character">봸</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -86,10 +86,10 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">뵎</span>
 <span class="character">뵏</span>
 <span class="character">뵐</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">뵑</span>
+<span class="character">뵒</span>
+<span class="character">뵓</span>
+<span class="character">뵔</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -114,10 +114,10 @@ description: "코드 페이지 - 코드 범위: U+BD00 ~ U+BDFF"
 <span class="character">뵪</span>
 <span class="character">뵫</span>
 <span class="character">뵬</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">뵭</span>
+<span class="character">뵮</span>
+<span class="character">뵯</span>
+<span class="character">뵰</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

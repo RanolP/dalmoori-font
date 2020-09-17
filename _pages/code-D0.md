@@ -94,10 +94,10 @@ description: "코드 페이지 - 코드 범위: U+D000 ~ U+D0FF"
 <span class="character">큖</span>
 <span class="character">큗</span>
 <span class="character">큘</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">큙</span>
+<span class="character">큚</span>
+<span class="character">큛</span>
+<span class="character">큜</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
