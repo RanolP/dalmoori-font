@@ -73,7 +73,7 @@ description: "코드 페이지 - 코드 범위: U+C000 ~ U+C0FF"
 <span class="character">쁁</span>
 <span class="character">쁂</span>
 <span class="character">쁃</span>
-<span class="code tofu"></span>
+<span class="character">쁄</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

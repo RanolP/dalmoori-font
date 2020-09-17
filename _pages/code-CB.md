@@ -85,7 +85,7 @@ description: "코드 페이지 - 코드 범위: U+CB00 ~ U+CBFF"
 <span class="character">쭍</span>
 <span class="character">쭎</span>
 <span class="character">쭏</span>
-<span class="code tofu"></span>
+<span class="character">쭐</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -197,7 +197,7 @@ description: "코드 페이지 - 코드 범위: U+CB00 ~ U+CBFF"
 <span class="character">쮽</span>
 <span class="character">쮾</span>
 <span class="character">쮿</span>
-<span class="code tofu"></span>
+<span class="character">쯀</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

@@ -101,7 +101,7 @@ description: "코드 페이지 - 코드 범위: U+B900 ~ U+B9FF"
 <span class="character">륝</span>
 <span class="character">륞</span>
 <span class="character">륟</span>
-<span class="code tofu"></span>
+<span class="character">률</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

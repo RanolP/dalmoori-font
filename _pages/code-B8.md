@@ -105,7 +105,7 @@ description: "코드 페이지 - 코드 범위: U+B800 ~ U+B8FF"
 <span class="character">롡</span>
 <span class="character">롢</span>
 <span class="character">롣</span>
-<span class="code tofu"></span>
+<span class="character">롤</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -217,7 +217,7 @@ description: "코드 페이지 - 코드 범위: U+B800 ~ U+B8FF"
 <span class="character">룑</span>
 <span class="character">룒</span>
 <span class="character">룓</span>
-<span class="code tofu"></span>
+<span class="character">룔</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -245,7 +245,7 @@ description: "코드 페이지 - 코드 범위: U+B800 ~ U+B8FF"
 <span class="character">룭</span>
 <span class="character">룮</span>
 <span class="character">룯</span>
-<span class="code tofu"></span>
+<span class="character">룰</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

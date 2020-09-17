@@ -237,7 +237,7 @@ description: "코드 페이지 - 코드 범위: U+C800 ~ U+C8FF"
 <span class="character">죥</span>
 <span class="character">죦</span>
 <span class="character">죧</span>
-<span class="code tofu"></span>
+<span class="character">죨</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>

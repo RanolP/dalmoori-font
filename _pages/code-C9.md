@@ -9,7 +9,7 @@ description: "코드 페이지 - 코드 범위: U+C900 ~ U+C9FF"
 <span class="character">줁</span>
 <span class="character">줂</span>
 <span class="character">줃</span>
-<span class="code tofu"></span>
+<span class="character">줄</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
@@ -121,7 +121,7 @@ description: "코드 페이지 - 코드 범위: U+C900 ~ U+C9FF"
 <span class="character">쥱</span>
 <span class="character">쥲</span>
 <span class="character">쥳</span>
-<span class="code tofu"></span>
+<span class="character">쥴</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
