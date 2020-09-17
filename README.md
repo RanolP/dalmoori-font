@@ -22,3 +22,4 @@
 
 - [@EatChangmyeong](https://github.com/EatChangmyeong): 여러 글리프 제안
 - [@ShapeLayer](https://github.com/ShapeLayer): 웹 페이지 디자인
+- [@Lee0701](https://github.com/Lee0701/): 여러 글리프 제안
