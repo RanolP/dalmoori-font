@@ -1,11 +1,11 @@
 ---
-for = [ㅜㅝㅟㅠㅡ]...
+for = .[ㅗㅘㅚㅙㅛㅜㅠㅡ]
 ---
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+. . . . # # # .
+. # # # . . . .
 . # # # # # # .
-. . . . . . # .
-x x x x x x x x
-x x x x x x x x
-x x x x x x x x
-x x x x x x x x
-x x x x x x x x
-x x x x x x x x

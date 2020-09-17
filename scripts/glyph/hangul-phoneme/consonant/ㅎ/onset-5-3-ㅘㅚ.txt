@@ -1,9 +1,9 @@
 ---
-for = [ㅝㅞㅟ].[ㄹㄺㄻㄼㄽㄾㄿㅊㅌ].
+for = [ㅘㅚ].[ㄹ]3
 ---
-# . . . # x x x
+. . # . . x x x
 # # # # # x x x
-x x x x x x x x
+. # . # . x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

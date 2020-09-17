@@ -2,7 +2,7 @@ import { basename, join, PathLike, readdir } from '../util/fs';
 import { AsciiFont } from './asciiFont';
 
 const ONSET_REGEX = /onset-(\d+)-(\d+)(?:-([a-z]+))?/;
-const CODA_REGEX = /coda-(\d+)/;
+const CODA_REGEX = /coda-(\d+)(?:-[a-z]+)?/;
 
 export class Consonant {
   private static Cache: Record<string, Consonant> = {};
@@ -15,7 +15,7 @@ export class Consonant {
     const path = join(basepath.toString(), compatPhoneme);
     if (!(path in Consonant.Cache)) {
       const onsetParts: Record<number, Record<number, OnsetPart[]>> = {};
-      const codaheightFontMap: Record<number, AsciiFont> = {};
+      const codaParts: CodaPart[] = [];
       for (const file of await readdir(path)) {
         const name = basename(file, '.txt');
         const onset = ONSET_REGEX.exec(name);
@@ -40,10 +40,26 @@ export class Consonant {
         const coda = CODA_REGEX.exec(name);
         if (coda !== null) {
           const asciiFont = await AsciiFont.fromFile(join(path, file));
-          const [height] = coda.slice(1).map(Number);
-          codaheightFontMap[height] = asciiFont;
+          const height = Number(coda[1]);
+          const variantsRequirementsMap: Record<string, string[]> = {};
+          const targetFor = asciiFont.meta['for'] ? new RegExp('^' + asciiFont.meta['for'] + '$') : undefined;
+          const notTargetFor = asciiFont.meta['not-for'] ? new RegExp('^' + asciiFont.meta['not-for'] + '$') : undefined;
+          const marginTop = asciiFont.meta['margin-top'] ? [asciiFont.meta['margin-top']].flat().sort((a, b) => b - a) : [0];
+          for (const target of Object.keys(asciiFont.meta['variant'] ?? {})) {
+            variantsRequirementsMap[target] = [asciiFont.meta['variant'][target] ?? []].flat();
+          }
+          codaParts.push(new CodaPart(
+            asciiFont,
+            variantsRequirementsMap,
+            targetFor,
+            notTargetFor,
+            height,
+            marginTop,
+          ));
         }
       }
+
+      codaParts.sort((a, b) => b.height - a.height);
 
       const convertOnset = 'ᄀᄁ ᄂ  ᄃᄄᄅ       ᄆᄇᄈ ᄉᄊᄋᄌᄍᄎᄏᄐᄑᄒ';
       const convertCoda = 'ᆨᆩᆪᆫᆬᆭᆮ ᆯᆰᆱᆲᆳᆴᆵᆶᆷᆸ ᆹᆺᆻᆼᆽ ᆾᆿᇀᇁᇂ';
@@ -53,7 +69,7 @@ export class Consonant {
       if (!(path in Consonant.Cache)) {
         Consonant.Cache[path] = new Consonant(
           new Onset(new PhonemeName(convertOnset[compatConsonant.indexOf(compatPhoneme)], compatPhoneme), onsetParts),
-          new Coda(new PhonemeName(convertCoda[compatConsonant.indexOf(compatPhoneme)], compatPhoneme), codaheightFontMap)
+          new Coda(new PhonemeName(convertCoda[compatConsonant.indexOf(compatPhoneme)], compatPhoneme), codaParts)
         );
       }
     }
@@ -152,16 +168,20 @@ export class Nucleus {
   }
 }
 
+export class CodaPart {
+  constructor(
+    public readonly font: AsciiFont,
+    public readonly variantRequirementsMap: Record<string, string[]>,
+    public readonly targetFor: RegExp | undefined,
+    public readonly notTargetFor: RegExp | undefined,
+    public readonly height: number,
+    public readonly marginTop: number[],
+  ) { }
+}
+
 export class Coda {
-  public readonly heightList: number[];
   constructor(
     public readonly name: PhonemeName,
-    private readonly heightFontMap: Record<number, AsciiFont>
-  ) {
-    this.heightList = Object.keys(this.heightFontMap).map(Number).sort((a, b) => b - a);
-  }
-
-  public fontForHeight(height: number): AsciiFont {
-    return this.heightFontMap[height];
-  }
+    public readonly parts: CodaPart[]
+  ) { }
 }

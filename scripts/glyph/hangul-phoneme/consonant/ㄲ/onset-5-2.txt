@@ -1,5 +1,5 @@
 ---
-for = [ㅘㅙㅚㅝㅞㅟ].
+for = [ㅘㅙㅚㅝㅞㅟ]...
 variant.ㅚ = right
 variant.ㅘ = right
 variant.ㅙ = right

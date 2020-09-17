@@ -1,5 +1,5 @@
 ---
-not-for = [ㅗㅛ].
+not-for = [ㅗㅛ]...
 variant.ㅜ = right
 ---
 . # # # # # # .
