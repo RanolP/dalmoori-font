@@ -150,7 +150,7 @@ description: "코드 페이지 - 코드 범위: U+B100 ~ U+B1FF"
 <span class="character">놎</span>
 <span class="code tofu"></span>
 <span class="character">놐</span>
-<span class="code tofu"></span>
+<span class="character">놑</span>
 <span class="character">높</span>
 <span class="character">놓</span>
 <span class="character">놔</span>
@@ -178,7 +178,7 @@ description: "코드 페이지 - 코드 범위: U+B100 ~ U+B1FF"
 <span class="character">놪</span>
 <span class="code tofu"></span>
 <span class="character">놬</span>
-<span class="code tofu"></span>
+<span class="character">놭</span>
 <span class="character">놮</span>
 <span class="character">놯</span>
 <span class="character">놰</span>
@@ -206,7 +206,7 @@ description: "코드 페이지 - 코드 범위: U+B100 ~ U+B1FF"
 <span class="character">뇆</span>
 <span class="code tofu"></span>
 <span class="character">뇈</span>
-<span class="code tofu"></span>
+<span class="character">뇉</span>
 <span class="character">뇊</span>
 <span class="character">뇋</span>
 <span class="character">뇌</span>
@@ -234,7 +234,7 @@ description: "코드 페이지 - 코드 범위: U+B100 ~ U+B1FF"
 <span class="character">뇢</span>
 <span class="code tofu"></span>
 <span class="character">뇤</span>
-<span class="code tofu"></span>
+<span class="character">뇥</span>
 <span class="character">뇦</span>
 <span class="character">뇧</span>
 <span class="character">뇨</span>

@@ -249,7 +249,7 @@ description: "코드 페이지 - 코드 범위: U+CA00 ~ U+CAFF"
 <span class="character">쫱</span>
 <span class="character">쫲</span>
 <span class="character">쫳</span>
-<span class="code tofu"></span>
+<span class="character">쫴</span>
 <span class="character">쫵</span>
 <span class="character">쫶</span>
 <span class="character">쫷</span>

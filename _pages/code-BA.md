@@ -186,8 +186,8 @@ description: "코드 페이지 - 코드 범위: U+BA00 ~ U+BAFF"
 <span class="character">몲</span>
 <span class="character">몳</span>
 <span class="character">몴</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">몵</span>
+<span class="character">몶</span>
 <span class="code tofu"></span>
 <span class="character">몸</span>
 <span class="character">몹</span>
@@ -198,7 +198,7 @@ description: "코드 페이지 - 코드 범위: U+BA00 ~ U+BAFF"
 <span class="character">몾</span>
 <span class="code tofu"></span>
 <span class="character">뫀</span>
-<span class="code tofu"></span>
+<span class="character">뫁</span>
 <span class="character">뫂</span>
 <span class="character">뫃</span>
 <span class="character">뫄</span>
@@ -214,8 +214,8 @@ description: "코드 페이지 - 코드 범위: U+BA00 ~ U+BAFF"
 <span class="character">뫎</span>
 <span class="character">뫏</span>
 <span class="character">뫐</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">뫑</span>
+<span class="character">뫒</span>
 <span class="code tofu"></span>
 <span class="character">뫔</span>
 <span class="character">뫕</span>
@@ -226,7 +226,7 @@ description: "코드 페이지 - 코드 범위: U+BA00 ~ U+BAFF"
 <span class="character">뫚</span>
 <span class="code tofu"></span>
 <span class="character">뫜</span>
-<span class="code tofu"></span>
+<span class="character">뫝</span>
 <span class="character">뫞</span>
 <span class="character">뫟</span>
 <span class="character">뫠</span>
@@ -242,8 +242,8 @@ description: "코드 페이지 - 코드 범위: U+BA00 ~ U+BAFF"
 <span class="character">뫪</span>
 <span class="character">뫫</span>
 <span class="character">뫬</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">뫭</span>
+<span class="character">뫮</span>
 <span class="code tofu"></span>
 <span class="character">뫰</span>
 <span class="character">뫱</span>
@@ -254,7 +254,7 @@ description: "코드 페이지 - 코드 범위: U+BA00 ~ U+BAFF"
 <span class="character">뫶</span>
 <span class="code tofu"></span>
 <span class="character">뫸</span>
-<span class="code tofu"></span>
+<span class="character">뫹</span>
 <span class="character">뫺</span>
 <span class="character">뫻</span>
 <span class="character">뫼</span>

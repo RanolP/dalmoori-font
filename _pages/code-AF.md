@@ -214,7 +214,7 @@ description: "코드 페이지 - 코드 범위: U+AF00 ~ U+AFFF"
 <span class="character">꿎</span>
 <span class="code tofu"></span>
 <span class="character">꿐</span>
-<span class="code tofu"></span>
+<span class="character">꿑</span>
 <span class="character">꿒</span>
 <span class="character">꿓</span>
 <span class="character">꿔</span>

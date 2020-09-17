@@ -242,8 +242,8 @@ description: "코드 페이지 - 코드 범위: U+C800 ~ U+C8FF"
 <span class="character">죪</span>
 <span class="character">죫</span>
 <span class="character">죬</span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">죭</span>
+<span class="character">죮</span>
 <span class="code tofu"></span>
 <span class="character">죰</span>
 <span class="character">죱</span>
@@ -254,7 +254,7 @@ description: "코드 페이지 - 코드 범위: U+C800 ~ U+C8FF"
 <span class="character">죶</span>
 <span class="code tofu"></span>
 <span class="character">죸</span>
-<span class="code tofu"></span>
+<span class="character">죹</span>
 <span class="character">죺</span>
 <span class="character">죻</span>
 <span class="character">주</span>
