@@ -12,6 +12,7 @@
 - [갈무리9](https://tbh.kr/galmuri)
 - [Silver](https://poppyworks.itch.io/silver)
 - Misaki Gothic
+- [Neo둥근모](https://neodgm.dalgona.dev/)
 
 ## 라이선스
 
