@@ -166,10 +166,10 @@ description: "코드 페이지 - 코드 범위: U+D100 ~ U+D1FF"
 <span class="character">톞</span>
 <span class="character">톟</span>
 <span class="character">토</span>
+<span class="character">톡</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">톤</span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
 <span class="code tofu"></span>
