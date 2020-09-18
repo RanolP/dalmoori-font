@@ -216,7 +216,7 @@ description: "코드 페이지 - 코드 범위: U+B300 ~ U+B3FF"
 <span class="character">돐</span>
 <span class="character">돑</span>
 <span class="character">돒</span>
-<span class="code tofu"></span>
+<span class="character">돓</span>
 <span class="character">돔</span>
 <span class="character">돕</span>
 <span class="character">돖</span>
@@ -224,7 +224,7 @@ description: "코드 페이지 - 코드 범위: U+B300 ~ U+B3FF"
 <span class="character">돘</span>
 <span class="character">동</span>
 <span class="character">돚</span>
-<span class="code tofu"></span>
+<span class="character">돛</span>
 <span class="character">돜</span>
 <span class="character">돝</span>
 <span class="character">돞</span>
@@ -244,7 +244,7 @@ description: "코드 페이지 - 코드 범위: U+B300 ~ U+B3FF"
 <span class="character">돬</span>
 <span class="character">돭</span>
 <span class="character">돮</span>
-<span class="code tofu"></span>
+<span class="character">돯</span>
 <span class="character">돰</span>
 <span class="character">돱</span>
 <span class="character">돲</span>
@@ -252,7 +252,7 @@ description: "코드 페이지 - 코드 범위: U+B300 ~ U+B3FF"
 <span class="character">돴</span>
 <span class="character">돵</span>
 <span class="character">돶</span>
-<span class="code tofu"></span>
+<span class="character">돷</span>
 <span class="character">돸</span>
 <span class="character">돹</span>
 <span class="character">돺</span>

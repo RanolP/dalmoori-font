@@ -212,7 +212,7 @@ description: "코드 페이지 - 코드 범위: U+AF00 ~ U+AFFF"
 <span class="character">꿌</span>
 <span class="character">꿍</span>
 <span class="character">꿎</span>
-<span class="code tofu"></span>
+<span class="character">꿏</span>
 <span class="character">꿐</span>
 <span class="character">꿑</span>
 <span class="character">꿒</span>
