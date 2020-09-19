@@ -1,6 +1,6 @@
 ---
 width-occupying = 2
-margin-left = 0, 1
+margin-left = 0, 1, -1
 height-occupying = 2
 ---
 x x x x x m # .
