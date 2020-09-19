@@ -13,6 +13,7 @@
 - [Silver](https://poppyworks.itch.io/silver)
 - Misaki Gothic
 - [Neo둥근모](https://neodgm.dalgona.dev/)
+- [D2Coding](https://github.com/naver/d2codingfont)
 
 ## 라이선스
 
