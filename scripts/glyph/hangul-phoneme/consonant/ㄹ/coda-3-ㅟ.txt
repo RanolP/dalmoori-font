@@ -1,0 +1,12 @@
+---
+for = .[ㅟ]
+margin-top = -1
+---
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+. . . . # # # .
+. # # # . . . .
+. # # # # # # .
