@@ -5,22 +5,22 @@ permalink: "/code/D2"
 description: "코드 페이지 - 코드 범위: U+D200 ~ U+D2FF"
 ---
 
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">툀</span>
+<span class="character">툁</span>
+<span class="character">툂</span>
+<span class="character">툃</span>
+<span class="character">툄</span>
+<span class="character">툅</span>
+<span class="character">툆</span>
+<span class="character">툇</span>
+<span class="character">툈</span>
+<span class="character">툉</span>
+<span class="character">툊</span>
+<span class="character">툋</span>
+<span class="character">툌</span>
+<span class="character">툍</span>
+<span class="character">툎</span>
+<span class="character">툏</span>
 <span class="character">툐</span>
 <span class="character">툑</span>
 <span class="character">툒</span>
