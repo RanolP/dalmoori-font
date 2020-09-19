@@ -191,3 +191,11 @@ input:checked + .slider:before {
     -ms-transform: translateX(18px);
     transform: translateX(18px);
 }
+
+button {
+    font-family: inherit;
+}
+
+#download {
+    border-width: 4px;
+}
