@@ -5,10 +5,10 @@ permalink: "/code/CE"
 description: "코드 페이지 - 코드 범위: U+CE00 ~ U+CEFF"
 ---
 
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
-<span class="code tofu"></span>
+<span class="character">츀</span>
+<span class="character">츁</span>
+<span class="character">츂</span>
+<span class="character">츃</span>
 <span class="character">츄</span>
 <span class="character">츅</span>
 <span class="character">츆</span>
