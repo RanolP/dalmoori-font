@@ -1,6 +1,5 @@
 import dedent from 'dedent';
 import { Paths } from './constants';
-import { Requirements } from './hangul2350-with-ascii';
 import { writeFile, copyFile, join } from './util/fs';
 
 function escapeMarkdown(char: string): string {
@@ -40,7 +39,7 @@ function escapeMarkdown(char: string): string {
   }
 }
 
-export async function generatePreview(availableCharacters: Set<string>, pageAvailable: Set<string>, donePercentage: number): Promise<void> {
+export async function generatePreview(availableCharacters: Set<string>, pageAvailable: Set<string>): Promise<void> {
   await copyFile(join(Paths.build, 'font', 'dalmoori.ttf'), '../docs/assets/dalmoori.ttf');
 
   for (const page of pageAvailable) {
@@ -80,7 +79,8 @@ export async function generatePreview(availableCharacters: Set<string>, pageAvai
   const supported = [];
   const unsupported = [];
 
-  for (const c of Requirements) { 
+  for (let id = '가'.charCodeAt(0); id <= '힣'.charCodeAt(0); id++) {
+    const c = String.fromCharCode(id);
     if (availableCharacters.has(c)) {
       supported.push(c);
     } else {
@@ -92,9 +92,7 @@ export async function generatePreview(availableCharacters: Set<string>, pageAvai
   ---
   layout: home
   ---
-  현대 한글 ${donePercentage.toFixed(2)}% 지원
-
-  KS X 1001에 실린 한글 2350 자, 한글 호환 자모, 아스키 문자 ${(100 * supported.length / Requirements.length).toFixed(2)}% 지원
+  현대 한글 ${(100 * supported.length / 11172).toFixed(2)}% 지원
 
   미지원 문자 목록:
   ${unsupported.join(', ')}

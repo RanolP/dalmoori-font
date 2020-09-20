@@ -18,8 +18,7 @@ function* hangulPhonemeCombination(): Generator<[onset: string, nucleus: string,
 
 export interface RenderResult {
   asciiFontMap: Record<string, AsciiFont>
-  pageAvailable: Set<string>,
-  status: { error: number, total: number }
+  pageAvailable: Set<string>
 }
 
 export async function renderAsciiFont(): Promise<RenderResult> {
@@ -57,10 +56,8 @@ export async function renderAsciiFont(): Promise<RenderResult> {
       tick,
     );
   }
-  const total = 11172;
-  let error = 0;
 
-  const { tick } = createProgressIndicator('Render Hangul Syllable', total);
+  const { tick } = createProgressIndicator('Render Hangul Syllable', 11172);
 
   await execute(
     function* () {
@@ -71,7 +68,7 @@ export async function renderAsciiFont(): Promise<RenderResult> {
             asciiFontMap[syllable.text] = await syllable.renderGlyph();
             pageAvailable.add(formatHex(syllable.text.charCodeAt(0) >> 8, 2));
           } catch (e) {
-            error += 1;
+            /* do nothing */
           }
         };
       }
@@ -80,5 +77,5 @@ export async function renderAsciiFont(): Promise<RenderResult> {
     tick,
   );
 
-  return { asciiFontMap, pageAvailable, status: { error, total } };
+  return { asciiFontMap, pageAvailable };
 }
