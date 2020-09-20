@@ -36,6 +36,8 @@ export function createProgressIndicator(label: string, total: number): AbstractP
         chalk.yellow(':rate char/s'),
         '·',
         chalk.blue('ETA :etas'),
+        '·',
+        ':elapseds used',
       ].join(' '),
       {
         total,

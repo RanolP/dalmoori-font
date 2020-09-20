@@ -1,5 +1,5 @@
 import { PathLike, join } from '../util/fs';
-import { AsciiFont } from './asciiFont';
+import { AsciiFont } from './ascii-font';
 import { combine } from './combine';
 import { Coda, Consonant, Nucleus, Onset } from './hangul-phoneme';
 

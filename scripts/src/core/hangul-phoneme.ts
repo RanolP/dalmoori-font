@@ -1,5 +1,5 @@
 import { basename, join, PathLike, readdir } from '../util/fs';
-import { AsciiFont } from './asciiFont';
+import { AsciiFont } from './ascii-font';
 
 const ONSET_REGEX = /onset-(\d+)-(\d+)(?:-([a-z]+))?/;
 const CODA_REGEX = /coda-(\d+)(?:-[a-z]+)?/;

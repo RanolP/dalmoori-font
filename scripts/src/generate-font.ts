@@ -1,11 +1,12 @@
 import svg2ttf from 'svg2ttf';
 import SVGIcons2SVGFont, { Glyphs } from 'svgicons2svgfont';
 import { Readable } from 'stream';
-import { AsciiFont } from './core/asciiFont';
+import { AsciiFont } from './core/ascii-font';
 import { createWriteStream } from 'fs';
 import { join, mkdirs, readFile, writeFile } from './util/fs';
 import { OnePixel, Paths, Version } from './constants';
 import { createProgressIndicator, formatHex } from './util/format';
+import { execute } from './util/executor';
 
 export async function generateFont(map: Record<string, AsciiFont>): Promise<void> {
   const entries = Object.entries(map);
@@ -15,15 +16,28 @@ export async function generateFont(map: Record<string, AsciiFont>): Promise<void
     descent: OnePixel,
     log: () => { /* do nothing */ },
   });
-  for (const [character, font] of Object.entries(map)) {
-    const id = formatHex(character.charCodeAt(0), 4);
-    const glyphs = Readable.from(await font.renderSvg()) as Glyphs;
-    glyphs.metadata = {
-      name: 'uni' + id,
-      unicode: [...character],
-    };
-    tick();
-    svgFontStream.write(glyphs);
+
+  const glyphList: Glyphs[] = await execute(
+    function* () {
+      for (const [character, font] of Object.entries(map)) {
+        yield async () => {
+          const id = formatHex(character.charCodeAt(0), 4);
+          const glyphs = Readable.from(await font.renderSvg()) as Glyphs;
+          glyphs.metadata = {
+            name: 'uni' + id,
+            unicode: [...character],
+          };
+
+          return glyphs;
+        };
+      }
+    },
+    64,
+    tick,
+  );
+
+  for (const glyph of glyphList) {
+    svgFontStream.write(glyph);
   }
 
   svgFontStream.end();

@@ -1,10 +1,6 @@
 import { PathLike, readFile } from 'fs';
 import Svgo from 'svgo';
-import { CompoundPath, PathItem, Shape, Project, Size } from 'paper';
-import dedent from 'dedent';
-import { FullWidthSize } from '../constants';
-
-type PathItemT = Parameters<ReturnType<typeof PathItem['create']>['unite']>[0];
+import { Path } from './path';
 
 export type AsciiFontData = Array<[x: number, y: number]>;
 
@@ -27,13 +23,14 @@ const svgo = new Svgo({
 
 export class AsciiFont {
   private static FileCache: Record<string, AsciiFont> = {};
-  private svgRenderCache: string | undefined = undefined;
+  private path: Path | undefined = undefined;
   private constructor(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public readonly meta: any,
     public readonly width: number,
     public readonly height: number,
-    private readonly data: AsciiFontData
+    public readonly data: AsciiFontData,
+    private pathGetter: undefined | (() => Path) = undefined,
   ) { }
 
   static async fromFile(file: PathLike): Promise<AsciiFont> {
@@ -141,7 +138,6 @@ export class AsciiFont {
     return new AsciiFont(meta, width, height, data);
   }
   with(other: AsciiFont | undefined): AsciiFont {
-
     if (other === undefined) {
       return this;
     } else if (this.width !== other.width || this.height !== other.height) {
@@ -155,7 +151,13 @@ export class AsciiFont {
           union.push([x, y]);
         }
       }
-      return new AsciiFont({}, this.width, this.height, union);
+      return new AsciiFont(
+        {},
+        this.width,
+        this.height,
+        union,
+        () => this.renderPath().unite(other.renderPath()),
+      );
     }
   }
 
@@ -166,36 +168,17 @@ export class AsciiFont {
       ).join(' ')
     ).join('\n');
   }
+  
+  renderPath(): Path {
+    if (this.path === undefined) {
+      this.path = this.pathGetter?.() ?? new Path(this);
+    }
+    return this.path;
+  }
 
   async renderSvg(): Promise<string> {
-    if (this.svgRenderCache === undefined) {
-      const factor = FullWidthSize / this.height;
-
-      const actualWidth = this.width * factor;
-      const actualHeight = this.height * factor;
-
-      const project = new Project(new Size(actualWidth, actualHeight));
-      const path = this.data.reduce<PathItemT>((acc, [x, y]) => acc.unite(new Shape.Rectangle({
-        point: [x * factor, y * factor],
-        size: [1 * factor + 1e-5, 1 * factor + 1e-5],
-        insert: false,
-        project,
-      }).toPath(false)), new CompoundPath({
-        insert: false,
-        project,
-      }));
-      const pathRendered = path.exportSVG({
-        asString: true
-      });
-      const optimized = await svgo.optimize(dedent`
-        <svg viewBox="0 0 ${actualWidth} ${actualHeight}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          ${pathRendered}
-        </svg>
-      `);
-      if (this.svgRenderCache === undefined) {
-        this.svgRenderCache = optimized.data;
-      }
-    }
-    return this.svgRenderCache;
+    const path = this.renderPath();
+    const optimized = await svgo.optimize(path.renderToSvg());
+    return optimized.data;
   }
 }

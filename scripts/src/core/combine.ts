@@ -1,4 +1,4 @@
-import { AsciiFont } from './asciiFont';
+import { AsciiFont } from './ascii-font';
 import { Coda, CodaPart, Nucleus, Onset } from './hangul-phoneme';
 
 export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont {
