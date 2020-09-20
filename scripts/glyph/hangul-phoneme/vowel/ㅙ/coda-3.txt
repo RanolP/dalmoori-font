@@ -1,6 +1,7 @@
 ---
 width-occupying = 3
 height-occupying = 2
+margin-top = 0, 1
 ---
 x x x x x # . #
 x x x x x # . #
