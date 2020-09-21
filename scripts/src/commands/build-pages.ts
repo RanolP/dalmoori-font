@@ -7,11 +7,15 @@ import { listWorkflowRuns } from '../vendors/github';
 (async () => {
   const { asciiFontMap, pageAvailable } = await renderAsciiFont();
   let begin = 0;
-  const latestTag = getLatestTagCommitHash();
-  for await (const workflow of listWorkflowRuns('RanolP', 'dalmoori-font')) {
-    if (workflow.head_sha.startsWith(latestTag)) {
-      begin = workflow.run_number;
+  try {
+    const latestTag = getLatestTagCommitHash();
+    for await (const workflow of listWorkflowRuns('RanolP', 'dalmoori-font')) {
+      if (workflow.head_sha.startsWith(latestTag)) {
+        begin = workflow.run_number;
+      }
     }
+  } catch {
+    /* do nothing */
   }
   const curr = Number(process.env['GITHUB_RUN_NUMBER']);
   const versionExtraInfo = `b${curr - begin}`;
