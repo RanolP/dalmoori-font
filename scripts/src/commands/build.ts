@@ -5,5 +5,5 @@ import { renderAsciiFont } from '../render-ascii-font';
 (async () => {
   const { asciiFontMap } = await renderAsciiFont();
   await generateAsciiFont(asciiFontMap);
-  await generateFont(asciiFontMap);
+  await generateFont(asciiFontMap, 'dev');
 })();

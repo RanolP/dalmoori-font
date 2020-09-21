@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "patch-package",
     "build": "ts-node --files src/commands/build.ts",
     "clean": "ts-node --files src/commands/clean.ts",
     "build:pages": "ts-node --files src/commands/build-pages.ts",
@@ -29,9 +30,11 @@
     "chalk": "^4.1.0",
     "dedent": "^0.7.0",
     "paper-jsdom": "^0.12.11",
+    "patch-package": "^6.2.2",
+    "postinstall-postinstall": "^2.1.0",
     "progress": "^2.0.3",
     "readable-glyph-names": "^1.1.0",
-    "svg2ttf": "^5.0.0",
+    "svg2ttf": "5.0.0",
     "svgicons2svgfont": "^9.1.1",
     "svgo": "^1.3.2"
   }

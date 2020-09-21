@@ -1,11 +1,10 @@
 
 /*
- * We're creating a font sized 8x8.
- * But Microsoft Windows require 64 <= emHeight...
+ * Microsoft Windows requires emHeight bigger than 8
  */
 export const FullWidthSize = 64;
 export const OnePixel = FullWidthSize / 8;
-export const Version = '0.1';
+export const Version = '0.100';
 
 export const Paths = {
   glyphBase: './glyph',
