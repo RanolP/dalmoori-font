@@ -3,6 +3,7 @@ import { generateFont } from '../generate-font';
 import { renderAsciiFont } from '../render-ascii-font';
 import { getLatestTagCommitHash } from '../vendors/git';
 import { listWorkflowRuns } from '../vendors/github';
+import { generateArtifacts } from '../generate-artifact';
 
 (async () => {
   const { asciiFontMap, pageAvailable } = await renderAsciiFont();
@@ -21,5 +22,6 @@ import { listWorkflowRuns } from '../vendors/github';
   const versionExtraInfo = `b${curr - begin}`;
 
   await generateFont(asciiFontMap, versionExtraInfo);
+  await generateArtifacts();
   await generatePreview(new Set(Object.keys(asciiFontMap)), pageAvailable);
 })();

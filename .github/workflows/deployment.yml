@@ -23,6 +23,12 @@ jobs:
         working-directory: ./scripts
         run: npm run build:pages
 
+      - name: Create Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dalmoori-font
+          path: ./artifacts
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
