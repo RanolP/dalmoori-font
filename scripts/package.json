@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "patch-package",
-    "build": "ts-node --files src/commands/build.ts",
     "clean": "ts-node --files src/commands/clean.ts",
-    "build:pages": "ts-node --files src/commands/build-pages.ts",
+    "build:debug": "ts-node --files src/commands/build-debug.ts",
+    "build:release": "ts-node --files src/commands/build-release.ts",
     "check": "eslint \"src/**\"",
     "fix": "eslint \"src/**\" --fix"
   },

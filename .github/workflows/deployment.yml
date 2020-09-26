@@ -21,7 +21,7 @@ jobs:
 
       - name: Build
         working-directory: ./scripts
-        run: npm run build:pages
+        run: npm run build:release
 
       - name: Create Artifacts
         uses: actions/upload-artifact@v2
