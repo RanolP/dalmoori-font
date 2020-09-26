@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 
+const TOKEN = process.env['GITHUB_TOKEN'];
 const BASE_URL = 'https://api.github.com';
 
 export interface WorkflowRun {
@@ -17,7 +18,12 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
   const url = `${BASE_URL}/repos/${owner}/${repository}/actions/runs`;
 
   for (let page = 1; true; page += 1) {
-    const response = await fetch(`${url}?per_page=100&page=${page}`);
+    const response = await fetch(
+      `${url}?per_page=100&page=${page}`,
+      {
+        headers: TOKEN ? { Authorization: `token ${TOKEN}` } : {}
+      }
+    );
     if (response.statusText === 'rate limit exceeded') {
       const rateLimitReset = response.headers.get('X-RateLimit-Reset');
       const leftSeconds = rateLimitReset !== null ? (Number(rateLimitReset) - Date.now() / 1000) : 0;
