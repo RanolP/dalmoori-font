@@ -6,7 +6,7 @@ import { listWorkflowRuns } from '../vendors/github';
 import { generateArtifacts } from '../generate-artifact';
 
 (async () => {
-  const { asciiFontMap, pageAvailable } = await renderAsciiFont();
+  const asciiFontMap = await renderAsciiFont();
   let begin = 0;
   try {
     const latestTag = getLatestTagCommitHash();
@@ -24,5 +24,5 @@ import { generateArtifacts } from '../generate-artifact';
 
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await generateArtifacts();
-  await generatePreview(new Set(Object.keys(asciiFontMap)), pageAvailable);
+  await generatePreview();
 })();

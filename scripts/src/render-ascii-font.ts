@@ -16,14 +16,10 @@ function* hangulPhonemeCombination(): Generator<[onset: string, nucleus: string,
   }
 }
 
-export interface RenderResult {
-  asciiFontMap: Record<string, AsciiFont>
-  pageAvailable: Set<string>
-}
+export type AsciiFontMap = Record<string, AsciiFont>;
 
-export async function renderAsciiFont(): Promise<RenderResult> {
-  const pageAvailable = new Set<string>();
-  const asciiFontMap: Record<string, AsciiFont> = {};
+export async function renderAsciiFont(): Promise<AsciiFontMap> {
+  const asciiFontMap: AsciiFontMap = {};
 
   for (const block of AllUnicodeBlocks) {
     const length = block.to - block.from + 1;
@@ -33,7 +29,6 @@ export async function renderAsciiFont(): Promise<RenderResult> {
       function* () {
         for (let charCode = block.from; charCode <= block.to; charCode++) {
           yield async () => {
-            pageAvailable.add(formatHex(charCode >> 8, 2));
             const char = String.fromCharCode(charCode);
             const id = formatHex(charCode, 4);
             let font: AsciiFont | undefined = undefined;
@@ -66,7 +61,6 @@ export async function renderAsciiFont(): Promise<RenderResult> {
           const syllable = await Syllable.of(Paths.glyphBase, onset, nucleus, coda);
           try {
             asciiFontMap[syllable.text] = await syllable.renderGlyph();
-            pageAvailable.add(formatHex(syllable.text.charCodeAt(0) >> 8, 2));
           } catch (e) {
             /* do nothing */
           }
@@ -77,5 +71,5 @@ export async function renderAsciiFont(): Promise<RenderResult> {
     tick,
   );
 
-  return { asciiFontMap, pageAvailable };
+  return asciiFontMap;
 }
