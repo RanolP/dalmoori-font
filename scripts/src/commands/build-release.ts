@@ -1,7 +1,7 @@
 import { generatePreview } from '../generate-preview';
 import { generateFont } from '../generate-font';
 import { renderAsciiFont } from '../render-ascii-font';
-import { getLatestTagCommitHash } from '../vendors/git';
+import { getLatestCommitUnixtime, getLatestTagCommitHash } from '../vendors/git';
 import { listWorkflowRuns } from '../vendors/github';
 import { generateArtifacts } from '../generate-artifact';
 
@@ -19,9 +19,10 @@ import { generateArtifacts } from '../generate-artifact';
     /* do nothing */
   }
   const curr = Number(process.env['GITHUB_RUN_NUMBER']);
+  const latestCommitDate = getLatestCommitUnixtime();
   const versionExtraInfo = `b${curr - begin}`;
 
-  await generateFont(asciiFontMap, versionExtraInfo);
+  await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await generateArtifacts();
   await generatePreview(new Set(Object.keys(asciiFontMap)), pageAvailable);
 })();

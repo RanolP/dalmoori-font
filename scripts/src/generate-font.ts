@@ -8,7 +8,7 @@ import { OnePixel, Paths, Version } from './constants';
 import { createProgressIndicator, formatHex } from './util/format';
 import { execute } from './util/executor';
 
-export async function generateFont(map: Record<string, AsciiFont>, versionExtraInfo?: string): Promise<void> {
+export async function generateFont(map: Record<string, AsciiFont>, versionExtraInfo: string, ts?: number): Promise<void> {
   const entries = Object.entries(map);
   const { tick } = createProgressIndicator('Render SVG', entries.length,);
   const svgFontStream = new SVGIcons2SVGFont({
@@ -64,6 +64,7 @@ export async function generateFont(map: Record<string, AsciiFont>, versionExtraI
     copyright: 'Copyright (c) 2020 RanolP and contributors',
     url: 'https://github.com/RanolP/dalmoori-font/',
     version: [Version, versionExtraInfo].filter(Boolean).join(' '),
+    ts,
   });
   const ttfBuffer = Buffer.from(ttf.buffer);
   await writeFile(join(fontPath, 'dalmoori.ttf'), ttfBuffer);
