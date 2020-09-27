@@ -37,7 +37,7 @@ import { Paths } from '../constants';
   await generatePreview();
   await generateArtifacts();
   if (previousWorkflow !== null) {
-    console.log('Downloading previous artifacts...');
+    console.log(`Downloading previous artifact (#${previousWorkflow.run_number} ${(shortenCommitHash(previousWorkflow.head_sha))})...`);
     await downloadArtifact(previousWorkflow, '../previous');
     await generateAdvancementReport(
       {
