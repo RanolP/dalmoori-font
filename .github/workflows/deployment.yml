@@ -45,7 +45,7 @@ jobs:
       - name: Set Comment Body
         id: get-comment-body
         run: |
-          body=$(cat artifacts/advancement-report.md || echo)
+          body=$(cat artifacts/advancement-report.md || echo Failed to generate Advancement Report)
           echo ::set-output name=body::$body
       - name: Comment Advancement
         uses: peter-evans/commit-comment@v1
