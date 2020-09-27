@@ -15,11 +15,14 @@ jobs:
         with:
           node-version: 14.x
 
-      #- name: Download previous version of font
-      #  uses: actions/download-artifact@v2
-      #  with:
-      #    name: dalmoori-font
-      #    path: previous
+      - name: Download previous version of font
+        uses: actions/download-artifact@v2
+        with:
+          path: previous
+
+      - name: Download please
+        run: |
+          ls -al previous
 
       - name: Install
         working-directory: ./scripts
