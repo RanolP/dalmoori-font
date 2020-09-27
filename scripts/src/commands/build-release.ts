@@ -16,15 +16,18 @@ import { Paths } from '../constants';
   try {
     const latestTag = getLatestTagCommitHash();
     for await (const workflow of listWorkflowRuns('RanolP', 'dalmoori-font')) {
+      if (workflow.workflow_id !== 2550121) {
+        continue;
+      }
       if (workflow.head_sha.startsWith(latestTag)) {
         begin = workflow.run_number;
       }
-      if (workflow.run_number !== curr && previousCommitHash === undefined) {
+      if (workflow.run_number !== curr && workflow.conclusion === 'success' && previousCommitHash === undefined) {
         previousCommitHash = shortenCommitHash(workflow.head_sha);
       }
     }
   } catch {
-    /* do nothing */ 
+    /* do nothing */
   }
   const latestCommitDate = getLatestCommitUnixtime();
   const versionExtraInfo = `b${curr - begin}`;
@@ -32,6 +35,7 @@ import { Paths } from '../constants';
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await generatePreview();
   await generateArtifacts();
+  /*
   await generateAdvancementReport(
     {
       path: '../previous/dalmoori.ttf',
@@ -42,4 +46,5 @@ import { Paths } from '../constants';
       commitHash: shortenCommitHash(getLatestCommitHash()),
     }
   );
+  */
 })();

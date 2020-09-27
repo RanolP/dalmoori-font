@@ -6,6 +6,7 @@ const BASE_URL = 'https://api.github.com';
 export interface WorkflowRun {
   head_sha: string;
   run_number: number;
+  workflow_id: number;
   status: string;
   conclusion: string;
 }
@@ -37,8 +38,8 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
       break;
     }
     for (const run of workflow_runs) {
-      const { head_sha, run_number, status, conclusion } = run;
-      yield { head_sha, run_number, status, conclusion };
+      const { head_sha, run_number, workflow_id, status, conclusion } = run;
+      yield { head_sha, run_number, workflow_id, status, conclusion };
     }
   }
 }
