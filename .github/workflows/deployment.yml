@@ -18,7 +18,7 @@ jobs:
       - name: Download previous version of font
         uses: actions/download-artifact@v2
         with:
-          name: my-artifact
+          name: dalmoori-font
           path: previous
 
       - name: Install
