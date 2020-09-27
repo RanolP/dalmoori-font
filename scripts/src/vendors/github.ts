@@ -36,7 +36,6 @@ export async function requestRaw(url: string): Promise<Response> {
 }
 export async function request<T>(url: string): Promise<T | null> {
   const response = await requestRaw(url);
-  console.log(url, response);
   if (response.statusText === 'rate limit exceeded') {
     const rateLimitReset = response.headers.get('X-RateLimit-Reset');
     const leftSeconds = rateLimitReset !== null ? (Number(rateLimitReset) - Date.now() / 1000) : 0;
