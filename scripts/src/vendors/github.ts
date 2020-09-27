@@ -35,7 +35,7 @@ export async function requestRaw(url: string): Promise<Response> {
   return response;
 }
 export async function request<T>(url: string): Promise<T | null> {
-  const response = await requestRaw(url);
+  const response = await requestRaw(url.startsWith('https://') ? url : join(BASE_URL, url));
   if (response.statusText === 'rate limit exceeded') {
     const rateLimitReset = response.headers.get('X-RateLimit-Reset');
     const leftSeconds = rateLimitReset !== null ? (Number(rateLimitReset) - Date.now() / 1000) : 0;
@@ -53,7 +53,7 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
     total_count: number;
     workflow_runs: WorkflowRun[];
   }
-  const url = `${BASE_URL}/repos/${owner}/${repository}/actions/runs`;
+  const url = `/repos/${owner}/${repository}/actions/runs`;
 
   for (let page = 1; true; page += 1) {
     const response = await request<Response>(`${url}?per_page=100&page=${page}`);

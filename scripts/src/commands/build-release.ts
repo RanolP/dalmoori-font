@@ -2,13 +2,14 @@ import { generatePreview } from '../generate-preview';
 import { generateFont } from '../generate-font';
 import { renderAsciiFont } from '../render-ascii-font';
 import { getLatestCommitHash, getLatestCommitUnixtime, getLatestTagCommitHash, shortenCommitHash } from '../vendors/git';
-import { downloadArtifact, listWorkflowRuns, WorkflowRun } from '../vendors/github';
+import { downloadArtifact, listWorkflowRuns, request, WorkflowRun } from '../vendors/github';
 import { generateArtifacts } from '../generate-artifact';
 import { generateAdvancementReport } from '../generate-advancement-report';
 import { join } from '../util/fs';
 import { Paths } from '../constants';
 
 (async () => {
+  console.log(await request('/app'));
   const asciiFontMap = await renderAsciiFont();
   let previousWorkflow: WorkflowRun | null = null;
   let begin = 0;
