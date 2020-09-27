@@ -35,7 +35,6 @@ import { Paths } from '../constants';
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await generatePreview();
   await generateArtifacts();
-  /*
   await generateAdvancementReport(
     {
       path: '../previous/dalmoori.ttf',
@@ -46,5 +45,4 @@ import { Paths } from '../constants';
       commitHash: shortenCommitHash(getLatestCommitHash()),
     }
   );
-  */
 })();
