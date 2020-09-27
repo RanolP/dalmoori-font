@@ -15,6 +15,12 @@ jobs:
         with:
           node-version: 14.x
 
+      - name: Download previous version of font
+        uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+          path: previous
+
       - name: Install
         working-directory: ./scripts
         run: npm install
@@ -35,3 +41,12 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           enable_jekyll: true
+
+      - id: get-comment-body
+        run: |
+          body=$(cat artifacts/advancement-report.md)
+          echo ::set-output name=body::$body
+      - name: Comment Advancement
+        uses: peter-evans/commit-comment@v1
+        with:
+          body: ${{ steps.get-comment-body.outputs.body }}

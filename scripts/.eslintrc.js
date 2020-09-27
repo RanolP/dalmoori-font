@@ -9,7 +9,7 @@ module.exports = {
   rules: {
     'semi': ['error', 'always'],
     'quotes': ['error', 'single'],
-    'indent': ['error', 2, { 'SwitchCase': 1, }],
+    'indent': ['error', 2, { 'SwitchCase': 1, 'ignoredNodes': ['TemplateLiteral > *'] }],
     'eol-last': ['error', 'always']
   }
 };

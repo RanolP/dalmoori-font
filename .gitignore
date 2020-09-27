@@ -1,3 +1,6 @@
 **/node_modules/
 **/build/
 **/dist/
+docs/assets/dalmoori.ttf
+artifacts/
+previous/
