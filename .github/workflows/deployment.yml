@@ -42,9 +42,10 @@ jobs:
           publish_dir: ./docs
           enable_jekyll: true
 
-      - id: get-comment-body
+      - name: Set Comment Body
+        id: get-comment-body
         run: |
-          body=$(cat artifacts/advancement-report.md)
+          body=$(cat artifacts/advancement-report.md || 1)
           echo ::set-output name=body::$body
       - name: Comment Advancement
         uses: peter-evans/commit-comment@v1
