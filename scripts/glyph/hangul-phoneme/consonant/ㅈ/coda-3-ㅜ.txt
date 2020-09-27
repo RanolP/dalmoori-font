@@ -1,12 +1,11 @@
 ---
-margin-top = 0, 1
-not-for = .ㅜ
+for = .ㅜ
 ---
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
-m m m m m m m m
+x x x x x x x x
+. . . . . . . .
 # # # # # # # .
-. . # . # . . .
-# # . . . # # .
+. # # . # # . .
