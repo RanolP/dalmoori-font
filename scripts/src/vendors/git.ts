@@ -4,7 +4,9 @@ export type CommitHashLong = string;
 export type CommitHashShort = string;
 
 export function getLatestTagCommitHash(): CommitHashShort {
-  const commandResult = execSync('git describe --long').toString();
+  console.log(execSync('git log --oneline 6a41949', { stdio: 'ignore' }).toString());
+  const commandResult = execSync('git describe --tags --long', { stdio: 'ignore' }).toString();
+  console.log(commandResult);
   const { length, [length - 1]: last } = commandResult.trim().split('-g');
   return last;
 }
