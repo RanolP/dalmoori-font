@@ -1,5 +1,5 @@
 import fetch, { Response } from 'node-fetch';
-import { mkdirs, writeFile } from '../util/fs';
+import { dirname, mkdirs, PathLike, writeFile } from '../util/fs';
 
 const TOKEN = process.env['GITHUB_TOKEN'];
 const BASE_URL = 'https://api.github.com';
@@ -70,13 +70,13 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
   }
 }
 
-export async function downloadArtifact(workflowRun: WorkflowRun): Promise<void> {
+export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLike): Promise<void> {
   const artifacts = await request<Artifacts>(workflowRun.artifacts_url);
   if (artifacts === null || artifacts.artifacts.length === 0) {
     throw new Error(`Failed to download artifact on ${workflowRun.workflow_id}`);
   }
   const response = await requestRaw(artifacts.artifacts[0].archive_download_url);
   const buffer = await response.buffer();
-  await mkdirs('../previous/');
-  await writeFile('../previous/dalmoori.ttf', buffer);
+  await mkdirs(dirname(target.toString()));
+  await writeFile(target, buffer);
 }
