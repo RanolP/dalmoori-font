@@ -16,6 +16,7 @@ import { Paths } from '../constants';
   try {
     const latestTag = getLatestTagCommitHash();
     for await (const workflow of listWorkflowRuns('RanolP', 'dalmoori-font')) {
+      console.log(workflow);
       if (workflow.workflow_id !== 2550121) {
         continue;
       }

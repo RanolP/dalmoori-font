@@ -82,7 +82,7 @@ export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLik
 
   const zipFile = await fromBuffer(buffer);
 
-  zipFile.walkEntries(async entry => {
+  await zipFile.walkEntries(async entry => {
     const filename = join(target.toString(), entry.fileName);
     if (/\/$/.test(filename)) {
       await mkdirs(filename);
