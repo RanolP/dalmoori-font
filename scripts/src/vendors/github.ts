@@ -1,5 +1,6 @@
 import fetch, { Response } from 'node-fetch';
-import { dirname, mkdirs, PathLike, writeFile } from '../util/fs';
+import { createWriteStream, dirname, join, mkdirs, PathLike } from '../util/fs';
+import { fromBuffer } from 'yauzl-promise';
 
 const TOKEN = process.env['GITHUB_TOKEN'];
 const BASE_URL = 'https://api.github.com';
@@ -78,5 +79,19 @@ export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLik
   const response = await requestRaw(artifacts.artifacts[0].archive_download_url);
   const buffer = await response.buffer();
   await mkdirs(dirname(target.toString()));
-  await writeFile(target, buffer);
+
+  const zipFile = await fromBuffer(buffer);
+
+  zipFile.walkEntries(async entry => {
+    const filename = join(target.toString(), entry.fileName);
+    if (/\/$/.test(filename)) {
+      await mkdirs(filename);
+    } else {
+      await mkdirs(dirname(filename));
+      const stream = await entry.openReadStream();
+      const writeStream = createWriteStream(filename);
+      stream.pipe(writeStream);
+      await new Promise(resolve => writeStream.on('close', () => resolve()));
+    }
+  });
 }

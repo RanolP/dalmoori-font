@@ -36,6 +36,9 @@ export async function generateFont(map: Record<string, AsciiFont>, versionExtraI
     tick,
   );
 
+  glyphList.sort((a, b) => a.metadata.name.localeCompare(b.metadata.name));
+
+  console.log('Writing svg font...');
   for (const glyph of glyphList) {
     svgFontStream.write(glyph);
   }
@@ -59,6 +62,7 @@ export async function generateFont(map: Record<string, AsciiFont>, versionExtraI
       });
   });
 
+  console.log('Writing ttf font...');
   const ttf = svg2ttf(await readFile(svgFontPath, { encoding: 'utf8' }), {
     description: 'dalmoori: 8x8 dot graphic hangul font',
     copyright: 'Copyright (c) 2020 RanolP and contributors',

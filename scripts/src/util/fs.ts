@@ -1,5 +1,5 @@
 import { promises } from 'fs';
-import { PathLike, constants } from 'fs';
+import { PathLike, constants, createWriteStream } from 'fs';
 import { dirname, resolve, join, basename } from 'path';
 
 const { readFile, writeFile, readdir, copyFile, access, mkdir, stat, unlink, rmdir } = promises;
@@ -8,7 +8,8 @@ export {
   readFile,
   writeFile,
   readdir,
-  copyFile
+  copyFile,
+  createWriteStream
 };
 export { PathLike };
 export { join, basename, dirname };

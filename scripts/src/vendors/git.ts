@@ -11,7 +11,7 @@ export function getLatestTagCommitHash(): CommitHashShort {
 
 export function getLatestCommitUnixtime(): number {
   const commandResult = execSync('git show -s --format=%cI').toString();
-  return Date.parse(commandResult.replace(/ \+/, '+'));
+  return Math.floor(Date.parse(commandResult.replace(/ \+/, '+')) / 1000);
 }
 
 export function getLatestCommitHash(): CommitHashLong {

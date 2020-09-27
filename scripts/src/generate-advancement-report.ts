@@ -26,7 +26,7 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
         if (!(block.blockName in oldUnicodeSupports)) {
           oldUnicodeSupports[block.blockName] = new Set(
             function* () {
-              for (let i = block.startCode; i < block.endCode; i++) {
+              for (let i = block.startCode; i <= block.endCode; i++) {
                 yield i;
               }
             }()

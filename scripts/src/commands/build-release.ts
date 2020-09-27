@@ -35,8 +35,9 @@ import { Paths } from '../constants';
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await generatePreview();
   await generateArtifacts();
-  if (previousWorkflow) {
-    await downloadArtifact(previousWorkflow, '../previous/dalmoori.ttf');
+  if (previousWorkflow !== null) {
+    console.log('Downloading previous artifacts...');
+    await downloadArtifact(previousWorkflow, '../previous');
     await generateAdvancementReport(
       {
         path: '../previous/dalmoori.ttf',
@@ -47,5 +48,7 @@ import { Paths } from '../constants';
         commitHash: shortenCommitHash(getLatestCommitHash()),
       }
     );
+  } else {
+    console.log('There are no workflow found before');
   }
 })();
