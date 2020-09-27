@@ -78,6 +78,7 @@ export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLik
   }
   const response = await requestRaw(artifacts.artifacts[0].archive_download_url);
   const buffer = await response.buffer();
+  console.log(buffer.toString());
   await mkdirs(dirname(target.toString()));
 
   const zipFile = await fromBuffer(buffer);
