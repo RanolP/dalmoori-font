@@ -26,6 +26,7 @@ import { Paths } from '../constants';
         previousWorkflow = workflow;
       }
     }
+    console.log(curr, latestTag, begin);
   } catch (e) {
     console.log(e);
     /* do nothing */
