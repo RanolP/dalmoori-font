@@ -4,6 +4,7 @@ import { getBlocks, getCharacters } from 'unidata';
 import { Paths } from './constants';
 import { formatHex } from './util/format';
 import { join, mkdirs, PathLike, writeFile } from './util/fs';
+import { encodeHTML } from 'entities';
 
 export interface FontInfo {
   path: PathLike;
@@ -84,14 +85,21 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
               case 'Zl': // Line Separator
               case 'Zp': // Paragraph Separator
               case 'Zs': // Space Separator
-                name = '`' + unicodeInformation.name + '`';
+                name = `<code>${encodeHTML(unicodeInformation.name)}</code>`;
                 break;
               default:
                 name = character;
             }
-            return `${name} (U+${formatHex(n, 4)})`;
+            return `<li>${name} (U+${formatHex(n, 4)})</li>`;
           }).join(', ');
-          return `- ${blockName}: ${full - unsupported.size}/${full}, unsupports ${unsupportString}`;
+          return dedent`
+            <details>
+              <summary>${blockName}: ${full - unsupported.size}/${full}</summary>
+              <ul>
+                ${unsupportString}
+              </ul>
+            </details>
+          `;
         })
         .join('\n')
     }
