@@ -4,11 +4,8 @@ export type CommitHashLong = string;
 export type CommitHashShort = string;
 
 export function getLatestTagCommitHash(): CommitHashShort {
-  const commandResult = execSync('git describe --tags --long').toString();
-  console.log('???', commandResult);
-  const { length, [length - 1]: last } = commandResult.trim().split('-g');
-  console.log('???', last);
-  return last;
+  const commandResult = execSync('git rev-list --tags --max-count=1').toString();
+  return commandResult.trim();
 }
 
 export function getLatestCommitUnixtime(): number {

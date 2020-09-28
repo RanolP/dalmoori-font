@@ -19,8 +19,7 @@ import { Paths } from '../constants';
       if (workflow.workflowId !== 2550121) {
         continue;
       }
-      if (workflow.headSha.startsWith(latestTag)) {
-        console.log(workflow);
+      if (workflow.headSha === latestTag) {
         begin = workflow.runNumber;
       }
       if (workflow.runNumber !== curr && workflow.conclusion === 'success' && previousWorkflow === null) {
