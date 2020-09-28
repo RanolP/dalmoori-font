@@ -84,7 +84,7 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
               case 'Zl': // Line Separator
               case 'Zp': // Paragraph Separator
               case 'Zs': // Space Separator
-                name = unicodeInformation.name;
+                name = '`' + unicodeInformation.name + '`';
                 break;
               default:
                 name = character;

@@ -10,6 +10,7 @@ export const Paths = {
   glyphBase: './glyph',
   build: './build',
   artifacts: '../artifacts',
+  font: '../font',
 };
 
 export const IsCI = Boolean(process.env['CI']);

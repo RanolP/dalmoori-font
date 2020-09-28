@@ -12,23 +12,20 @@ export interface WorkflowRun {
   status: string;
   conclusion: string;
   artifactsUrl: string;
-  suiteId: number;
-  repository: {
-    fullName: string;
-  }
 }
 
 export interface Artifacts {
   artifacts: Array<{
-    id: number;
+    archive_download_url: string;
   }>;
 }
 
-export async function requestRaw(url: string): Promise<Response> {
+export async function requestRaw(url: string, token?: string): Promise<Response> {
+  token = token ?? TOKEN;
   const response = await fetch(
     url,
     {
-      headers: TOKEN ? { Authorization: `token ${TOKEN}` } : {}
+      headers: token ? { Authorization: `token ${token}` } : {}
     }
   );
   if (response.statusText === 'rate limit exceeded') {
@@ -38,8 +35,8 @@ export async function requestRaw(url: string): Promise<Response> {
   }
   return response;
 }
-export async function request<T>(url: string): Promise<T | null> {
-  const response = await requestRaw(url.startsWith('https://') ? url : BASE_URL + url);
+export async function request<T>(url: string, token?: string): Promise<T | null> {
+  const response = await requestRaw(url.startsWith('https://') ? url : BASE_URL + url, token);
   if (response.statusText === 'rate limit exceeded') {
     const rateLimitReset = response.headers.get('X-RateLimit-Reset');
     const leftSeconds = rateLimitReset !== null ? (Number(rateLimitReset) - Date.now() / 1000) : 0;
@@ -88,21 +85,14 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
         status,
         conclusion,
         artifacts_url: artifactsUrl,
-        check_suite_url,
-        repository: { full_name: fullName }
       } = run;
-      const suiteId = Number(check_suite_url.split('/').slice(-1)[0]);
       yield {
         headSha,
         runNumber,
         workflowId,
         status,
         conclusion,
-        artifactsUrl,
-        suiteId,
-        repository: {
-          fullName,
-        }
+        artifactsUrl
       };
     }
   }
@@ -113,9 +103,8 @@ export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLik
   if (artifacts === null || artifacts.artifacts.length === 0) {
     throw new Error(`Failed to download artifact on ${workflowRun.workflowId}`);
   }
-  const response = await fetch(`https://github.com/${workflowRun.repository.fullName}/suites/${workflowRun.suiteId}/artifacts/${artifacts.artifacts[0].id}`);
+  const response = await requestRaw(artifacts.artifacts[0].archive_download_url, process.env['ARTIFACT_DOWNLOAD_TOKEN']);
   const buffer = await response.buffer();
-  console.log(buffer.toString());
   await mkdirs(dirname(target.toString()));
 
   const zipFile = await fromBuffer(buffer);
