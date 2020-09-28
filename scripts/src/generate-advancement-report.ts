@@ -75,11 +75,13 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
             }
             const unicodeInformation = characters[hi];
             const character = String.fromCharCode(n);
-            if (unicodeInformation === undefined || unicodeInformation.code !== n) {
-              return `${character} (U+${formatHex(n, 4)})`;
-            }
+            let category: string | null = null;
+            if (unicodeInformation !== undefined && unicodeInformation.code === n) {
+              category = unicodeInformation.cat;
+            } 
+
             let name: string;
-            switch (unicodeInformation.cat) {
+            switch (unicodeInformation?.cat) {
               case 'Cc': // Control
               case 'Cf': // Format
               case 'Zl': // Line Separator
@@ -90,11 +92,13 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
               default:
                 name = character;
             }
+            
             return `<li>${name} (U+${formatHex(n, 4)})</li>`;
-          }).join(', ');
+          }).join('\n');
           return dedent`
             <details>
-              <summary>${blockName}: ${full - unsupported.size}/${full}</summary>
+              <summary>${blockName}: ${full - unsupported.size}/${full} (${unsupported.size} unsupported)</summary>
+              <p>Unsupported Character List:</p>
               <ul>
                 ${unsupportString}
               </ul>
