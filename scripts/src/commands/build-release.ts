@@ -17,13 +17,13 @@ import { Paths } from '../constants';
   try {
     const latestTag = getLatestTagCommitHash();
     for await (const workflow of listWorkflowRuns('RanolP', 'dalmoori-font')) {
-      if (workflow.workflow_id !== 2550121) {
+      if (workflow.workflowId !== 2550121) {
         continue;
       }
-      if (workflow.head_sha.startsWith(latestTag)) {
-        begin = workflow.run_number;
+      if (workflow.headSha.startsWith(latestTag)) {
+        begin = workflow.runNumber;
       }
-      if (workflow.run_number !== curr && workflow.conclusion === 'success' && previousWorkflow === null) {
+      if (workflow.runNumber !== curr && workflow.conclusion === 'success' && previousWorkflow === null) {
         previousWorkflow = workflow;
       }
     }
@@ -38,12 +38,12 @@ import { Paths } from '../constants';
   await generatePreview();
   await generateArtifacts();
   if (previousWorkflow !== null) {
-    console.log(`Downloading previous artifact (#${previousWorkflow.run_number} ${(shortenCommitHash(previousWorkflow.head_sha))})...`);
+    console.log(`Downloading previous artifact (#${previousWorkflow.runNumber} ${(shortenCommitHash(previousWorkflow.headSha))})...`);
     await downloadArtifact(previousWorkflow, '../previous');
     await generateAdvancementReport(
       {
         path: '../previous/dalmoori.ttf',
-        commitHash: shortenCommitHash(previousWorkflow.head_sha),
+        commitHash: shortenCommitHash(previousWorkflow.headSha),
       },
       {
         path: join(Paths.build, 'font', 'dalmoori.ttf'),

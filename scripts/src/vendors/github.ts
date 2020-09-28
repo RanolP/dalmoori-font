@@ -6,17 +6,21 @@ const TOKEN = process.env['GITHUB_TOKEN'];
 const BASE_URL = 'https://api.github.com';
 
 export interface WorkflowRun {
-  head_sha: string;
-  run_number: number;
-  workflow_id: number;
+  headSha: string;
+  runNumber: number;
+  workflowId: number;
   status: string;
   conclusion: string;
-  artifacts_url: string;
+  artifactsUrl: string;
+  suiteId: number;
+  repository: {
+    fullName: string;
+  }
 }
 
 export interface Artifacts {
   artifacts: Array<{
-    archive_download_url: string;
+    id: number;
   }>;
 }
 
@@ -35,7 +39,7 @@ export async function requestRaw(url: string): Promise<Response> {
   return response;
 }
 export async function request<T>(url: string): Promise<T | null> {
-  const response = await requestRaw(url.startsWith('https://') ? url : join(BASE_URL, url));
+  const response = await requestRaw(url.startsWith('https://') ? url : BASE_URL + url);
   if (response.statusText === 'rate limit exceeded') {
     const rateLimitReset = response.headers.get('X-RateLimit-Reset');
     const leftSeconds = rateLimitReset !== null ? (Number(rateLimitReset) - Date.now() / 1000) : 0;
@@ -49,9 +53,21 @@ export async function request<T>(url: string): Promise<T | null> {
 
 
 export async function* listWorkflowRuns(owner: string, repository: string): AsyncGenerator<WorkflowRun, void, unknown> {
+  interface WorkflowRunRaw {
+    head_sha: string;
+    run_number: number;
+    workflow_id: number;
+    status: string;
+    conclusion: string;
+    artifacts_url: string;
+    check_suite_url: string;
+    repository: { 
+      full_name: string;
+    }
+  }
   interface Response {
     total_count: number;
-    workflow_runs: WorkflowRun[];
+    workflow_runs: WorkflowRunRaw[];
   }
   const url = `/repos/${owner}/${repository}/actions/runs`;
 
@@ -65,18 +81,39 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
       break;
     }
     for (const run of workflow_runs) {
-      const { head_sha, run_number, workflow_id, status, conclusion, artifacts_url } = run;
-      yield { head_sha, run_number, workflow_id, status, conclusion, artifacts_url };
+      const {
+        head_sha: headSha,
+        run_number: runNumber,
+        workflow_id: workflowId,
+        status,
+        conclusion,
+        artifacts_url: artifactsUrl,
+        check_suite_url,
+        repository: { full_name: fullName }
+      } = run;
+      const suiteId = Number(check_suite_url.split('/').slice(-1)[0]);
+      yield {
+        headSha,
+        runNumber,
+        workflowId,
+        status,
+        conclusion,
+        artifactsUrl,
+        suiteId,
+        repository: {
+          fullName,
+        }
+      };
     }
   }
 }
 
 export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLike): Promise<void> {
-  const artifacts = await request<Artifacts>(workflowRun.artifacts_url);
+  const artifacts = await request<Artifacts>(workflowRun.artifactsUrl);
   if (artifacts === null || artifacts.artifacts.length === 0) {
-    throw new Error(`Failed to download artifact on ${workflowRun.workflow_id}`);
+    throw new Error(`Failed to download artifact on ${workflowRun.workflowId}`);
   }
-  const response = await requestRaw(artifacts.artifacts[0].archive_download_url);
+  const response = await fetch(`https://github.com/${workflowRun.repository.fullName}/suites/${workflowRun.suiteId}/artifacts/${artifacts.artifacts[0].id}`);
   const buffer = await response.buffer();
   console.log(buffer.toString());
   await mkdirs(dirname(target.toString()));
