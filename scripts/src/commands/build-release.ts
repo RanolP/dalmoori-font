@@ -20,6 +20,7 @@ import { Paths } from '../constants';
         continue;
       }
       if (workflow.headSha.startsWith(latestTag)) {
+        console.log(workflow);
         begin = workflow.runNumber;
       }
       if (workflow.runNumber !== curr && workflow.conclusion === 'success' && previousWorkflow === null) {

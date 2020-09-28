@@ -7,6 +7,7 @@ export function getLatestTagCommitHash(): CommitHashShort {
   const commandResult = execSync('git describe --tags --long').toString();
   console.log('???', commandResult);
   const { length, [length - 1]: last } = commandResult.trim().split('-g');
+  console.log('???', last);
   return last;
 }
 
