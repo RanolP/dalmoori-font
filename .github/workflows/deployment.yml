@@ -30,6 +30,8 @@ jobs:
         with:
           name: dalmoori-font
           path: ./artifacts
+        env: # Or as an environment variable
+          ARTIFACT_DOWNLOAD_TOKEN: ${{ secrets.ARTIFACT_DOWNLOAD_TOKEN }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
