@@ -1,10 +1,9 @@
-import dedent from 'dedent';
+import endent from 'endent';
 import { load, Font } from 'opentype.js';
-import { Block, getBlocks, getCharacters } from 'unidata';
+import { BLOCKS, BLOCKS_NAME_MAP, findCharacter, UnicodeBlock } from './util/unidata';
 import { Paths } from './constants';
 import { formatHex } from './util/format';
 import { join, mkdirs, PathLike, writeFile } from './util/fs';
-import { binarySearch } from './util/algorithm';
 import { encodeHTML } from 'entities';
 
 export interface FontInfo {
@@ -19,46 +18,35 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
   const oldAnalysisResult = analyze(oldFont);
   const currentAnalysisResult = analyze(currentFont);
 
-  const report = dedent`
+  const report = endent`
     ## Advancement Report
 
     Comparison between ${old.commitHash} (${oldFont.names.version['en']}) and ${current.commitHash} (${currentFont.names.version['en']}).
 
-    ### Support Ranges
+    ### Summary
 
-    #### Old
-
-    ${renderSupportRanges(oldAnalysisResult)}
-
-    #### Current
-    
-    ${renderSupportRanges(currentAnalysisResult)}
+    ${renderSummary(oldAnalysisResult, currentAnalysisResult)}
   `;
 
   await mkdirs(Paths.artifacts);
   await writeFile(join(Paths.artifacts, 'advancement-report.md'), report, 'utf8');
 }
 
+type UnsupportedCodepointSet = Set<number>;
+
 interface AnalysisResult {
-  blocks: Array<
-    {
-      block: Block,
-      unsupportedCodepoints: Set<number>;
-    }
-  >;
+  supportRanges: Record<string, UnsupportedCodepointSet>;
 }
 
 function analyze(font: Font): AnalysisResult {
-  const unicodeBlocks = Object.fromEntries(getBlocks().map(block => [block.blockName, block]));
-
   const unicodeSupport: Record<string, Set<number>> = {};
 
   for (let i = 0; i < font.glyphs.length; i++) {
     const glyph = font.glyphs.get(i);
-    for (const block of Object.values(unicodeBlocks)) {
+    for (const block of BLOCKS) {
       if (block.startCode <= glyph.unicode && glyph.unicode <= block.endCode) {
-        if (!(block.blockName in unicodeSupport)) {
-          unicodeSupport[block.blockName] = new Set(
+        if (!(block.name in unicodeSupport)) {
+          unicodeSupport[block.name] = new Set(
             function* () {
               for (let i = block.startCode; i <= block.endCode; i++) {
                 yield i;
@@ -66,60 +54,73 @@ function analyze(font: Font): AnalysisResult {
             }()
           );
         }
-        unicodeSupport[block.blockName].delete(glyph.unicode);
+        unicodeSupport[block.name].delete(glyph.unicode);
         break;
       }
     }
   }
 
   return {
-    blocks: Object.entries(unicodeSupport)
-      .map(([name, unsupportedCodepoints]) => ({
-        block: unicodeBlocks[name],
-        unsupportedCodepoints
-      })),
+    supportRanges: Object.fromEntries(
+      Object.entries(unicodeSupport)
+        .map(
+          ([name, unsupportedCodepoints]) => [
+            name,
+            unsupportedCodepoints
+          ]
+        )
+    ),
   };
 }
 
-function renderSupportRanges(analysisResult: AnalysisResult): string {
-  const characters = getCharacters();
-  return Object
-    .values(analysisResult.blocks)
-    .map(({ block, unsupportedCodepoints }) => {
-      const full = block.endCode - block.startCode + 1;
-      const unsupportString = Array.from(unsupportedCodepoints).sort((a, b) => a - b).map(n => {
-        const index = binarySearch(-1, characters.length, mid => characters[mid].code >= n);
-        const unicodeInformation = characters[index];
-        const character = String.fromCharCode(n);
-        const category: string | null =
-          unicodeInformation !== undefined && unicodeInformation.code === n
-            ? unicodeInformation.cat
-            : null;
-
-        let name: string;
-        switch (category) {
-          case 'Cc': // Control
-          case 'Cf': // Format
-          case 'Zl': // Line Separator
-          case 'Zp': // Paragraph Separator
-          case 'Zs': // Space Separator
-            name = `<code>${encodeHTML(unicodeInformation.name)}</code>`;
-            break;
-          default:
-            name = character;
-        }
-
-        return `<li>${name} (U+${formatHex(n, 4)})</li>`;
-      }).join('\n');
-      return dedent`
-        <details>
-          <summary>${block.blockName}: ${full - unsupportedCodepoints.size}/${full} (${unsupportedCodepoints.size} unsupported)</summary>
-          <p>Unsupported Character List:</p>
-          <ul>
-            ${unsupportString}
-          </ul>
-        </details>
-      `;
-    })
+function renderSummary(old: AnalysisResult, current: AnalysisResult): string {
+  return Array.from(new Set([...Object.keys(old.supportRanges), ...Object.keys(current.supportRanges)]))
+    .map(name => BLOCKS_NAME_MAP[name])
+    .map(block => renderSupportRange(block, old.supportRanges[block.name], current.supportRanges[block.name]))
     .join('\n');
+}
+
+function renderSupportRange(block: UnicodeBlock, old: UnsupportedCodepointSet, current: UnsupportedCodepointSet): string {
+  const minus = Array.from(current).filter(v => !old.has(v));
+  const plus = Array.from(old).filter(v => !current.has(v));
+  const differenceResult =
+    minus.length === 0 && plus.length === 0
+      ? 'no changes'
+      : [minus.length && `-${minus.length}`, plus.length && `+${plus.length}`].filter(Boolean).join(', ')
+    ;
+  return endent`
+    <details>
+      <summary>
+        ${block.name}: ${block.characterCount - current.size}/${block.characterCount} (${differenceResult})
+      </summary>
+      <p>Unsupported ${current.size} Characters:</p>
+      <ul>
+        ${Array.from(current)
+    .sort((a, b) => a - b)
+    .map(renderUnsupportedCharacter)
+    .join('\n')
+    }
+      </ul>
+    </details>
+  `;
+}
+
+function renderUnsupportedCharacter(n: number): string {
+  const unicodeInformation = findCharacter(n);
+  const character = String.fromCharCode(n);
+
+  let name: string;
+  switch (unicodeInformation?.cat) {
+    case 'Cc': // Control
+    case 'Cf': // Format
+    case 'Zl': // Line Separator
+    case 'Zp': // Paragraph Separator
+    case 'Zs': // Space Separator
+      name = `<code>${encodeHTML(unicodeInformation.name)}</code>`;
+      break;
+    default:
+      name = character;
+  }
+
+  return `<li>${name} (U+${formatHex(n, 4)})</li>`;
 }

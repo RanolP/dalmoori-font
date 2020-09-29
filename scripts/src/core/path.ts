@@ -1,7 +1,7 @@
 import { AsciiFont } from './ascii-font';
 import { CompoundPath, PathItem, Shape, Project, Size } from 'paper';
 import { FullWidthSize } from '../constants';
-import dedent from 'dedent';
+import endent from 'endent';
 type PathItemT = Parameters<ReturnType<typeof PathItem.create>['unite']>[0];
 
 export class Path {
@@ -50,7 +50,7 @@ export class Path {
   }
 
   renderToSvg(): string {
-    return dedent`
+    return endent`
       <svg viewBox="0 0 ${this.actualWidth} ${this.actualHeight}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
         ${this.handle.exportSVG({ asString: true })}
       </svg>
