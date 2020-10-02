@@ -1,10 +1,12 @@
 import endent from 'endent';
 import { load, Font } from 'opentype.js';
-import { BLOCKS, BLOCKS_NAME_MAP, findCharacter, UnicodeBlock } from './util/unidata';
+import { BLOCKS, BLOCKS_NAME_MAP, findCharacter, fullCodepointsOf, UnicodeBlock } from './util/unidata';
 import { Paths } from './constants';
-import { formatHex } from './util/format';
+import { createProgressIndicator, formatHex } from './util/format';
 import { join, mkdirs, PathLike, writeFile } from './util/fs';
 import { encodeHTML } from 'entities';
+import { pathItemEquals, makePathsForComparison } from './util/opentype-paper';
+import { execute } from './util/executor';
 
 export interface FontInfo {
   path: PathLike;
@@ -15,8 +17,7 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
   const oldFont = await load(old.path.toString());
   const currentFont = await load(current.path.toString());
 
-  const oldAnalysisResult = analyze(oldFont);
-  const currentAnalysisResult = analyze(currentFont);
+  const analysisResult = await analyze(oldFont, currentFont);
 
   const report = endent`
     ## Advancement Report
@@ -25,20 +26,95 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
 
     ### Summary
 
-    ${renderSummary(oldAnalysisResult, currentAnalysisResult)}
+    ${renderSummary(analysisResult)}
+
+    ### Details
+
+    ${Object.values(analysisResult.blocks).map(renderBlockDetail).join('\n')}
   `;
 
   await mkdirs(Paths.artifacts);
   await writeFile(join(Paths.artifacts, 'advancement-report.md'), report, 'utf8');
 }
 
+type Codepoint = number;
 type UnsupportedCodepointSet = Set<number>;
 
+interface BlockAnalysis {
+  block: UnicodeBlock,
+  old: UnsupportedCodepointSet,
+  current: UnsupportedCodepointSet,
+  removed: Set<Codepoint>,
+  added: Set<Codepoint>,
+  changed: Set<Codepoint>,
+}
+
 interface AnalysisResult {
+  old: FontAnalysisResult;
+  current: FontAnalysisResult;
+  blocks: Record<string, BlockAnalysis>;
+}
+
+interface FontAnalysisResult {
   supportRanges: Record<string, UnsupportedCodepointSet>;
 }
 
-function analyze(font: Font): AnalysisResult {
+async function analyze(oldFont: Font, currentFont: Font): Promise<AnalysisResult> {
+  const oldFontResult = analyzeFont(oldFont);
+  const currentFontResult = analyzeFont(currentFont);
+
+  const supportRangeUnion = Array.from(
+    new Set([
+      ...Object.keys(oldFontResult.supportRanges),
+      ...Object.keys(currentFontResult.supportRanges)
+    ])
+  )
+    .map(name => BLOCKS_NAME_MAP[name])
+    .sort((a, b) => a.startCode - b.startCode);
+
+  const blocks: Array<[string, BlockAnalysis]> = [];
+
+  for (const block of supportRangeUnion) {
+    const old = oldFontResult.supportRanges[block.name] ?? new Set(fullCodepointsOf(block));
+    const current = currentFontResult.supportRanges[block.name] ?? new Set(fullCodepointsOf(block));
+    const { tick } = createProgressIndicator(`Create Report for ${block.name}`, block.characterCount);
+    const changed: Array<Codepoint | null> = await execute(
+      function* () {
+        for (const codepoint of fullCodepointsOf(block)) {
+          const ch = String.fromCharCode(codepoint);
+          const oldGlyph = oldFont.charToGlyph(ch);
+          const currentGlyph = currentFont.charToGlyph(ch);
+          yield async () => {
+            const [oldGlyphPath, currentGlyphPath] = makePathsForComparison(oldGlyph, currentGlyph);
+            if (pathItemEquals(oldGlyphPath, currentGlyphPath)) {
+              return null;
+            }
+            return codepoint;
+          };
+        }
+      },
+      64,
+      tick,
+    );
+    const blockAnalysis: BlockAnalysis = {
+      block,
+      old,
+      current,
+      removed: new Set(Array.from(current).filter(v => !old.has(v))),
+      added: new Set(Array.from(old).filter(v => !current.has(v))),
+      changed: new Set(changed.filter(Boolean) as Codepoint[]),
+    };
+    blocks.push([block.name, blockAnalysis]);
+  }
+
+  return {
+    old: oldFontResult,
+    current: currentFontResult,
+    blocks: Object.fromEntries(blocks),
+  };
+}
+
+function analyzeFont(font: Font): FontAnalysisResult {
   const unicodeSupport: Record<string, Set<number>> = {};
 
   for (let i = 0; i < font.glyphs.length; i++) {
@@ -46,13 +122,7 @@ function analyze(font: Font): AnalysisResult {
     for (const block of BLOCKS) {
       if (block.startCode <= glyph.unicode && glyph.unicode <= block.endCode) {
         if (!(block.name in unicodeSupport)) {
-          unicodeSupport[block.name] = new Set(
-            function* () {
-              for (let i = block.startCode; i <= block.endCode; i++) {
-                yield i;
-              }
-            }()
-          );
+          unicodeSupport[block.name] = new Set(fullCodepointsOf(block));
         }
         unicodeSupport[block.name].delete(glyph.unicode);
         break;
@@ -73,41 +143,43 @@ function analyze(font: Font): AnalysisResult {
   };
 }
 
-function renderSummary(old: AnalysisResult, current: AnalysisResult): string {
-  return Array.from(new Set([...Object.keys(old.supportRanges), ...Object.keys(current.supportRanges)]))
-    .map(name => BLOCKS_NAME_MAP[name])
-    .map(block => renderSupportRange(block, old.supportRanges[block.name], current.supportRanges[block.name]))
+function renderSummary(analysisResult: AnalysisResult): string {
+  return Object.values(analysisResult.blocks)
+    .map(renderSupportRange)
     .join('\n');
 }
 
-function renderSupportRange(block: UnicodeBlock, old: UnsupportedCodepointSet, current: UnsupportedCodepointSet): string {
-  const minus = Array.from(current).filter(v => !old.has(v));
-  const plus = Array.from(old).filter(v => !current.has(v));
+function renderSupportRange({ block, current, removed, added }: BlockAnalysis): string {
   const differenceResult =
-    minus.length === 0 && plus.length === 0
+    removed.size === 0 && added.size === 0
       ? 'no changes'
-      : [minus.length && `-${minus.length}`, plus.length && `+${plus.length}`].filter(Boolean).join(', ')
+      : [removed.size && `-${removed.size}`, added.size && `+${added.size}`].filter(Boolean).join(', ')
     ;
   return endent`
-    <details>
-      <summary>
-        ${block.name}: ${block.characterCount - current.size}/${block.characterCount} (${differenceResult})
-      </summary>
-      <p>Unsupported ${current.size} Characters:</p>
-      <ul>
-        ${Array.from(current)
-    .sort((a, b) => a - b)
-    .map(renderUnsupportedCharacter)
-    .join('\n')
-    }
-      </ul>
-    </details>
+    - ${block.name}: ${block.characterCount - current.size}/${block.characterCount} (${differenceResult})
   `;
 }
 
-function renderUnsupportedCharacter(n: number): string {
-  const unicodeInformation = findCharacter(n);
-  const character = String.fromCharCode(n);
+function renderBlockDetail(block: BlockAnalysis): string {
+  const entries = [
+    block.removed.size && `**Removed**: ${Array.from(block.removed).map(renderCharacter).join(', ')}`,
+    block.added.size && `**Added**: ${Array.from(block.added).map(renderCharacter).join(', ')}`,
+    block.changed.size && `**Changed**: ${Array.from(block.changed).map(renderCharacter).join(', ')}`,
+  ].filter(Boolean);
+  if (entries.length > 0) {
+    return endent`
+      #### ${block.block.name}
+
+      ${entries.join('\n')}
+    `;
+  } else {
+    return '';
+  }
+}
+
+function renderCharacter(codepoint: number): string {
+  const unicodeInformation = findCharacter(codepoint);
+  const character = String.fromCharCode(codepoint);
 
   let name: string;
   switch (unicodeInformation?.cat) {
@@ -122,5 +194,5 @@ function renderUnsupportedCharacter(n: number): string {
       name = character;
   }
 
-  return `<li>${name} (U+${formatHex(n, 4)})</li>`;
+  return `${name} (U+${formatHex(codepoint, 4)})`;
 }

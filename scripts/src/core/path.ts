@@ -1,14 +1,13 @@
 import { AsciiFont } from './ascii-font';
-import { CompoundPath, PathItem, Shape, Project, Size } from 'paper';
 import { FullWidthSize } from '../constants';
+import { createProject, PathItem, Shape, CompoundPath } from '../util/opentype-paper';
 import endent from 'endent';
-type PathItemT = Parameters<ReturnType<typeof PathItem.create>['unite']>[0];
 
 export class Path {
   private readonly actualWidth: number;
   private readonly actualHeight: number;
-  private readonly handle: PathItemT;
-  constructor(param0: AsciiFont | PathItemT, param1?: number, param2?: number) {
+  private readonly handle: PathItem;
+  constructor(param0: AsciiFont | PathItem, param1?: number, param2?: number) {
     if (param0 instanceof PathItem) {
       this.handle = param0;
       if (param1 === undefined || param2 === undefined) {
@@ -23,8 +22,8 @@ export class Path {
     this.actualWidth = param0.width * factor;
     this.actualHeight = param0.height * factor;
 
-    const project = new Project(new Size(this.actualWidth, this.actualHeight));
-    this.handle = param0.data.reduce<PathItemT>((acc, [x, y]) => acc.unite(new Shape.Rectangle({
+    const project = createProject(this.actualWidth, this.actualHeight);
+    this.handle = param0.data.reduce<PathItem>((acc, [x, y]) => acc.unite(new Shape.Rectangle({
       point: [x * factor, y * factor],
       size: [1 * factor + 1e-5, 1 * factor + 1e-5],
       insert: false,

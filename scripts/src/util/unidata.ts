@@ -1,5 +1,5 @@
 import { Character, getBlocks, getCharacters } from 'unidata';
-import { binarySearch } from './algorithm';
+import { binarySearch, range } from './algorithm';
 
 export interface UnicodeBlock {
   name: string;
@@ -20,6 +20,10 @@ export const BLOCKS: UnicodeBlock[] = rawBlocks.map((rawBlock, id) => ({
   characterCount: rawBlock.endCode - rawBlock.startCode + 1,
 }));
 export const BLOCKS_NAME_MAP: Record<string, UnicodeBlock> = Object.fromEntries(BLOCKS.map(block => [block.name, block]));
+
+export function fullCodepointsOf(block: UnicodeBlock): Array<number> { 
+  return Array.from(range(block.startCode, block.endCode + 1));
+}
 
 export function findCharacter(codepoint: number): Character | null { 
   const index = binarySearch(-1, rawCharacters.length, mid => rawCharacters[mid].code >= codepoint);
