@@ -1,11 +1,12 @@
 ---
 width-occupying = 4
+margin-left = 0, 1
 ---
-x x x x # . # .
-x x x x # . # .
-x x x x # # # .
-x x x x # . # .
-x x x x # . # .
-x x x x # # # .
-x x x x # . # .
-x x x x # . # .
+x x x m # . # .
+x x x m # . # .
+x x x m # # # .
+x x x m # . # .
+x x x m # . # .
+x x x m # # # .
+x x x m # . # .
+x x x m # . # .

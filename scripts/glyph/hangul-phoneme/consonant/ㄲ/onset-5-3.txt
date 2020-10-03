@@ -1,5 +1,8 @@
 ---
-not-for = [ㅘㅙㅚ]...
+not-for = [ㅘㅙㅚ]..4
+ㅘ.variant = right
+ㅙ.variant = right
+ㅚ.variant = right
 ---
 # # # # # x x x
 . . # . # x x x
