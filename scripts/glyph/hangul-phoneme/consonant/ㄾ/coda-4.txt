@@ -1,10 +1,11 @@
 ---
+not-for = .[ㅗㅛㅜㅠㅡ]
 ---
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 . # # # # # # .
-. . . # # # # .
+. . . # # # . .
 . # # . # . . .
 . # # # # # # .

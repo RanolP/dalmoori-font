@@ -1,4 +1,8 @@
 ---
+not-for = [ㅙㅢ]..4
+variant.ㅘ = ㄱ
+variant.ㅚ = ㄱ
+variant.ㅟ = ㄱ
 ---
 # # # # # x x x
 . . . . # x x x

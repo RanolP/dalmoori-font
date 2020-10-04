@@ -1,5 +1,5 @@
 ---
-for = .[ㅗㅘㅚㅙㅢㅛㅜㅝㅞㅟㅠㅡ]
+for = .[ㅘㅚㅙㅝㅞㅟㅢ]
 ---
 x x x x x x x x
 x x x x x x x x
@@ -7,5 +7,5 @@ x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 . . . # # # # .
-. # # . # . # .
-. # # # # # # .
+. # # . . . # .
+. # # # . . # .

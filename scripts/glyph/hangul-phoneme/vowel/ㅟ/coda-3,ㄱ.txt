@@ -1,0 +1,13 @@
+---
+width-occupying = 2
+margin-left = 1
+height-occupying = 2
+---
+x x x x x . # .
+x x x x x . # .
+x x x x x . # .
+# # # # . . # .
+. . # . . . # .
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x

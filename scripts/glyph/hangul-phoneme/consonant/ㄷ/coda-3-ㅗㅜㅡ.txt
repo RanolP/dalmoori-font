@@ -1,0 +1,12 @@
+---
+margin-top = 0, 1
+for = .[ㅗㅛㅜㅠㅡ]
+---
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+m m m m m m m m
+. # # # # # . .
+. # . . . . . .
+. # # # # # . .
