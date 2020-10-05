@@ -69,10 +69,7 @@ export function scale(path: paper.Path, scale: number): void {
 
 
 export function pathItemEquals(a: paper.PathItem, b: paper.PathItem): boolean {
-  const aSubB = a.subtract(b, NoInsert);
-  const bSubA = b.subtract(a, NoInsert);
-
-  return aSubB.isEmpty() && bSubA.isEmpty();
+  return a.compare(b);
 }
 
 type RenderSvgOption = Partial<{

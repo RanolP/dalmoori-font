@@ -1,11 +1,9 @@
 ---
 not-for = [ㅗㅛ]..4
-variant.ㅗ = right
-variant.ㅜ = right
 ---
 . # # # # # . .
-. . . # . # . .
-. . . # . # . .
+. . # . . # . .
+. . # . . # . .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

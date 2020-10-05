@@ -1,4 +1,5 @@
 ---
+not-for = ㄲ[ㅏㅐㅑㅒㅓㅕ]
 ---
 x x x x x x x x
 x x x x x x x x

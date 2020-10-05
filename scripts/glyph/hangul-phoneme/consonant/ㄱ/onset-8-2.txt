@@ -1,11 +1,11 @@
 ---
-for = .ㅜ
+for = ㅜ2ㅊ4
 ---
-x x x x x x x x
-x x x x x x x x
-x x x x x x x x
-x x x x x x x x
-x x x x x x x x
-. . . . . . . .
 . # # # # # . .
-. . # . # . . .
+. . . . . # . .
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x

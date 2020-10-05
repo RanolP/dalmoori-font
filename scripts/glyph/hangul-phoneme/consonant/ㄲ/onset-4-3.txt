@@ -1,11 +1,10 @@
 ---
-variant.ㅐ = right
-variant.ㅒ = right
+for = [ㅐㅒㅔㅖ].[ㅂㅄ].
 ---
 # # # # x x x x
 . # . # x x x x
 . # . # x x x x
-. # . # x x x x
+x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
