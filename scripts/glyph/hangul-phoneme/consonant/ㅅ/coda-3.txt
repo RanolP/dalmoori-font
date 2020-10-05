@@ -1,6 +1,5 @@
 ---
 margin-top = 0, 1
-not-for = .[ㅜㅡ]
 ---
 x x x x x x x x
 x x x x x x x x

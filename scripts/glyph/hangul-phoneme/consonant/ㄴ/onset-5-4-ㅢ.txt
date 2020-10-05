@@ -1,10 +1,10 @@
 ---
-for = [ㅘㅙㅚㅝㅞㅟ].[ㄹㄺㄻㄼㄽㄾㄿㅀ].
+for = ㅢ..3
 ---
 # . . . . x x x
+# . . . . x x x
 # # # # # x x x
-x x x x x x x x
-x x x x x x x x
+. . . . . x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

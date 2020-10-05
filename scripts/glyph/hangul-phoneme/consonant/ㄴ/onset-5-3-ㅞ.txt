@@ -1,9 +1,9 @@
 ---
-for = [ㅗㅛㅜㅠ].[ㅊㅎ].
+for = [ㅞ]..3
 ---
-. # . . . . . .
-. # # # # # . .
-x x x x x x x x
+# . . . . x x x
+# # # # . x x x
+. . . . . x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
