@@ -45,7 +45,7 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
             HEIGHT - nucleusVariant.heightOccupying - marginTop - codaHeight
           )) {
             if (onsetPart.targetFor) {
-              if (!onsetPart.targetFor.test(`${nucleus.name.compat}${nucleusVariant.heightOccupying + marginTop}${coda ? coda.name.compat + codaHeight : ''}`)) {
+              if (!onsetPart.targetFor.test(`${nucleus.name.compat}${nucleusVariant.heightOccupying + marginTop}${coda ? coda.name.compat + codaHeight : '.0'}`)) {
                 continue;
               }
             }
