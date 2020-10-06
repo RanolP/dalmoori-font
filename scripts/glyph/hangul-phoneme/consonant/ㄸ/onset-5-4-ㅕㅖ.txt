@@ -1,10 +1,10 @@
 ---
-not-for = [ㅕㅖㅢ]...
+for = [ㅕㅖ]...
 ---
-# # # # # x x x
+# # # # . x x x
 # . # . . x x x
 # . # . . x x x
-# # # # # x x x
+# # # # . x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

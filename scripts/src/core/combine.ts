@@ -50,7 +50,7 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
               }
             }
             if (onsetPart.notTargetFor) {
-              if (onsetPart.notTargetFor.test(`${nucleus.name.compat}${nucleusVariant.heightOccupying + marginTop}${coda ? coda.name.compat + codaHeight : ''}`)) {
+              if (onsetPart.notTargetFor.test(`${nucleus.name.compat}${nucleusVariant.heightOccupying + marginTop}${coda ? coda.name.compat + codaHeight : '.0'}`)) {
                 continue;
               }
             }

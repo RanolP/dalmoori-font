@@ -1,8 +1,9 @@
 ---
+for = ㅙ...
 ---
-. # # # # # . .
-. # . # . . . .
-. # # # # # . .
+# . . . . x x x
+# . . . . x x x
+# # # # . x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

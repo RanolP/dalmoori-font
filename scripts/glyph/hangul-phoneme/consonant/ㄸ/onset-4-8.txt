@@ -1,4 +1,7 @@
 ---
+variant.ㅐ = right
+variant.ㅒ = right
+variant.ㅖ = middle
 ---
 # # # # x x x x
 # . # . x x x x
