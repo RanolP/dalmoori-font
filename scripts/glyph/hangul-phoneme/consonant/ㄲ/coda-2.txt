@@ -1,5 +1,6 @@
 ---
-for = .[ㅗㅛㅜㅡ]
+margin-top = 0, 1
+not-for = .[ㅗㅛㅜㅠㅡ]
 ---
 x x x x x x x x
 x x x x x x x x
@@ -7,5 +8,5 @@ x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
-. . # . # . . .
-. # . # . # . .
+. # # # # # # .
+. . . # . . # .
