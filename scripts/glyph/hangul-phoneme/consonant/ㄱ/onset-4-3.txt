@@ -1,9 +1,10 @@
 ---
-for = [ㅙㅞ]...
+for = ㅞ...
+variant.ㅞ = ㄱ
 ---
-# # # # . x x x
-# . . # . x x x
-# # # # . x x x
+# # # # x x x x
+. . . # x x x x
+. . . # x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

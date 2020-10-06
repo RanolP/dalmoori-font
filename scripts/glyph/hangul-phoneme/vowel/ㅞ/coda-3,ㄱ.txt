@@ -1,14 +1,13 @@
 ---
 width-occupying = 3
 height-occupying = 2
-margin-top = 0, -1
-margin-left = 0, 1
+margin-left = 1, 0
 ---
 x x x x x # . #
 x x x x x # . #
-x x x x x # # #
-. . . # . # . #
-# # # # # # . #
+x x x x x # . #
+# # # . # # . #
+. # . . . # . #
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

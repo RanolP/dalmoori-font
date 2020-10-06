@@ -1,9 +1,9 @@
 ---
-for = ㅢ...
+for = [ㅛㅜㅠㅡ]..3
 ---
-# # # # # x x x
-. . # . # x x x
-. . . . . x x x
+. # . # . # . .
+. # # # # # . .
+. # . # . # . .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

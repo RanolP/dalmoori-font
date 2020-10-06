@@ -1,9 +1,9 @@
 ---
-not-for = (ㅛ...|..[^ㅊ]4)
+for = ㅙ...
 ---
-. . . # . . . .
-. . # . # . . .
-. # . . . # . .
+# # # # x x x x
+. . . # x x x x
+x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
