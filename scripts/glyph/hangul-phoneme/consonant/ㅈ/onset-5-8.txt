@@ -1,4 +1,6 @@
 ---
+variant.ㅕ = middle
+variant.ㅖ = compact, middle
 ---
 # # # # # x x x
 . . # . . x x x

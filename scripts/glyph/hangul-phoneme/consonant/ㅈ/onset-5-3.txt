@@ -1,8 +1,9 @@
 ---
+not-for = (ㅙ...|[ㅘㅚㅢ]..4)
 ---
 # # # # # x x x
-. . # . . x x x
-# # . # # x x x
+. # . # . x x x
+# . . . # x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
