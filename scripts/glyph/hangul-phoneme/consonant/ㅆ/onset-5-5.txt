@@ -1,4 +1,5 @@
 ---
+variant.ㅞ = compact
 ---
 . # . # . x x x
 . # . # . x x x

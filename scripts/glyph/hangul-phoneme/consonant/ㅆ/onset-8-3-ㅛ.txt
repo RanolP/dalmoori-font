@@ -1,10 +1,9 @@
 ---
-not-for = ...4
-variant.ㅞ = compact
+for = ㅛ..3
 ---
-. # . # . x x x
-. # . # . x x x
-# . # . # x x x
+. . # . # . . .
+. # . # . # . .
+# . . . . . # .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x
