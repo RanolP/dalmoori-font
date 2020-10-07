@@ -1,0 +1,11 @@
+---
+width-occupying = 4
+---
+x x x x . # . #
+x x x x . # . #
+x x x x # # . #
+x x x x . # . #
+x x x x . # . #
+x x x x x x x x
+x x x x x x x x
+x x x x x x x x

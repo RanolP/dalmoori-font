@@ -1,9 +1,8 @@
 ---
-for = [ㅝㅞㅟㅢ]...
 ---
-# # # # # x x x
-# # # # . x x x
-# . . . . x x x
+# # # # x x x x
+# # # . x x x x
+# # # # x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

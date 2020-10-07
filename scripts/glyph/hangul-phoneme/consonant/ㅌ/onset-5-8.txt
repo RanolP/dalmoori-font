@@ -1,4 +1,6 @@
 ---
+variant.ㅕ = up
+not-for = ㅖ...
 ---
 # # # # # x x x
 # . . . . x x x

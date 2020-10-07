@@ -1,5 +1,5 @@
 ---
-for = .[ㅘㅚㅙㅝㅞㅟㅢ]
+for = (ㅌ.|.[ㅘㅚㅙㅝㅞㅟㅢ])
 ---
 x x x x x x x x
 x x x x x x x x

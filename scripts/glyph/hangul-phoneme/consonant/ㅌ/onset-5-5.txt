@@ -1,4 +1,6 @@
 ---
+not-for = [ㅐㅒㅔㅖ]...
+variant.ㅓ = up
 ---
 # # # # # x x x
 # . . . . x x x

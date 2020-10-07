@@ -1,6 +1,8 @@
 ---
+variant.ㅓ = down
+not-for = ㅔ...
 ---
-. . # . . x x x
+. # # # . x x x
 # # # # # x x x
 . # . # . x x x
 # . . . # x x x
