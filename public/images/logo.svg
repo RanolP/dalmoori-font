@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+    <defs>
+        <style>
+            .background {
+                /* nord 0 */
+                fill: #2E3440;
+            }
+
+            .halo {
+                /* nord 8 */
+                fill: #88C0D0;
+            }
+
+            .moon {
+                /* nord 4 */
+                fill: #D8DEE9;
+            }
+        </style>
+    </defs>
+    <rect class="background" x="0" y="0" width="16" height="16" />
+    <path class="halo" d="
+            M10 1
+            h-4 v1
+            h-2 v1
+            h-1 v1
+            h-1 v2
+            h-1 v4
+            h1 v2
+            h1 v1
+            h1 v1
+            h2 v1
+            h4 v-1
+            h2 v-1
+            h1 v-1
+            h1 v-2
+            h1 v-4
+            h-1 v-2
+            h-1 v-1
+            h-1 v-1
+            h-2 v1
+            h2 v1
+            h1 v2
+            h1 v4
+            h-1 v2
+            h-1 v1
+            h-2 v1
+            h-4 v-1
+            h-2 v-1
+            h-1 v-2
+            h-1 v-4
+            h1 v-2
+            h1 v-1
+            h2 v-1
+            h4 v-1
+            z
+        " />
+    <path class="moon" d="
+            M8 4
+            h-2 v1
+            h-1 v1
+            h-1 v4
+            h1 v1
+            h1 v1
+            h4 v-1
+            h1 v-1
+            h1 v-2
+            h-1 v1
+            h-1 v1
+            h-3 v-1
+            h-1 v-3
+            h1 v-1
+            h1 v-1
+            z
+        " />
+</svg>
