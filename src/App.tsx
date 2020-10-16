@@ -27,14 +27,16 @@ function App(): ReactElement {
     <AppThemeProvider>
       <Wrap>
         <Suspense fallback={<Loading />}>
-          <AppLocalizationProvider>
-            <Navbar />
+          <AppLocalizationProvider name="app">
             <BrowserRouter>
-              <Switch>
-                <Route to="/" exact={true}>
-                  <LandingPage />
-                </Route>
-              </Switch>
+              <>
+                <Navbar />
+                <Switch>
+                  <Route to="/" exact={true}>
+                    <LandingPage />
+                  </Route>
+                </Switch>
+              </>
             </BrowserRouter>
           </AppLocalizationProvider>
         </Suspense>

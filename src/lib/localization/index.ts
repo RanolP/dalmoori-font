@@ -9,10 +9,12 @@ export const LocaleNameMap: Record<SupportedLocale, string> = {
 };
 export const DefaultLocale: SupportedLocale = 'ko-KR';
 
-const ftl = Object.fromEntries(SupportedLocaleList.map(locale => [locale, `${process.env.PUBLIC_URL}/l10n/${locale}.ftl`])) as Record<SupportedLocale, string>;
+function ftl(locale: SupportedLocale, name: string): string {
+  return `${process.env.PUBLIC_URL}/l10n/${locale}/${name}.ftl`;
+}
 
-export async function fetchMessages(locale: SupportedLocale): Promise<[string, string]> {
-  const response = await fetch(ftl[locale]);
+export async function fetchMessages(locale: SupportedLocale, name: string): Promise<[string, string]> {
+  const response = await fetch(ftl(locale, name));
   const messages = await response.text();
   return [locale, messages];
 }

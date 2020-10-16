@@ -5,13 +5,14 @@ import useSWR from 'swr';
 import { SupportedLocale, negotiateLanguages, fetchMessages, lazilyParsedBundles } from 'lib/localization';
 
 export interface LocalizationProviderProps {
+  name: string;
   children: ReactNode;
 }
 
 export const SetUserLocalesContext = createContext<Dispatch<SetStateAction<SupportedLocale[]>> | undefined>(undefined);
 export const IsUserLocaleUpdatingContext = createContext<boolean>(false);
 
-export default function AppLocalizationProvider({ children }: LocalizationProviderProps): ReactElement {
+export default function AppLocalizationProvider({ name, children }: LocalizationProviderProps): ReactElement {
   const [userLocales, setUserLocalesRaw] = useState(navigator.languages as SupportedLocale[]);
   const [startTransition, isPending] = useTransition({ timeoutMs: 3000 });
   const setUserLocales: Dispatch<SetStateAction<SupportedLocale[]>> = v => startTransition(() => setUserLocalesRaw(v));
@@ -21,7 +22,7 @@ export default function AppLocalizationProvider({ children }: LocalizationProvid
     'l10n[' + userLocales.join(',') + ']',
     async (): Promise<ReactLocalization> => {
       const currentLocales = negotiateLanguages(userLocales);
-      const fetchedMessages = await Promise.all(currentLocales.map(fetchMessages));
+      const fetchedMessages = await Promise.all(currentLocales.map(locale => fetchMessages(locale, name)));
       const bundles = lazilyParsedBundles(fetchedMessages);
       return new ReactLocalization(bundles);
     },

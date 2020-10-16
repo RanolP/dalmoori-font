@@ -4,6 +4,7 @@ import { styled } from 'lib/emotion';
 import { ColorScheme, ColorSchemeList } from 'lib/hooks/use-preferred-color-scheme';
 import { LocaleNameMap, SupportedLocale } from 'lib/localization';
 import React, { ReactElement, useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { SetUserLocalesContext } from 'system/AppLocalizationProvider';
 import { SetUserColorSchemeContext } from 'system/AppThemeProvider';
 import Icon from 'system/Icon';
@@ -14,6 +15,27 @@ const Header = styled.header`
   align-items: center;
 `;
 
+const BrandNavLink = styled(NavLink)`
+  font-size: 32px;
+
+  margin-right: 16px;
+
+  text-decoration: none;
+  color: ${({ theme }) => theme.foreground.strong};
+`;
+
+const Collapse = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 8px;
+  margin-right: auto;
+`;
+
+const OtherNavLink = styled(NavLink)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.foreground.normal};
+`;
+
 function Navbar(): ReactElement {
   const setUserColorScheme = useContext(SetUserColorSchemeContext);
   const setUserLocales = useContext(SetUserLocalesContext);
@@ -21,35 +43,47 @@ function Navbar(): ReactElement {
 
   return (
     <Header>
-      <h1>
+      <BrandNavLink to="/">
         <Icon name="logo-circle" css={css`margin: 4px 0;`} />
         <Localized id="brand">
           달무리
         </Localized>
-      </h1>
-      Code
-      Pro
-      Max
-      블로그
-      <select
-        onChange={(event): void => { setUserColorScheme?.(event.target.value === '$default' ? null : event.target.value as ColorScheme); }}
-      >
-        <option value="$default">
-          {localization.getString('theme-system-default')}
-        </option>
-        {ColorSchemeList.map(schemeName => (
-          <option key={schemeName} value={schemeName}>
-            {localization.getString(`theme-${schemeName}`)}
+      </BrandNavLink>
+      <Collapse>
+        <OtherNavLink to="/code">
+          Code
+        </OtherNavLink>
+        <OtherNavLink to="/pro">
+          Pro
+        </OtherNavLink>
+        <OtherNavLink to="/max">
+          Max
+        </OtherNavLink>
+        <OtherNavLink to="/blog">
+          Blog
+        </OtherNavLink>
+      </Collapse>
+      <div>
+        <select
+          onChange={(event): void => { setUserColorScheme?.(event.target.value === '$default' ? null : event.target.value as ColorScheme); }}
+        >
+          <option value="$default">
+            {localization.getString('theme-system-default')}
           </option>
-        ))}
-      </select>
-      <select onChange={(event): void => { setUserLocales?.([event.target.value as SupportedLocale]); }}>
-        {Object.entries(LocaleNameMap).map(([code, name]) => (
-          <option key={code} value={code}>
-            {name}
-          </option>
-        ))}
-      </select>
+          {ColorSchemeList.map(schemeName => (
+            <option key={schemeName} value={schemeName}>
+              {localization.getString(`theme-${schemeName}`)}
+            </option>
+          ))}
+        </select>
+        <select onChange={(event): void => { setUserLocales?.([event.target.value as SupportedLocale]); }}>
+          {Object.entries(LocaleNameMap).map(([code, name]) => (
+            <option key={code} value={code}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </div>
     </Header>
   );
 }
