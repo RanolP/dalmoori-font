@@ -6,7 +6,6 @@ import { LocaleNameMap, SupportedLocale } from 'lib/localization';
 import React, { ReactElement, useContext } from 'react';
 import { SetUserLocalesContext } from 'system/AppLocalizationProvider';
 import { SetUserColorSchemeContext } from 'system/AppThemeProvider';
-import Select from 'react-select/src/Select';
 import Icon from 'system/Icon';
 
 const Header = styled.header`
