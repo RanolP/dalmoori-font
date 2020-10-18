@@ -9,10 +9,13 @@ import { SetUserLocalesContext } from 'system/AppLocalizationProvider';
 import { SetUserColorSchemeContext } from 'system/AppThemeProvider';
 import Icon from 'system/Icon';
 
+export const NavbarHeight = '64px';
+
 const Header = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: ${NavbarHeight};
 `;
 
 const BrandNavLink = styled(NavLink)`

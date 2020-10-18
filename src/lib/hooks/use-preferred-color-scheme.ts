@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
-
-// Define available themes
+import { useState, useEffect } from 'react';
 
 export type ColorScheme = 'dark' | 'light';
 export const ColorSchemeList = ['dark', 'light'];
 export const colorSchemes: Record<ColorScheme, string> = {
   'dark': '(prefers-color-scheme: dark)',
   'light': '(prefers-color-scheme: light)'
-}
+};
 
 export default function usePreferredColorScheme(): ColorScheme | null {
   const [scheme, setScheme] = useState<ColorScheme | null>(null);
@@ -24,7 +22,7 @@ export default function usePreferredColorScheme(): ColorScheme | null {
         if (matches) {
           setScheme(schemeName as ColorScheme);
         }
-      }
+      };
 
       const mq = window.matchMedia(query);
       const listener = (e: MediaQueryListEvent) => update(e.matches);
@@ -40,7 +38,7 @@ export default function usePreferredColorScheme(): ColorScheme | null {
         cleanup();
       }
     };
-  }, [])
+  }, []);
 
   return scheme;
 }

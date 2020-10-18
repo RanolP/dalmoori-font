@@ -14,9 +14,8 @@ module.exports = {
   rules: {
     'react/prop-types': ['off'],
 
-    '@typescript-eslint/explicit-function-return-type': ['error', { 'ignoredNodes': ['TemplateLiteral > *'] }],
+    '@typescript-eslint/explicit-function-return-type': ['warn', { 'allowExpressions': true }],
 
-    'emotion/jsx-import': 'error',
     'emotion/no-vanilla': 'error',
     'emotion/import-from-emotion': 'error',
     'emotion/styled-import': 'error',
@@ -24,7 +23,7 @@ module.exports = {
       'error',
       { 'vars': 'all', 'args': 'all', 'varsIgnorePattern': '^jsx$|^_', 'argsIgnorePattern': '^_' }
     ],
-    
+
     'semi': ['error', 'always'],
     'quotes': ['error', 'single'],
     'indent': ['error', 2, { 'SwitchCase': 1, 'ignoredNodes': ['TemplateLiteral > *'] }],

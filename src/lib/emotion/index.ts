@@ -8,7 +8,7 @@ export interface ColorVariant {
   strong: Color;
   brighter: Color;
   darker: Color;
-};
+}
 
 export interface ColorTheme {
   background: ColorVariant;

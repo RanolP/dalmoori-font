@@ -9,10 +9,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LandingPage from 'pages/Landing';
 
 const Wrap = styled.div`
-  padding: 48px;
+  padding: 0 48px;
 
-  width: 100vw;
-  height: 100vh;
+  max-width: 100vw;
+  min-height: 100vh;
 
   background: ${({ theme }) => theme.background.darker};
   color: ${({ theme }) => theme.foreground.normal};
@@ -28,7 +28,7 @@ function App(): ReactElement {
       <Wrap>
         <Suspense fallback={<Loading />}>
           <AppLocalizationProvider name="app">
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
               <>
                 <Navbar />
                 <Switch>

@@ -7,7 +7,11 @@ import Pixelate from 'styles/pixelate';
 import Typography from 'styles/typography';
 import App from 'App';
 
-ReactDOM.unstable_createRoot(document.getElementById('root')!).render(
+// we know that there *must* exists the root element.
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const root = document.getElementById('root')!;
+
+ReactDOM.unstable_createRoot(root).render(
   <React.StrictMode>
     <Global styles={[Reset, Pixelate, Typography]} />
     <App />

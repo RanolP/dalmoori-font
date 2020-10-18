@@ -28,7 +28,7 @@ export function* lazilyParsedBundles(fetchedMessages: Array<[string, string]>): 
   }
 }
 
-export function negotiateLanguages(userLocales: SupportedLocale[]): SupportedLocale[] {
+export function negotiateLanguages(userLocales: string[]): SupportedLocale[] {
   return fluentNegotiateLanguages(
     userLocales,
     SupportedLocaleList as unknown as string[],
