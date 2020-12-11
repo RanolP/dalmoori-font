@@ -3,7 +3,7 @@ import React, { useState, ReactNode, ReactElement, createContext, Dispatch, SetS
 import { ReactLocalization, LocalizationProvider as FluentProvider } from '@fluent/react';
 import useSWR from 'swr';
 import { SupportedLocale, negotiateLanguages, fetchMessages, lazilyParsedBundles } from 'lib/localization';
-import { Global } from '@emotion/core';
+import { Global } from '@emotion/react';
 import { KeepAll } from 'styles/typography';
 
 export interface LocalizationProviderProps {
@@ -16,7 +16,7 @@ export const IsUserLocaleUpdatingContext = createContext<boolean>(false);
 
 export default function AppLocalizationProvider({ name, children }: LocalizationProviderProps): ReactElement {
   const [userLocales, setUserLocalesRaw] = useState(navigator.languages as string[]);
-  const [startTransition, isPending] = useTransition({ timeoutMs: 3000 });
+  const [startTransition, isPending] = useTransition({ busyDelayMs: 3000 });
   const setUserLocales: Dispatch<SetStateAction<SupportedLocale[]>> = v => startTransition(() => setUserLocalesRaw(v as string[]));
   const isKorean = useMemo(() => {
     const currentLocales = negotiateLanguages(userLocales);

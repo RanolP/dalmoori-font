@@ -18,14 +18,14 @@ export default function usePreferredColorScheme(): ColorScheme | null {
     // Add listener for all themes
     const cleanupFunctions: Array<() => void> = [];
     for (const [schemeName, query] of Object.entries(colorSchemes)) {
-      const update = (matches: boolean) => {
+      const update = (matches: boolean): void => {
         if (matches) {
           setScheme(schemeName as ColorScheme);
         }
       };
 
       const mq = window.matchMedia(query);
-      const listener = (e: MediaQueryListEvent) => update(e.matches);
+      const listener = (e: MediaQueryListEvent): void => update(e.matches);
       mq.addEventListener('change', listener);
       update(mq.matches);
 

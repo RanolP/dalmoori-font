@@ -1,9 +1,9 @@
-import { css } from '@emotion/core';
+import React, { ReactElement, useContext } from 'react';
+import { css } from '@emotion/react';
 import { Localized, useLocalization } from '@fluent/react';
-import { styled } from 'lib/emotion';
+import styled from '@emotion/styled';
 import { ColorScheme, ColorSchemeList } from 'lib/hooks/use-preferred-color-scheme';
 import { LocaleNameMap, SupportedLocale } from 'lib/localization';
-import React, { ReactElement, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { SetUserLocalesContext } from 'system/AppLocalizationProvider';
 import { SetUserColorSchemeContext } from 'system/AppThemeProvider';
@@ -24,7 +24,9 @@ const BrandNavLink = styled(NavLink)`
   margin-right: 16px;
 
   text-decoration: none;
-  color: ${({ theme }) => theme.foreground.strong};
+  &, &:visited {
+    color: ${({ theme }) => theme.foreground.strong};
+  }
 `;
 
 const Collapse = styled.div`
@@ -47,7 +49,7 @@ function Navbar(): ReactElement {
   return (
     <Header>
       <BrandNavLink to="/">
-        <Icon name="logo-circle" css={css`margin: 4px 0;`} />
+        <Icon name="logo-circle" className={css`margin: 4px 0;`.name} />
         <Localized id="brand">
           달무리
         </Localized>

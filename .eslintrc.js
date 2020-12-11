@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'emotion'],
+  plugins: ['@typescript-eslint', '@emotion/eslint-plugin'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -16,9 +16,9 @@ module.exports = {
 
     '@typescript-eslint/explicit-function-return-type': ['warn', { 'allowExpressions': true }],
 
-    'emotion/no-vanilla': 'error',
-    'emotion/import-from-emotion': 'error',
-    'emotion/styled-import': 'error',
+    '@emotion/no-vanilla': 'error',
+    '@emotion/import-from-emotion': 'error',
+    '@emotion/styled-import': 'error',
     '@typescript-eslint/no-unused-vars': [
       'error',
       { 'vars': 'all', 'args': 'all', 'varsIgnorePattern': '^jsx$|^_', 'argsIgnorePattern': '^_' }

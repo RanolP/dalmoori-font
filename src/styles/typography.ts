@@ -1,10 +1,10 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 
 const Style = css`
   html {
     font-size: 16px;
   }
-  html, select {
+  html, select, textarea {
     font-family: dalmoori;
   }
 `;

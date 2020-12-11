@@ -1,7 +1,7 @@
 import React, { useState, ReactNode, ReactElement, createContext, SetStateAction, Dispatch } from 'react';
 import usePreferredColorScheme, { ColorScheme } from 'lib/hooks/use-preferred-color-scheme';
-import { ThemeProvider } from 'emotion-theming';
-import { ColorTheme, DarkTheme, LightTheme } from 'lib/emotion';
+import { ThemeProvider } from '@emotion/react';
+import { ColorTheme, DarkTheme, LightTheme } from 'lib/theme';
 
 export interface AppThemeProviderProps {
   children: ReactNode;

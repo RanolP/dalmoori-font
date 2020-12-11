@@ -1,5 +1,5 @@
-import { styled } from 'lib/emotion';
 import React, { ImgHTMLAttributes, ReactElement } from 'react';
+import styled from '@emotion/styled';
 
 export type HtmlImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src'>;
 export interface IconProps extends HtmlImageProps {

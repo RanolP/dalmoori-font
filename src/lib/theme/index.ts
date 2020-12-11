@@ -1,5 +1,4 @@
 import nord from 'styles/nord';
-import styledRaw, { CreateStyled } from '@emotion/styled';
 
 export type Color = string;
 export interface ColorVariant {
@@ -11,11 +10,14 @@ export interface ColorVariant {
 }
 
 export interface ColorTheme {
+  isDark: boolean;
   background: ColorVariant;
   foreground: ColorVariant;
+  link: {
+    normal: Color;
+    visit: Color;
+  };
 }
-
-export const styled = styledRaw as CreateStyled<ColorTheme>;
 
 const BlackVariant: ColorVariant = {
   brighter: nord[2],
@@ -34,11 +36,21 @@ const WhiteVariant: ColorVariant = {
 };
 
 export const DarkTheme: ColorTheme = {
+  isDark: true,
   background: BlackVariant,
   foreground: WhiteVariant,
+  link: {
+    normal: nord[8],
+    visit: nord[15],
+  },
 };
 
 export const LightTheme: ColorTheme = {
+  isDark: false,
   background: WhiteVariant,
   foreground: BlackVariant,
+  link: {
+    normal: nord[10],
+    visit: nord[15],
+  },
 };
