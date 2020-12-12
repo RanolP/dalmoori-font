@@ -30,7 +30,7 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
 
     ### Details
 
-    ${Object.values(analysisResult.blocks).map(renderBlockDetail).join('\n')}
+    ${Object.values(analysisResult.blocks).map(renderBlockDetail).join('\n').trim()}
   `;
 
   await mkdirs(Paths.artifacts);

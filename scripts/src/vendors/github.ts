@@ -1,6 +1,6 @@
 import fetch, { Response } from 'node-fetch';
 import { createWriteStream, dirname, join, mkdirs, PathLike } from '../util/fs';
-import { fromBuffer } from 'yauzl-promise';
+import JSZip from 'jszip';
 
 const TOKEN = process.env['GITHUB_TOKEN'];
 const BASE_URL = 'https://api.github.com';
@@ -58,7 +58,7 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
     conclusion: string;
     artifacts_url: string;
     check_suite_url: string;
-    repository: { 
+    repository: {
       full_name: string;
     }
   }
@@ -107,18 +107,18 @@ export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLik
   const buffer = await response.buffer();
   await mkdirs(dirname(target.toString()));
 
-  const zipFile = await fromBuffer(buffer);
+  const zipFile = await JSZip.loadAsync(buffer);
 
-  await zipFile.walkEntries(async entry => {
-    const filename = join(target.toString(), entry.fileName);
-    if (/\/$/.test(filename)) {
+  await Promise.all(zipFile.file(/.*/).map(async entry => {
+    const filename = join(target.toString(), entry.name);
+    if (entry.dir) {
       await mkdirs(filename);
     } else {
       await mkdirs(dirname(filename));
-      const stream = await entry.openReadStream();
+      const stream = entry.nodeStream();
       const writeStream = createWriteStream(filename);
       stream.pipe(writeStream);
-      await new Promise(resolve => writeStream.on('close', () => resolve()));
+      await new Promise<void>(resolve => writeStream.on('close', () => resolve()));
     }
-  });
+  }));
 }

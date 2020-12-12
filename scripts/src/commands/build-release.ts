@@ -3,10 +3,11 @@ import { generateFont } from '../generate-font';
 import { renderAsciiFont } from '../render-ascii-font';
 import { getLatestCommitHash, getLatestCommitUnixtime, getLatestTagCommitHash, shortenCommitHash } from '../vendors/git';
 import { downloadArtifact, listWorkflowRuns, WorkflowRun } from '../vendors/github';
-import { generateArtifacts } from '../generate-artifact';
+import { copyFiles } from '../copy-files';
 import { generateAdvancementReport } from '../generate-advancement-report';
 import { join } from '../util/fs';
 import { Paths } from '../constants';
+import { generateArtifactZip } from '../generate-artifact-zip';
 
 (async () => {
   const asciiFontMap = await renderAsciiFont();
@@ -35,7 +36,7 @@ import { Paths } from '../constants';
 
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await generatePreview();
-  await generateArtifacts();
+  await copyFiles();
   if (previousWorkflow !== null) {
     console.log(`Downloading previous artifact (#${previousWorkflow.runNumber} ${(shortenCommitHash(previousWorkflow.headSha))})...`);
     await downloadArtifact(previousWorkflow, '../previous');
@@ -52,4 +53,5 @@ import { Paths } from '../constants';
   } else {
     console.log('There are no workflow found before');
   }
+  await generateArtifactZip();
 })();

@@ -7,6 +7,8 @@ import { join, mkdirs, readFile, writeFile } from './util/fs';
 import { OnePixel, Paths, Version } from './constants';
 import { createProgressIndicator, formatHex } from './util/format';
 import { execute } from './util/executor';
+import ttf2woff from 'ttf2woff';
+import ttf2woff2 from 'ttf2woff2';
 
 export async function generateFont(map: Record<string, AsciiFont>, versionExtraInfo: string, ts?: number): Promise<void> {
   const entries = Object.entries(map);
@@ -50,7 +52,7 @@ export async function generateFont(map: Record<string, AsciiFont>, versionExtraI
 
   const svgFontPath = join(fontPath, 'dalmoori.svg');
 
-  await new Promise((resolve, reject) => {
+  await new Promise<void>((resolve, reject) => {
     svgFontStream.pipe(createWriteStream(svgFontPath))
       .on('finish', () => {
         resolve();
@@ -72,4 +74,12 @@ export async function generateFont(map: Record<string, AsciiFont>, versionExtraI
   });
   const ttfBuffer = Buffer.from(ttf.buffer);
   await writeFile(join(fontPath, 'dalmoori.ttf'), ttfBuffer);
+
+  console.log('Writing woff font...');
+  const { buffer: woffBuffer } = ttf2woff(ttfBuffer);
+  await writeFile(join(fontPath, 'dalmoori.woff'), woffBuffer);
+
+  console.log('Writing woff2 font...');
+  const woff2Buffer = ttf2woff2(ttfBuffer);
+  await writeFile(join(fontPath, 'dalmoori.woff2'), woff2Buffer);
 }

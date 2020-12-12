@@ -7,6 +7,7 @@ export const OnePixel = FullWidthSize / 8;
 export const Version = '0.100';
 
 export const Paths = {
+  root: '../',
   glyphBase: './glyph',
   build: './build',
   artifacts: '../artifacts',
