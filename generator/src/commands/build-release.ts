@@ -2,7 +2,7 @@ import { generatePreview } from '../generate-preview';
 import { generateFont } from '../generate-font';
 import { renderAsciiFont } from '../render-ascii-font';
 import { getLatestCommitHash, getLatestCommitUnixtime, getLatestTagCommitHash, shortenCommitHash } from '../vendors/git';
-import { downloadArtifact, listWorkflowRuns, WorkflowRun } from '../vendors/github';
+import { downloadArtifact, listWorkflowRuns, WorkflowRun, Artifact } from '../vendors/github';
 import { copyFiles } from '../copy-files';
 import { generateAdvancementReport } from '../generate-advancement-report';
 import { join } from '../util/fs';
@@ -45,9 +45,9 @@ import { generateArtifactZip } from '../generate-artifact-zip';
 
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await copyFiles();
-  if (previousWorkflow !== null) {
+  if (previousWorkflow !== null && previousArtifact !== null) {
     console.log(`Downloading previous artifact (#${previousWorkflow.runNumber} ${(shortenCommitHash(previousWorkflow.headSha))})...`);
-    await downloadArtifact(previousWorkflow, '../previous');
+    await downloadArtifact(previousArtifact, '../previous');
     await generateAdvancementReport(
       {
         path: '../previous/dalmoori.ttf',
