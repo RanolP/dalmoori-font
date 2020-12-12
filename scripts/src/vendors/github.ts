@@ -11,13 +11,12 @@ export interface WorkflowRun {
   workflowId: number;
   status: string;
   conclusion: string;
-  artifactsUrl: string;
+  artifacts: Array<Artifact>;
 }
 
-export interface Artifacts {
-  artifacts: Array<{
-    archive_download_url: string;
-  }>;
+export interface Artifact {
+  expired: boolean;
+  archiveDownloadUrl: string;
 }
 
 export async function requestRaw(url: string, token?: string): Promise<Response> {
@@ -92,18 +91,47 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
         workflowId,
         status,
         conclusion,
-        artifactsUrl
+        artifacts: await getArtifacts(artifactsUrl),
       };
     }
   }
 }
 
-export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLike): Promise<void> {
-  const artifacts = await request<Artifacts>(workflowRun.artifactsUrl);
-  if (artifacts === null || artifacts.artifacts.length === 0) {
-    throw new Error(`Failed to download artifact on ${workflowRun.workflowId}`);
+export async function getArtifacts(url: string): Promise<Artifact[]> {
+  interface ArtifactRaw {
+    expired: boolean;
+    archive_download_url: string;
   }
-  const response = await requestRaw(artifacts.artifacts[0].archive_download_url, process.env['ARTIFACT_DOWNLOAD_TOKEN']);
+  interface Response {
+    total_count: number;
+    artifacts: ArtifactRaw[];
+  }
+
+  const response = await request<Response>(url);
+
+  if (response === null) {
+    return [];
+  }
+  const { artifacts }: Response = response;
+
+  const result = [] as Artifact[];
+
+  for (const artifact of artifacts) {
+    const {
+      expired,
+      archive_download_url: archiveDownloadUrl,
+    } = artifact;
+    result.push({
+      expired,
+      archiveDownloadUrl,
+    });
+  }
+
+  return result;
+}
+
+export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLike): Promise<void> {
+  const response = await requestRaw(workflowRun.artifacts[0].archiveDownloadUrl, process.env['ARTIFACT_DOWNLOAD_TOKEN']);
   const buffer = await response.buffer();
   await mkdirs(dirname(target.toString()));
 

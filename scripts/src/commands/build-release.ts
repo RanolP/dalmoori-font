@@ -23,7 +23,7 @@ import { generateArtifactZip } from '../generate-artifact-zip';
       if (workflow.headSha === latestTag) {
         begin = workflow.runNumber;
       }
-      if (workflow.runNumber !== curr && workflow.conclusion === 'success' && previousWorkflow === null) {
+      if (workflow.runNumber !== curr && workflow.conclusion === 'success' && workflow.artifacts.length > 0 && previousWorkflow === null) {
         previousWorkflow = workflow;
       }
     }

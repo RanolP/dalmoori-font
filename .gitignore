@@ -2,6 +2,7 @@
 **/build/
 **/dist/
 docs/assets/dalmoori.ttf
+docs/assets/dalmoori.zip
 artifacts/
 previous/
 .eslintcache
