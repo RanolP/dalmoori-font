@@ -12,6 +12,7 @@ import { generateArtifactZip } from '../generate-artifact-zip';
 (async () => {
   const asciiFontMap = await renderAsciiFont();
   let previousWorkflow: WorkflowRun | null = null;
+  let previousArtifact: Artifact | null = null;
   let begin = 0;
   const curr = Number(process.env['GITHUB_RUN_NUMBER']);
   try {
@@ -23,8 +24,13 @@ import { generateArtifactZip } from '../generate-artifact-zip';
       if (workflow.headSha === latestTag) {
         begin = workflow.runNumber;
       }
-      if (workflow.runNumber !== curr && workflow.conclusion === 'success' && workflow.artifacts.length > 0 && previousWorkflow === null) {
-        previousWorkflow = workflow;
+
+      if (previousArtifact === null && workflow.runNumber !== curr && workflow.conclusion === 'success') {
+        const artifacts = await workflow.artifacts();
+        if (artifacts.length > 0) {
+          previousArtifact = artifacts[0];
+          previousWorkflow = workflow;
+        }
       }
       if (begin !== 0 && previousWorkflow !== null) {
         break;

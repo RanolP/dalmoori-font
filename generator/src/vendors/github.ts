@@ -11,7 +11,7 @@ export interface WorkflowRun {
   workflowId: number;
   status: string;
   conclusion: string;
-  artifacts: Array<Artifact>;
+  artifacts: () => Promise<Array<Artifact>>;
 }
 
 export interface Artifact {
@@ -91,7 +91,7 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
         workflowId,
         status,
         conclusion,
-        artifacts: await getArtifacts(artifactsUrl),
+        artifacts: () => getArtifacts(artifactsUrl),
       };
     }
   }
@@ -130,8 +130,8 @@ export async function getArtifacts(url: string): Promise<Artifact[]> {
   return result;
 }
 
-export async function downloadArtifact(workflowRun: WorkflowRun, target: PathLike): Promise<void> {
-  const response = await requestRaw(workflowRun.artifacts[0].archiveDownloadUrl, process.env['ARTIFACT_DOWNLOAD_TOKEN']);
+export async function downloadArtifact(artifact: Artifact, target: PathLike): Promise<void> {
+  const response = await requestRaw(artifact.archiveDownloadUrl, process.env['ARTIFACT_DOWNLOAD_TOKEN']);
   const buffer = await response.buffer();
   await mkdirs(dirname(target.toString()));
 
