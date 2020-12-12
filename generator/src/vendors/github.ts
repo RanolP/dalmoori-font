@@ -139,7 +139,10 @@ export async function downloadArtifact(artifact: Artifact, target: PathLike): Pr
 
   await Promise.all(zipFile.file(/.*/).map(async entry => {
     const filename = join(target.toString(), entry.name);
-    if (!entry.dir) {
+    console.log('Unzipping: ' + filename);
+    if (entry.dir) {
+      await mkdirs(filename);
+    } else {
       await mkdirs(dirname(filename));
       const stream = entry.nodeStream();
       const writeStream = createWriteStream(filename);
