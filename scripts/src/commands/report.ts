@@ -13,4 +13,7 @@ import { Paths } from '../constants';
       commitHash: 'unknown',
     }
   );
-})();
+})().catch(e => {
+  console.error(e);
+  process.exit(1);
+});

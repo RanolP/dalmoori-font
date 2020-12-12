@@ -26,6 +26,9 @@ import { generateArtifactZip } from '../generate-artifact-zip';
       if (workflow.runNumber !== curr && workflow.conclusion === 'success' && workflow.artifacts.length > 0 && previousWorkflow === null) {
         previousWorkflow = workflow;
       }
+      if (begin !== 0 && previousWorkflow !== null) {
+        break;
+      }
     }
   } catch (e) {
     console.log(e);
@@ -54,4 +57,7 @@ import { generateArtifactZip } from '../generate-artifact-zip';
   }
   await generateArtifactZip();
   await generatePreview();
-})();
+})().catch(e => {
+  console.error(e);
+  process.exit(1);
+});
