@@ -18,11 +18,11 @@ jobs:
           node-version: 14.x
 
       - name: Install
-        working-directory: ./scripts
+        working-directory: ./generator
         run: npm install
 
       - name: Build
-        working-directory: ./scripts
+        working-directory: ./generator
         run: npm run build:release
         env:
           ARTIFACT_DOWNLOAD_TOKEN: ${{ secrets.ARTIFACT_DOWNLOAD_TOKEN }}
