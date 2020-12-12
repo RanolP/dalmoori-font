@@ -47,7 +47,6 @@ import { generateArtifactZip } from '../generate-artifact-zip';
   await copyFiles();
   if (previousWorkflow !== null && previousArtifact !== null) {
     console.log(`Downloading previous artifact (#${previousWorkflow.runNumber} ${(shortenCommitHash(previousWorkflow.headSha))})...`);
-    console.log(previousWorkflow, previousArtifact);
     await downloadArtifact(previousArtifact, '../previous');
     await generateAdvancementReport(
       {
