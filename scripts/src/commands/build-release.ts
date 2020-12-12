@@ -35,7 +35,6 @@ import { generateArtifactZip } from '../generate-artifact-zip';
   const versionExtraInfo = `b${curr - begin}`;
 
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
-  await generatePreview();
   await copyFiles();
   if (previousWorkflow !== null) {
     console.log(`Downloading previous artifact (#${previousWorkflow.runNumber} ${(shortenCommitHash(previousWorkflow.headSha))})...`);
@@ -54,4 +53,5 @@ import { generateArtifactZip } from '../generate-artifact-zip';
     console.log('There are no workflow found before');
   }
   await generateArtifactZip();
+  await generatePreview();
 })();
