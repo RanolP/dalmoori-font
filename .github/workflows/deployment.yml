@@ -88,6 +88,9 @@ jobs:
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
+      - name: Zipping Files
+        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
+        run: zip -r dalmoori.zip artifacts/
       - name: Upload Release Asset
         if: ${{ steps.tag-status.outputs.tagged == 'true' }}
         id: upload-release-asset
@@ -96,6 +99,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dalmoori-font.zip
+          asset_path: ./dalmoori.zip
           asset_name: dalmoori-font.zip
           asset_content_type: application/zip
