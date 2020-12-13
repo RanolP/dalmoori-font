@@ -1,5 +1,5 @@
 import fetch, { Response } from 'node-fetch';
-import { createWriteStream, dirname, join, mkdirs, PathLike } from '../util/fs';
+import { createWriteStream, dirname, join, mkdirs, PathLike, writeFile } from '../util/fs';
 import JSZip from 'jszip';
 
 const TOKEN = process.env['GITHUB_TOKEN'];
@@ -144,11 +144,9 @@ export async function downloadArtifact(artifact: Artifact, target: PathLike): Pr
       await mkdirs(filename);
     } else {
       await mkdirs(dirname(filename));
-      const stream = entry.nodeStream();
-      const writeStream = createWriteStream(filename);
-      stream.pipe(writeStream);
-      await new Promise<void>(resolve => writeStream.on('close', () => resolve()));
+      const buffer = await entry.async('nodebuffer');
+      await writeFile(filename, buffer);
     }
   }));
-    console.log('Unzipped!');
+  console.log('Unzipped!');
 }
