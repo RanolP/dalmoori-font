@@ -67,9 +67,11 @@ jobs:
           echo ::set-output name=tagged::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
       - name: Cancel if not tagged
         if: ${{ !steps.tag.outputs.tagged }}
-        uses: styfle/cancel-workflow-action@0.6.0
+        uses: andymckay/cancel-action@0.2
+      - name: Download artifact
+        uses: actions/download-artifact@v2
         with:
-          access_token: ${{ secrets.GITHUB_TOKEN }}
+          name: dalmoori-font
       - name: Generate Changelog
         id: changelog
         uses: metcalfc/changelog-generator@v0.4.4
