@@ -57,6 +57,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Evaluate tag status
         id: tag-status
         run: |
@@ -64,7 +66,7 @@ jobs:
           latestCommit=$(git show -s --format=%H);
           echo ::set-output name=tagged::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
       - name: Cancel if not tagged
-        if: steps.tag.outputs.tagged
+        if: ${{ !steps.tag.outputs.tagged }}
         uses: styfle/cancel-workflow-action@0.6.0
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
