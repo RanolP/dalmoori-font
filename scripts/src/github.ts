@@ -46,7 +46,7 @@ export interface WorkflowRun {
   workflowId: number;
   status: string;
   conclusion: string;
-  artifacts: Array<Artifact>;
+  artifacts: () => Promise<Array<Artifact>>;
   checkSuiteId: number;
   headCommit: {
     sha: string;
@@ -101,7 +101,7 @@ export async function* listWorkflowRuns(owner: string, repository: string): Asyn
         status,
         conclusion,
         checkSuiteId,
-        artifacts: await getArtifacts(artifactsUrl),
+        artifacts: () => getArtifacts(artifactsUrl),
       };
     }
   }
@@ -153,4 +153,56 @@ export async function getArtifacts(url: string): Promise<Artifact[]> {
   }
 
   return result;
+}
+
+export interface Release {
+  tagName: string;
+  commitHash: string;
+  publishedAt: DateTime;
+  assets: Array<{
+    name: string;
+    downloadUrl: string;
+  }>;
+  body: string;
+}
+
+export async function* listReleases(owner: string, repository: string): AsyncGenerator<Release, void, unknown> {
+  interface ReleaseRaw {
+    tag_name: string;
+    target_commitish: string;
+    published_at: string;
+    assets: Array<{
+      name: string;
+      browser_download_url: string;
+    }>;
+    body: string;
+  }
+  const url = `/repos/${owner}/${repository}/releases`;
+
+  for (let page = 1; true; page += 1) {
+    const response = await request<ReleaseRaw[]>(`${url}?per_page=100&page=${page}`);
+    if (response === null) {
+      return;
+    }
+    if (response.length === 0) {
+      break;
+    }
+    for (const release of response) {
+      const {
+        tag_name: tagName,
+        target_commitish: commitHash,
+        published_at: publishedAt,
+        assets,
+        body,
+      } = release;
+
+      yield {
+        tagName,
+        commitHash,
+        publishedAt: DateTime.fromISO(publishedAt),
+        assets: assets.map(({ name, browser_download_url: downloadUrl }) => ({ name, downloadUrl })),
+        body,
+      };
+    }
+  }
 }

@@ -5,6 +5,7 @@ import path from 'path';
 interface UnstableFont {
   downloadUrl: string;
   expired: boolean;
+  updatedAt: string;
   expiresAt: string;
   sizeInBytes: number;
   headCommit: {
@@ -24,11 +25,13 @@ async function main(): Promise<void> {
       continue;
     }
 
-    if (workflow.artifacts.length === 0) {
+    const artifacts = await workflow.artifacts();
+
+    if (artifacts.length === 0) {
       continue;
     }
 
-    const artifact = workflow.artifacts[0];
+    const artifact = artifacts[0];
 
     if (artifact.expired) {
       break;
@@ -38,6 +41,7 @@ async function main(): Promise<void> {
       downloadUrl: `https://github.com/RanolP/dalmoori-font/suites/${workflow.checkSuiteId}/artifacts/${artifact.id}`,
       expired: artifact.expired,
       expiresAt: artifact.expiresAt.toISO(),
+      updatedAt: artifact.updatedAt.toISO(),
       sizeInBytes: artifact.sizeInBytes,
       headCommit: workflow.headCommit,
     });

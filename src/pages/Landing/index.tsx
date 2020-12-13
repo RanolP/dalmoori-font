@@ -6,6 +6,7 @@ import { Localized } from '@fluent/react';
 import Palette from 'styles/nord';
 import endent from 'endent';
 import unstableFonts from '../../lib/data/unstable-font';
+import stableFonts from '../../lib/data/stable-font';
 
 const Wrap = styled.div`
   height: calc(100vh - ${NavbarHeight});
@@ -280,6 +281,27 @@ function LandingPage(): ReactElement {
           </h2>
           <details>
             <summary>
+              Stable 채널
+            </summary>
+            <ul>
+              {stableFonts.map(stableFont => (
+                <li key={stableFont.commitHash}>
+                  {stableFont.tagName}
+                  <ul>
+                    {stableFont.assets.map(asset => (
+                      <li key={asset.name}>
+                        <a rel="download" href={asset.downloadUrl}>
+                          {asset.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </details>
+          <details>
+            <summary>
               Unstable 채널 (GitHub 로그인 필요)
             </summary>
             <ul>
@@ -294,7 +316,7 @@ function LandingPage(): ReactElement {
           </details>
         </section>
       </main>
-    </Wrap>
+    </Wrap >
   );
 }
 
