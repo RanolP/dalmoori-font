@@ -65,12 +65,16 @@ jobs:
           latestTag=$(git rev-list --tags --max-count=1);
           latestCommit=$(git show -s --format=%H);
           echo ::set-output name=tagged::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
+          echo ::set-output name=name::$(git describe --tags)
       - name: Download artifact
         if: ${{ steps.tag-status.outputs.tagged == 'true' }}
         uses: actions/download-artifact@v2
         with:
           name: dalmoori-font
           path: ./dalmoori-font
+      - name: Zipping Files
+        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
+        run: zip -r -j dalmoori.zip dalmoori-font
       - name: Generate Changelog
         if: ${{ steps.tag-status.outputs.tagged == 'true' }}
         id: changelog
@@ -84,14 +88,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.create_release.outputs.name }}
+          release_name: Release ${{ steps.create_release.outputs.name }}
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-      - name: Zipping Files
-        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
-        run: zip -r dalmoori.zip dalmoori-font
       - name: Upload Release Asset
         if: ${{ steps.tag-status.outputs.tagged == 'true' }}
         id: upload-release-asset
