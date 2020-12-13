@@ -15,8 +15,9 @@ import { generateArtifactZip } from '../generate-artifact-zip';
   let previousArtifact: Artifact | null = null;
   let begin = 0;
   const curr = Number(process.env['GITHUB_RUN_NUMBER']);
+  const latestTag = getLatestTagCommitHash();
+  const latestCommit = shortenCommitHash(getLatestCommitHash());
   try {
-    const latestTag = getLatestTagCommitHash();
     for await (const workflow of listWorkflowRuns('RanolP', 'dalmoori-font')) {
       if (workflow.workflowId !== 2550121) {
         continue;
@@ -41,7 +42,7 @@ import { generateArtifactZip } from '../generate-artifact-zip';
     /* do nothing */
   }
   const latestCommitDate = getLatestCommitUnixtime();
-  const versionExtraInfo = `b${curr - begin}`;
+  const versionExtraInfo = latestTag === latestCommit ? '' : `beta_build${curr - begin}`;
 
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await copyFiles();
@@ -55,7 +56,7 @@ import { generateArtifactZip } from '../generate-artifact-zip';
       },
       {
         path: join(Paths.build, 'font', 'dalmoori.ttf'),
-        commitHash: shortenCommitHash(getLatestCommitHash()),
+        commitHash: shortenCommitHash(latestCommit),
       }
     );
   } else {
