@@ -60,41 +60,41 @@ jobs:
         with:
           fetch-depth: 0
       - name: Evaluate tag status
-        id: tag-status
+        id: tag_status
         run: |
           latestTag=$(git rev-list --tags --max-count=1);
           latestCommit=$(git show -s --format=%H);
-          echo ::set-output name=tagged::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
-          echo ::set-output name=name::$(git describe --tags)
+          echo ::set-output name=tagged::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false);
+          echo ::set-output name=name::$(git describe --tags);
       - name: Download artifact
-        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
+        if: ${{ steps.tag_status.outputs.tagged == 'true' }}
         uses: actions/download-artifact@v2
         with:
           name: dalmoori-font
           path: ./dalmoori-font
       - name: Zipping Files
-        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
+        if: ${{ steps.tag_status.outputs.tagged == 'true' }}
         run: zip -r -j dalmoori.zip dalmoori-font
       - name: Generate Changelog
-        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
+        if: ${{ steps.tag_status.outputs.tagged == 'true' }}
         id: changelog
         uses: metcalfc/changelog-generator@v0.4.4
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
-        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
+        if: ${{ steps.tag_status.outputs.tagged == 'true' }}
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.create_release.outputs.name }}
-          release_name: Release ${{ steps.create_release.outputs.name }}
+          tag_name: ${{ steps.tag_status.outputs.name }}
+          release_name: Release ${{ steps.tag_status.outputs.name }}
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
-        if: ${{ steps.tag-status.outputs.tagged == 'true' }}
+        if: ${{ steps.tag_status.outputs.tagged == 'true' }}
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
