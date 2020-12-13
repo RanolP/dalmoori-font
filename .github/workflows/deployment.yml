@@ -64,6 +64,8 @@ jobs:
         run: |
           latestTag=$(git rev-list --tags --max-count=1);
           latestCommit=$(git show -s --format=%H);
+          echo $latestTag;
+          echo $latestCommit;
           echo ::set-output name=tagged::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
       - name: Cancel if not tagged
         if: ${{ !steps.tag.outputs.tagged }}
