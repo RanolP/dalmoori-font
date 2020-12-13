@@ -52,3 +52,40 @@ jobs:
         uses: peter-evans/commit-comment@v1
         with:
           body: ${{ steps.get-comment-body.outputs.body }}
+  release:
+    needs: deploy
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v2
+        with:
+          name: dalmoori-font
+      - name: Generate Changelog
+        id: changelog
+        uses: metcalfc/changelog-generator@v0.4.4
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dalmoori-font.zip
+          asset_name: dalmoori-font.zip
+          asset_content_type: application/zip
