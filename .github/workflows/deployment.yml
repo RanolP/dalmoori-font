@@ -61,9 +61,9 @@ jobs:
         run: |
           latestTag=$(git rev-list --tags --max-count=1);
           latestCommit=$(git show -s --format=%H);
-          echo ::set-output name=set::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
+          echo ::set-output name=tagged::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
       - name: Cancel if not tagged
-        if: tag.set
+        if: steps.tag.outputs.tagged
         uses: styfle/cancel-workflow-action@0.6.0
         with:
           access_token: ${{ secrets.GITHUB_TOKEN }}
