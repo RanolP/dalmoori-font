@@ -16,7 +16,7 @@ import { generateArtifactZip } from '../generate-artifact-zip';
   let begin = 0;
   const curr = Number(process.env['GITHUB_RUN_NUMBER']);
   const latestTag = getLatestTagCommitHash();
-  const latestCommit = shortenCommitHash(getLatestCommitHash());
+  const latestCommit = getLatestCommitHash();
   try {
     for await (const workflow of listWorkflowRuns('RanolP', 'dalmoori-font')) {
       if (workflow.workflowId !== 2550121) {

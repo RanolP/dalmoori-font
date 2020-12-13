@@ -52,9 +52,11 @@ jobs:
         uses: peter-evans/commit-comment@v1
         with:
           body: ${{ steps.get-comment-body.outputs.body }}
+      - name: Debugging
+        run: ${{ echo github.ref }}
   release:
     needs: deploy
-    if: contains(github.ref, '/tags/')
+    if: contains(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

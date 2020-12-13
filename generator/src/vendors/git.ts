@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 export type CommitHashLong = string;
 export type CommitHashShort = string;
 
-export function getLatestTagCommitHash(): CommitHashShort {
+export function getLatestTagCommitHash(): CommitHashLong {
   const commandResult = execSync('git rev-list --tags --max-count=1').toString();
   return commandResult.trim();
 }
