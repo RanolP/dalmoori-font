@@ -53,7 +53,7 @@ jobs:
         with:
           body: ${{ steps.get-comment-body.outputs.body }}
       - name: Debugging
-        run: ${{ echo github.ref }}
+        run: echo ${{ github.ref }}
   release:
     needs: deploy
     if: contains(github.ref, 'refs/tags/')
