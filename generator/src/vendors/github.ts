@@ -150,4 +150,5 @@ export async function downloadArtifact(artifact: Artifact, target: PathLike): Pr
       await new Promise<void>(resolve => writeStream.on('close', () => resolve()));
     }
   }));
+    console.log('Unzipped!');
 }
