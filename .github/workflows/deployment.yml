@@ -54,7 +54,7 @@ jobs:
           body: ${{ steps.get-comment-body.outputs.body }}
   release:
     needs: deploy
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: contains(github.ref, '/tags/')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
