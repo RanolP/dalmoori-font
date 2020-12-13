@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dalmoori-font
-          path: ./artifacts/dalmoori.zip
+          path: ./artifacts/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

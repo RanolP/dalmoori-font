@@ -16,5 +16,5 @@ export async function generateArtifactZip(): Promise<void> {
     type: 'nodebuffer',
   });
 
-  await writeFile(join(Paths.artifacts, 'dalmoori.zip'), buffer);
+  await writeFile(join(Paths.root, 'dalmoori.zip'), buffer);
 }
