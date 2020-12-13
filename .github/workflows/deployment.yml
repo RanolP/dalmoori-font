@@ -90,7 +90,9 @@ jobs:
           prerelease: false
       - name: Zipping Files
         if: ${{ steps.tag-status.outputs.tagged == 'true' }}
-        run: zip -r dalmoori.zip dalmoori-font/
+        run: |
+          ls -R
+          zip -r dalmoori.zip dalmoori-font
       - name: Upload Release Asset
         if: ${{ steps.tag-status.outputs.tagged == 'true' }}
         id: upload-release-asset
