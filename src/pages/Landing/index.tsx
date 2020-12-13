@@ -263,7 +263,7 @@ function LandingPage(): ReactElement {
           </h2>
           <textarea placeholder={endent`
             다람쥐 헌 쳇바퀴에 타고파.
-            그 늙은이만 본선에 진출케 투표해.
+            그 늙다리만 본선에 진출케 투표해.
 
             The quick brown fox jumps over the lazy dog.
           `} />
