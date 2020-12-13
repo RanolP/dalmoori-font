@@ -1,0 +1,41 @@
+name: Build Page
+
+on:
+  push:
+    branches:
+      - page
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 14.x
+
+      - name: Install on Scripts
+        working-directory: ./scripts
+        run: npm install
+
+      - name: Run Scripts
+        working-directory: ./scripts
+        run: |
+          npm run fetch-unstable-fonts;
+          npm run fetch-stable-fonts;
+
+      - name: Install
+        run: npm install
+
+      - name: Build Page
+        run: npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          enable_jekyll: true
