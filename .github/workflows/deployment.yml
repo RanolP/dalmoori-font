@@ -56,23 +56,23 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Debugging
-        run: echo ${{ github.ref }}
-      - uses: actions/checkout@v2
-      - name: Debugging
-        run: echo ${{ github.ref }}
-      - uses: actions/download-artifact@v2
-        if: contains(github.ref, 'refs/tags/')
+      - name: Evaluate tag status
+        id: tag-status
+        run: |
+          latestTag=$(git rev-list --tags --max-count=1);
+          latestCommit=$(git show -s --format=%H);
+          echo ::set-output name=set::$([ "$latestTag" = "$latestCommit" ] && echo true || echo false)
+      - name: Cancel if not tagged
+        if: tag.set
+        uses: styfle/cancel-workflow-action@0.6.0
         with:
-          name: dalmoori-font
+          access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Generate Changelog
-        if: contains(github.ref, 'refs/tags/')
         id: changelog
         uses: metcalfc/changelog-generator@v0.4.4
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
-        if: contains(github.ref, 'refs/tags/')
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -84,7 +84,6 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Release Asset
-        if: contains(github.ref, 'refs/tags/')
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
