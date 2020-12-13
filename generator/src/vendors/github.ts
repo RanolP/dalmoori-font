@@ -137,9 +137,8 @@ export async function downloadArtifact(artifact: Artifact, target: PathLike): Pr
 
   const zipFile = await JSZip.loadAsync(buffer);
 
-  await Promise.all(zipFile.file(/.*/).map(async entry => {
+  for (const entry of zipFile.file(/.*/)) {
     const filename = join(target.toString(), entry.name);
-    console.log('Unzipping: ' + filename);
     if (entry.dir) {
       await mkdirs(filename);
     } else {
@@ -147,6 +146,5 @@ export async function downloadArtifact(artifact: Artifact, target: PathLike): Pr
       const buffer = await entry.async('nodebuffer');
       await writeFile(filename, buffer);
     }
-  }));
-  console.log('Unzipped!');
+  }
 }
