@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/dalmoori-font/static/js/main.d0b8afc8.chunk.js",
+    "main.js.map": "/dalmoori-font/static/js/main.d0b8afc8.chunk.js.map",
+    "runtime-main.js": "/dalmoori-font/static/js/runtime-main.ab9ea8ee.js",
+    "runtime-main.js.map": "/dalmoori-font/static/js/runtime-main.ab9ea8ee.js.map",
+    "static/js/2.0b3dcf8d.chunk.js": "/dalmoori-font/static/js/2.0b3dcf8d.chunk.js",
+    "static/js/2.0b3dcf8d.chunk.js.map": "/dalmoori-font/static/js/2.0b3dcf8d.chunk.js.map",
+    "index.html": "/dalmoori-font/index.html",
+    "static/js/2.0b3dcf8d.chunk.js.LICENSE.txt": "/dalmoori-font/static/js/2.0b3dcf8d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ab9ea8ee.js",
+    "static/js/2.0b3dcf8d.chunk.js",
+    "static/js/main.d0b8afc8.chunk.js"
+  ]
+}

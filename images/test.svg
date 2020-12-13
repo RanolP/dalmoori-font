@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <defs>
+        <style>
+            .background {
+                /* nord 0 */
+                fill: #2E3440;
+            }
+
+            .halo {
+                /* nord 8 */
+                fill: #88C0D0;
+            }
+
+            .moon {
+                /* nord 4 */
+                fill: #D8DEE9;
+            }
+        </style>
+    </defs>
+      <path class="background" d="
+        M4 11
+        L2 13
+        L9 20
+        L22 7
+        L20 5
+        L9 16
+        Z
+      " />
+</svg>
