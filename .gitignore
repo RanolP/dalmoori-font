@@ -27,6 +27,7 @@ artifacts/
 docs/
 previous/
 generator/build/
+dalmoori.zip
 
 .eslintcache
 src/lib/data/*.data.json
