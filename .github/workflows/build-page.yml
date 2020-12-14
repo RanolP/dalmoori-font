@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - page
-  repository_dispatch:
-    types: [update-page]
+  workflow_dispatch:
 
 jobs:
   deploy:
