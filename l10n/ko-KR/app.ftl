@@ -62,7 +62,14 @@ landing-section-try-title =
     써보기
 landing-section-download-title =
     내려받기
+
+landing-section-download-stable-channel-title =
+    Stable 채널
+landing-section-download-stable-channel-description =
+
 landing-section-download-unstable-channel-title =
     Unstable 채널 (GitHub 로그인 필요)
 landing-section-download-unstable-channel-description =
-    Unstable 채널 (GitHub 로그인 필요)
+    Unstable 채널은 GitHub 저장소 main 브랜치에 생성된 커밋의 결과로 생성된 파일을 보여주고 있습니다.
+    이 파일들은 오작동할 수 있으며, 언제든 다운로드가 불가능해질 수 있습니다.
+    따라서, Unstable 채널의 파일을 사용할 때에는 주의하시길 바랍니다.
