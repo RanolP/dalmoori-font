@@ -43,17 +43,13 @@ function chooseProperSize(a: opentype.BoundingBox, b: opentype.BoundingBox): [wi
 
 export function makePathsForComparison(a: opentype.Glyph, b: opentype.Glyph): [paper.Path, paper.Path, paper.Project, [width: number, height: number]] {
   const size = chooseProperSize(a.getBoundingBox(), b.getBoundingBox());
-  const project = createProject(size[0], size[1]);
+  const project = createProject(...size);
   const aPaperPath = toPaperPath(a, project);
   const bPaperPath = toPaperPath(b, project);
   return [aPaperPath, bPaperPath, project, size];
 }
 
 export function toPaperPath(input: opentype.Glyph, project: paper.Project = createProject(...getSize(input.getBoundingBox()))): paper.Path {
-  if (project === undefined) {
-    const bb = input.getBoundingBox();
-    project = createProject(bb.x2 - bb.x1, bb.y2 - bb.y1);
-  }
   const output = new paper.Path({
     pathData: glyphToPath(input).toSVG(0),
     project,

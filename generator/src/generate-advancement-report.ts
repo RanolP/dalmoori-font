@@ -81,6 +81,9 @@ async function analyze(oldFont: Font, currentFont: Font): Promise<AnalysisResult
     const changed: Array<Codepoint | null> = await execute(
       function* () {
         for (const codepoint of fullCodepointsOf(block)) {
+          if (old.has(codepoint) || current.has(codepoint)) {
+            continue;
+          }
           const ch = String.fromCharCode(codepoint);
           const oldGlyph = oldFont.charToGlyph(ch);
           const currentGlyph = currentFont.charToGlyph(ch);

@@ -25,7 +25,7 @@ jobs:
         working-directory: ./generator
         run: npm run build:release
         env:
-          ARTIFACT_DOWNLOAD_TOKEN: ${{ secrets.ARTIFACT_DOWNLOAD_TOKEN }}
+          ARTIFACT_DOWNLOAD_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - name: Create Artifacts
         uses: actions/upload-artifact@v2
@@ -97,3 +97,8 @@ jobs:
           asset_path: ./dalmoori.zip
           asset_name: dalmoori-font.zip
           asset_content_type: application/zip
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          event-type: update-page
