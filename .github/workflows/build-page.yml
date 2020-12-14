@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - page
+  workflow_run:
+    workflows: ["Deployment"]
+    branches: [main]
+    types:
+      - completed
 
 jobs:
   deploy:
