@@ -311,7 +311,7 @@ function LandingPage(): ReactElement {
               {unstableFonts.map(unstableFont => (
                 <li key={unstableFont.headCommit.sha}>
                   <a rel="download" href={unstableFont.downloadUrl}>
-                    {unstableFont.headCommit.sha.substring(0, 6)}: {unstableFont.headCommit.message}
+                    {unstableFont.headCommit.sha.substring(0, 7)}: {unstableFont.headCommit.message}
                   </a>
                 </li>
               ))}
