@@ -26,6 +26,7 @@ jobs:
         run: |
           npm run fetch-unstable-fonts;
           npm run fetch-stable-fonts;
+          npm run download-latest-stable;
 
       - name: Install
         run: npm install

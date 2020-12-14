@@ -30,3 +30,4 @@ generator/build/
 
 .eslintcache
 src/lib/data/*.data.json
+public/latest-stable

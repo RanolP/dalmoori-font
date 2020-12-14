@@ -1,6 +1,7 @@
 {
   "name": "scripts",
   "dependencies": {
+    "jszip": "^3.5.0",
     "luxon": "^1.25.0",
     "node-fetch": "^2.6.1"
   },
@@ -13,6 +14,7 @@
   },
   "scripts": {
     "fetch-unstable-fonts": "ts-node src/fetch-unstable-fonts.ts",
-    "fetch-stable-fonts": "ts-node src/fetch-stable-fonts.ts"
+    "fetch-stable-fonts": "ts-node src/fetch-stable-fonts.ts",
+    "download-latest-stable": "ts-node src/download-latest-stable.ts"
   }
 }

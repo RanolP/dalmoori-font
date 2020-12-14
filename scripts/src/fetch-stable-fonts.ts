@@ -1,6 +1,5 @@
 import { listReleases } from './github';
-import fs from 'fs';
-import path from 'path';
+import { writeFile, join } from './fs';
 
 interface ReleaseFont {
   tagName: string;
@@ -30,5 +29,5 @@ async function main(): Promise<void> {
     console.log(release.tagName + ' has been added to preview font');
   }
 
-  fs.writeFileSync(path.join(__dirname, '../../src/lib/data/stable-font.data.json'), JSON.stringify(result));
+  await writeFile(join(__dirname, '../../src/lib/data/stable-font.data.json'), JSON.stringify(result));
 }

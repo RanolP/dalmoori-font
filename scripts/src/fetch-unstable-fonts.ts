@@ -1,6 +1,5 @@
 import { listWorkflowRuns } from './github';
-import fs from 'fs';
-import path from 'path';
+import { writeFile, join } from './fs';
 
 interface UnstableFont {
   downloadUrl: string;
@@ -51,5 +50,5 @@ async function main(): Promise<void> {
     }
   }
 
-  fs.writeFileSync(path.join(__dirname, '../../src/lib/data/unstable-font.data.json'), JSON.stringify(result));
+  await writeFile(join(__dirname, '../../src/lib/data/unstable-font.data.json'), JSON.stringify(result));
 }
