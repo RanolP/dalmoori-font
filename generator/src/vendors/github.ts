@@ -131,7 +131,7 @@ export async function getArtifacts(url: string): Promise<Artifact[]> {
 }
 
 export async function downloadArtifact(artifact: Artifact, target: PathLike): Promise<void> {
-  const response = await requestRaw(artifact.archiveDownloadUrl, process.env['ARTIFACT_DOWNLOAD_TOKEN']);
+  const response = await requestRaw(artifact.archiveDownloadUrl, process.env['REPO_ACCESS_TOKEN']);
   const buffer = await response.buffer();
   await mkdirs(dirname(target.toString()));
 

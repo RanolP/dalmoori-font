@@ -25,7 +25,7 @@ jobs:
         working-directory: ./generator
         run: npm run build:release
         env:
-          ARTIFACT_DOWNLOAD_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       - name: Create Artifacts
         uses: actions/upload-artifact@v2
