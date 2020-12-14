@@ -130,7 +130,7 @@ export class AsciiFont {
           throw new Error(`Invalid character: ${c}`);
         }
       }
-      if (index > 64) {
+      if (index > width * height) {
         throw new Error('Too many characters');
       }
     }
@@ -168,7 +168,7 @@ export class AsciiFont {
       ).join(' ')
     ).join('\n');
   }
-  
+
   renderPath(): Path {
     if (this.path === undefined) {
       this.path = this.pathGetter?.() ?? new Path(this);

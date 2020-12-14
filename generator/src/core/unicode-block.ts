@@ -3,7 +3,6 @@ export interface UnicodeBlock {
   id: string;
   from: number;
   to: number;
-  partial?: boolean;
 }
 
 export const BasicLatin: UnicodeBlock = {
@@ -11,17 +10,22 @@ export const BasicLatin: UnicodeBlock = {
   id: 'basic-latin',
   from: 0x0000,
   to: 0x007F,
-  partial: true,
+};
+export const Latin1Supplement: UnicodeBlock = {
+  name: 'Latin 1 Supplement',
+  id: 'latin-1-supplement',
+  from: 0x0080,
+  to: 0x00FF,
 };
 export const HangulCompatiblityJamo: UnicodeBlock = {
   name: 'Hangul Compatibility Jamo',
   id: 'hangul-compatibility-jamo',
   from: 0x3130,
   to: 0x318F,
-  partial: true,
 };
 
 export const AllUnicodeBlocks = [
   BasicLatin,
+  Latin1Supplement,
   HangulCompatiblityJamo
 ];
