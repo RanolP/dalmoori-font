@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - page
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
   deploy:
