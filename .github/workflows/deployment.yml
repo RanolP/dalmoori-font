@@ -97,8 +97,8 @@ jobs:
           asset_path: ./dalmoori.zip
           asset_name: dalmoori-font.zip
           asset_content_type: application/zip
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
+      - name: Call Build Page
+        uses: benc-uk/workflow-dispatch@v1
         with:
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          event-type: update-page
+          workflow: Build Page
