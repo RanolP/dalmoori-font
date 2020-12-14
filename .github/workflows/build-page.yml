@@ -31,8 +31,9 @@ jobs:
       - name: Build Page
         run: npm run build
 
-      - name: Call Build Page
-        uses: benc-uk/workflow-dispatch@v1
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
-          workflow: Build Page
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          enable_jekyll: true
