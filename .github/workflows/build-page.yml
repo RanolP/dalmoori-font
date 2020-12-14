@@ -1,10 +1,6 @@
 name: Build Page
 
-on:
-  push:
-    branches:
-      - page
-  workflow_dispatch: {}
+on: workflow_dispatch
 
 jobs:
   deploy:
@@ -35,9 +31,8 @@ jobs:
       - name: Build Page
         run: npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Call Build Page
+        uses: benc-uk/workflow-dispatch@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          enable_jekyll: true
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          workflow: Build Page

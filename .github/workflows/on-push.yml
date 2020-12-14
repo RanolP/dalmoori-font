@@ -1,0 +1,16 @@
+name: Build Page on Push
+
+on:
+  push:
+    branches:
+      - page
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Build Page
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          workflow: Build Page
