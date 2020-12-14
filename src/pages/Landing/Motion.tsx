@@ -8,26 +8,14 @@ import { Localized } from '@fluent/react';
 
 const Wrap = styled.div`
   width: 100%;
-  height: calc(100vh - ${NavbarHeight});
-
-  overflow-y: scroll;
-  scrollbar-width: none;
-
-  scroll-snap-type: y mandatory;
+  height: calc((100vh - ${NavbarHeight}) * 5);
 
   user-select: none;
 `;
 
-const SectionWrap = styled.span`
-  width: 100%;
-  height: calc(100vh - ${NavbarHeight});
-  
-  scroll-snap-align: end;
-`;
-
 const Section = styled.div`
   width: 100%;
-  height: 100%;
+  height: calc(100vh - ${NavbarHeight});
 
   position: sticky;
   top: 0;
@@ -156,71 +144,61 @@ function RandomCharacter({ index }: RandomCharacterProps): ReactElement {
 export default function Motion(): ReactElement {
   return (
     <Wrap>
-      <SectionWrap>
-        <Section className="scroll">
-          <Localized
-            id="landing-try-scroll-down"
-            elems={{
-              br: <br />,
-              skip: <a href="#download" />,
-            }}
-          >
-            <span />
-          </Localized>
-        </Section>
-      </SectionWrap>
+      <Section className="scroll">
+        <Localized
+          id="landing-try-scroll-down"
+          elems={{
+            br: <br />,
+            skip: <a href="#download" />,
+          }}
+        >
+          <span />
+        </Localized>
+      </Section>
 
-      <SectionWrap>
-        <Section className="title">
-          <span className="wrap">
-            <Localized id="landing-dal" />
-            <span className="hidden">
-              <Localized id="landing-moo" />
-              <Localized id="landing-ri" />
-            </span>
-          </span>
-        </Section>
-      </SectionWrap>
-
-      <SectionWrap>
-        <Section className="title">
-          <span className="wrap">
-            <span className="hidden">
-              <Localized id="landing-dal" />
-            </span>
+      <Section className="title">
+        <span className="wrap">
+          <Localized id="landing-dal" />
+          <span className="hidden">
             <Localized id="landing-moo" />
-            <span className="hidden">
-              <Localized id="landing-ri" />
-            </span>
-          </span>
-        </Section>
-      </SectionWrap>
-
-      <SectionWrap>
-        <Section className="title">
-          <div className="left">
-            {range(0, CharacterCount).map(index => <RandomCharacter index={index} key={index} />)}
-          </div>
-          <span className="wrap">
-            <span className="hidden">
-              <Localized id="landing-dal" />
-              <Localized id="landing-moo" />
-            </span>
             <Localized id="landing-ri" />
           </span>
-          <div className="right">
-            {range(0, CharacterCount).map(index => <RandomCharacter index={CharacterCount - 1 - index} key={index} />)}
-          </div>
-        </Section>
-      </SectionWrap>
+        </span>
+      </Section>
 
-      <SectionWrap>
-        <Section className="font-project">
-          <span className="text">
-            <Localized id="landing-font-project" />
+      <Section className="title">
+        <span className="wrap">
+          <span className="hidden">
+            <Localized id="landing-dal" />
           </span>
-        </Section>
-      </SectionWrap>
+          <Localized id="landing-moo" />
+          <span className="hidden">
+            <Localized id="landing-ri" />
+          </span>
+        </span>
+      </Section>
+
+      <Section className="title">
+        <div className="left">
+          {range(0, CharacterCount).map(index => <RandomCharacter index={index} key={index} />)}
+        </div>
+        <span className="wrap">
+          <span className="hidden">
+            <Localized id="landing-dal" />
+            <Localized id="landing-moo" />
+          </span>
+          <Localized id="landing-ri" />
+        </span>
+        <div className="right">
+          {range(0, CharacterCount).map(index => <RandomCharacter index={CharacterCount - 1 - index} key={index} />)}
+        </div>
+      </Section>
+
+      <Section className="font-project">
+        <span className="text">
+          <Localized id="landing-font-project" />
+        </span>
+      </Section>
     </Wrap>
   );
 }

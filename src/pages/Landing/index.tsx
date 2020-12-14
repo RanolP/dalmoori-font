@@ -12,12 +12,6 @@ const Wrap = styled.div`
   height: calc(100vh - ${NavbarHeight});
   overflow-y: scroll;
 
-  scroll-snap-type: y mandatory;
-
-  & > div, & > main section {
-    scroll-snap-align: start;
-  }
-
   &::after {
     display: block;
     height: 1px;
@@ -102,6 +96,10 @@ const Wrap = styled.div`
 
     summary {
       cursor: pointer;
+    }
+
+    small {
+      font-size: 1rem;
     }
   }
 `;
@@ -281,7 +279,7 @@ function LandingPage(): ReactElement {
           </h2>
           <details>
             <summary>
-              Stable 채널
+              <Localized id="landing-section-download-stable-channel-title" />
             </summary>
             <ul>
               {stableFonts.map(stableFont => (
@@ -302,13 +300,18 @@ function LandingPage(): ReactElement {
           </details>
           <details>
             <summary>
-              Unstable 채널 (GitHub 로그인 필요)
+              <Localized id="landing-section-download-unstable-channel-title" />
             </summary>
+            <blockquote>
+              <small>
+                <Localized id="landing-section-download-unstable-channel-description" />
+              </small>
+            </blockquote>
             <ul>
               {unstableFonts.map(unstableFont => (
                 <li key={unstableFont.headCommit.sha}>
                   <a rel="download" href={unstableFont.downloadUrl}>
-                    {unstableFont.headCommit.message}
+                    {unstableFont.headCommit.sha.substring(0, 6)}: {unstableFont.headCommit.message}
                   </a>
                 </li>
               ))}
