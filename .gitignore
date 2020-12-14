@@ -7,3 +7,6 @@ artifacts/
 previous/
 .eslintcache
 dalmoori.zip
+
+src/lib/data/*.data.json
+public/latest-stable

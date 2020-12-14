@@ -33,13 +33,6 @@ jobs:
           name: dalmoori-font
           path: ./artifacts/
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
-          enable_jekyll: true
-
       - name: Set Comment Body
         id: get-comment-body
         run: |

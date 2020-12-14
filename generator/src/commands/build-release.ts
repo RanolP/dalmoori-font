@@ -1,4 +1,3 @@
-import { generatePreview } from '../generate-preview';
 import { generateFont } from '../generate-font';
 import { renderAsciiFont } from '../render-ascii-font';
 import { getLatestCommitHash, getLatestCommitUnixtime, getLatestTagCommitHash, shortenCommitHash } from '../vendors/git';
@@ -63,7 +62,6 @@ import { generateArtifactZip } from '../generate-artifact-zip';
     console.log('There are no workflow found before');
   }
   await generateArtifactZip();
-  await generatePreview();
 })().catch(e => {
   console.error(e);
   process.exit(1);
