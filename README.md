@@ -14,6 +14,7 @@
 - Misaki Gothic
 - [Neo둥근모](https://neodgm.dalgona.dev/)
 - [D2Coding](https://github.com/naver/d2codingfont)
+- [Tiny](https://squaregear.net/fonts/tiny.html)
 
 ## 라이선스
 
