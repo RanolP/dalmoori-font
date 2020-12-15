@@ -1,14 +1,19 @@
 ## Advancement Report
 
-Comparison between 328b0b5 (Version 0.100) and d062e36 (Version 0.100).
+Comparison between 467b4e6 (Version 0.100 beta_build6) and b70e0ec (Version 0.200).
 
 ### Summary
 
 - Basic Latin: 95/128 (no changes)
+- Latin-1 Supplement: 94/128 (+40)
 - Hangul Compatibility Jamo: 51/96 (no changes)
 - Hangul Syllables: 11172/11184 (no changes)
 
 ### Details
+
+#### Latin-1 Supplement
+
+**Added**: Ø (U+00D8), Ù (U+00D9), Ú (U+00DA), Û (U+00DB), Ü (U+00DC), Ý (U+00DD), Þ (U+00DE), ß (U+00DF), à (U+00E0), á (U+00E1), â (U+00E2), ã (U+00E3), ä (U+00E4), å (U+00E5), æ (U+00E6), ç (U+00E7), è (U+00E8), é (U+00E9), ê (U+00EA), ë (U+00EB), ì (U+00EC), í (U+00ED), î (U+00EE), ï (U+00EF), ð (U+00F0), ñ (U+00F1), ò (U+00F2), ó (U+00F3), ô (U+00F4), õ (U+00F5), ö (U+00F6), ÷ (U+00F7), ø (U+00F8), ù (U+00F9), ú (U+00FA), û (U+00FB), ü (U+00FC), ý (U+00FD), þ (U+00FE), ÿ (U+00FF)
 
 #### Hangul Syllables
 
