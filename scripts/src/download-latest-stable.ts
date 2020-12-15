@@ -14,6 +14,7 @@ async function main(): Promise<void> {
     }
     console.log(release.tagName + ' will be used.');
     downloadUrl = asset.downloadUrl;
+    break;
   }
 
   if (downloadUrl === null) {
