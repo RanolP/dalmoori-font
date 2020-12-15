@@ -44,7 +44,7 @@ async function main(): Promise<void> {
       sizeInBytes: artifact.sizeInBytes,
       headCommit: workflow.headCommit,
     });
-    console.log(workflow.headCommit.message + ' has been added to preview font');
+    console.log(workflow.headCommit.message + ' has been added to unstable font');
     if (result.length >= 20) {
       break;
     }

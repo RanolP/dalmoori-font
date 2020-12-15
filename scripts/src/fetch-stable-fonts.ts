@@ -26,7 +26,7 @@ async function main(): Promise<void> {
       assets: release.assets,
       body: release.body,
     });
-    console.log(release.tagName + ' has been added to preview font');
+    console.log(release.tagName + ' has been added to stable font');
   }
 
   await writeFile(join(__dirname, '../../src/lib/data/stable-font.data.json'), JSON.stringify(result));
