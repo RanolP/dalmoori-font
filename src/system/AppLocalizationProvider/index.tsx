@@ -1,10 +1,11 @@
-import React, { useState, ReactNode, ReactElement, createContext, Dispatch, SetStateAction, unstable_useTransition as useTransition, useMemo } from 'react';
+import React, { ReactNode, ReactElement, createContext, Dispatch, SetStateAction, unstable_useTransition as useTransition, useMemo } from 'react';
 
 import { ReactLocalization, LocalizationProvider as FluentProvider } from '@fluent/react';
 import useSWR from 'swr';
 import { SupportedLocale, negotiateLanguages, fetchMessages, lazilyParsedBundles } from 'lib/localization';
 import { Global } from '@emotion/react';
 import { KeepAll } from 'styles/typography';
+import useLocalStorage from 'lib/hooks/use-local-storage';
 
 export interface LocalizationProviderProps {
   name: string;
@@ -15,7 +16,7 @@ export const SetUserLocalesContext = createContext<Dispatch<SetStateAction<Suppo
 export const IsUserLocaleUpdatingContext = createContext<boolean>(false);
 
 export default function AppLocalizationProvider({ name, children }: LocalizationProviderProps): ReactElement {
-  const [userLocales, setUserLocalesRaw] = useState(navigator.languages as string[]);
+  const [userLocales, setUserLocalesRaw] = useLocalStorage('userLocale', navigator.languages as string[]);
   const [startTransition, isPending] = useTransition({ busyDelayMs: 3000 });
   const setUserLocales: Dispatch<SetStateAction<SupportedLocale[]>> = v => startTransition(() => setUserLocalesRaw(v as string[]));
   const isKorean = useMemo(() => {

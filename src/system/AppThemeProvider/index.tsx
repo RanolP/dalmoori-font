@@ -1,7 +1,8 @@
-import React, { useState, ReactNode, ReactElement, createContext, SetStateAction, Dispatch } from 'react';
+import React, { ReactNode, ReactElement, createContext, SetStateAction, Dispatch } from 'react';
 import usePreferredColorScheme, { ColorScheme } from 'lib/hooks/use-preferred-color-scheme';
 import { ThemeProvider } from '@emotion/react';
 import { ColorTheme, DarkTheme, LightTheme } from 'lib/theme';
+import useLocalStorage from 'lib/hooks/use-local-storage';
 
 export interface AppThemeProviderProps {
   children: ReactNode;
@@ -11,7 +12,7 @@ export const SetUserColorSchemeContext = createContext<Dispatch<SetStateAction<C
 
 export default function AppThemeProvider({ children }: AppThemeProviderProps): ReactElement {
   const preferredColorScheme = usePreferredColorScheme();
-  const [userColorScheme, setUserColorScheme] = useState<ColorScheme | null>(null);
+  const [userColorScheme, setUserColorScheme] = useLocalStorage<ColorScheme | null>('colorTheme', null);
   let theme: ColorTheme;
   switch (userColorScheme ?? preferredColorScheme) {
     case 'dark':
