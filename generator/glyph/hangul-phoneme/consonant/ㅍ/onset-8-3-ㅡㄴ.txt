@@ -1,11 +1,11 @@
 ---
-for = [ㅡㅜㅠ]...
-not-for = [ㅡㅜㅠ]..0
+variant.ㅡ = margin
+for = ㅡ.ㄴ. 2
 ---
 . # # # # # . .
-. # . . . . . .
+. . # . # . . .
 . # # # # # . .
-. # . . . . . .
+x x x x x x x x
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

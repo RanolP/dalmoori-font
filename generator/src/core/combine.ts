@@ -5,17 +5,18 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
   const WIDTH = 8;
   const HEIGHT = 8;
 
-  const heightList: Array<[CodaPart | undefined, number]> = coda?.parts
+  const heightList: Array<[CodaPart | undefined, [number, number]]> = coda?.parts
     .flatMap(part =>
       part.marginTop
         .flat()
         .sort((a, b) => b - a)
-        .map(marginTop => [part, marginTop + part.height] as [CodaPart | undefined, number])
-    ) ?? [[undefined, 0]];
+        .map(marginTop => [part, [marginTop, part.height]] as [CodaPart | undefined, [number, number]])
+    ) ?? [[undefined, [0, 0]]];
 
-  for (const [codaPart, codaHeight] of heightList) {
+  for (const [codaPart, [marginTopCoda, codaHeight]] of heightList) {
+    const realCodaHeight = marginTopCoda + codaHeight;
     for (const nucleusVariant of nucleus.variants) {
-      if (HEIGHT < codaHeight + nucleusVariant.heightOccupying) {
+      if (HEIGHT < realCodaHeight + nucleusVariant.heightOccupying) {
         continue;
       }
       if (codaPart !== undefined) {
@@ -30,27 +31,41 @@ export function combine(onset: Onset, nucleus: Nucleus, coda?: Coda): AsciiFont 
           }
         }
         const requirements = codaPart.variantRequirementsMap[nucleus.name.compat] ?? [];
-        requirements.push(`coda-${codaHeight}`);
-        if (requirements.some(requirement => !nucleusVariant.variantsApplied[requirement])) {
+        requirements.push(`coda-${realCodaHeight}`);
+        if (requirements.some((requirement) => !nucleusVariant.variantsApplied[requirement])) {
           continue;
         }
       }
-      for (const marginTop of nucleusVariant.marginTop) {
-        if (HEIGHT < codaHeight + nucleusVariant.heightOccupying + marginTop) {
+      for (const marginTopNucleus of nucleusVariant.marginTop) {
+        if (HEIGHT < realCodaHeight + nucleusVariant.heightOccupying + marginTopNucleus) {
           continue;
         }
         for (const marginLeft of nucleusVariant.marginLeft) {
           for (const onsetPart of onset.find(
             WIDTH - nucleusVariant.widthOccupying - marginLeft,
-            HEIGHT - nucleusVariant.heightOccupying - marginTop - codaHeight
+            HEIGHT - nucleusVariant.heightOccupying - marginTopNucleus - realCodaHeight,
           )) {
+            const onsetTests = [
+              nucleus.name.compat + (marginTopNucleus + nucleusVariant.heightOccupying).toString(),
+              nucleus.name.compat + marginTopNucleus + ' ' + nucleusVariant.heightOccupying,
+            ].flatMap((n) =>
+              (coda
+                ? [
+                  coda.name.compat + (marginTopCoda + codaHeight).toString(),
+                  coda.name.compat + marginTopCoda + ' ' + codaHeight,
+                ]
+                : ['.0']
+              ).map((c) =>  n + c)
+            );
             if (onsetPart.targetFor) {
-              if (!onsetPart.targetFor.test(`${nucleus.name.compat}${nucleusVariant.heightOccupying + marginTop}${coda ? coda.name.compat + codaHeight : '.0'}`)) {
+              const regexp = onsetPart.targetFor;
+              if (!onsetTests.some((tc) => regexp.test(tc))) {
                 continue;
               }
             }
             if (onsetPart.notTargetFor) {
-              if (onsetPart.notTargetFor.test(`${nucleus.name.compat}${nucleusVariant.heightOccupying + marginTop}${coda ? coda.name.compat + codaHeight : '.0'}`)) {
+              const regexp = onsetPart.notTargetFor;
+              if (onsetTests.some((tc) => regexp.test(tc))) {
                 continue;
               }
             }

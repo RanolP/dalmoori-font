@@ -1,9 +1,10 @@
 ---
-not-for = ㅡ.ㄴ.
+variant.ㅡ = margin
+for = ㅡ.ㄴ. 2
 ---
-. . # # # . . .
-. # . . . # . .
-. . # # # . . .
+. # . . . . . .
+. # . . . . . .
+. # # # # # . .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

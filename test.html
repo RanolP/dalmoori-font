@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: dalmoori-old;
+        src: url('./previous/dalmoori.woff2');
+      }
+      @font-face {
+        font-family: dalmoori-new;
+        src: url('./generator/build/font/dalmoori.woff2');
+      }
+
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      #input {
+        font-size: 1rem;
+        resize: none;
+        width: calc(100vw - 2 * 4rem);
+        margin: 4rem;
+        margin-bottom: 2rem;
+      }
+
+      #old {
+        font-family: dalmoori-old;
+        margin: 2rem 2rem 4rem 4rem;
+      }
+
+      #new {
+        font-family: dalmoori-new;
+        margin: 2rem 4rem 4rem 2rem;
+      }
+
+      #old,
+      #new {
+        font-size: 2rem;
+        border: 1px solid black;
+      }
+
+      #pane {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .replaced {
+        color: #ff4488;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="input">
+r#why r#we r#wanting of r#waters
+r#Æ
+즈r#믄 해 동안 r#튼튼하던
+슬r#픈 생각 r#든 때
+r#뜬 구름 잡는 소리r#는 그만
+r#은혜 갚은 까치
+    </textarea>
+    <div id="pane">
+      <div id="old"></div>
+      <div id="new"></div>
+    </div>
+  </body>
+
+  <script>
+    const $input = document.getElementById('input');
+    const $old = document.getElementById('old');
+    const $new = document.getElementById('new');
+
+    function update() {
+      $input.style.height = $input.scrollHeight + 8 + 'px';
+      const html = $input.value
+        .replace(/r#(.)/g, (_, [a]) => `<span class="replaced">${a}</span>`)
+        .replace(/\n/g, '<br />');
+      $old.innerHTML = html;
+      $new.innerHTML = html;
+    }
+
+    $input.value = $input.value.trim();
+    $input.addEventListener('input', update);
+
+    update();
+  </script>
+</html>

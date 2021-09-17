@@ -1,11 +1,12 @@
 ---
-not-for = ㅡ.ㄴ.
+margin-top = 1
+height-occupying = 1
 ---
-. . # # # . . .
-. # . . . # . .
-. . # # # . . .
 x x x x x x x x
 x x x x x x x x
+x x x x x x x x
+m m m m m m m m
+# # # # # # # .
 x x x x x x x x
 x x x x x x x x
 x x x x x x x x

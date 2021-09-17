@@ -2,15 +2,19 @@ import { promises } from 'fs';
 import { PathLike, constants, createWriteStream } from 'fs';
 import { dirname, resolve, join, basename } from 'path';
 
-const { readFile, writeFile, readdir, copyFile, access, mkdir, stat, unlink, rmdir } = promises;
-
-export {
+const {
   readFile,
   writeFile,
   readdir,
   copyFile,
-  createWriteStream
-};
+  access,
+  mkdir,
+  stat,
+  unlink,
+  rmdir,
+} = promises;
+
+export { readFile, writeFile, readdir, copyFile, createWriteStream };
 export { PathLike };
 export { join, basename, dirname };
 
@@ -27,7 +31,8 @@ export const exists = async (path: PathLike): Promise<boolean> => {
   }
 };
 
-export const notExists = async (path: PathLike): Promise<boolean> => !(await exists(path));
+export const notExists = async (path: PathLike): Promise<boolean> =>
+  !(await exists(path));
 
 export const mkdirs = async (path: PathLike): Promise<void> => {
   const parent = dirname(resolve(path.toString()));
@@ -35,7 +40,11 @@ export const mkdirs = async (path: PathLike): Promise<void> => {
     await mkdirs(parent);
   }
   if (await notExists(path)) {
-    await mkdir(path);
+    try {
+      await mkdir(path);
+    } catch (e) {
+      /* do nothing */
+    }
   }
 };
 

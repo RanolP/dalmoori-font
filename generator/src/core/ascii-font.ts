@@ -14,11 +14,11 @@ const svgo = new Svgo({
           'font-weight',
           'font-size',
           'text-anchor',
-          'style'
-        ]
-      }
-    }
-  ]
+          'style',
+        ],
+      },
+    },
+  ],
 });
 
 export class AsciiFont {
@@ -30,8 +30,8 @@ export class AsciiFont {
     public readonly width: number,
     public readonly height: number,
     public readonly data: AsciiFontData,
-    private pathGetter: undefined | (() => Path) = undefined,
-  ) { }
+    private pathGetter: undefined | (() => Path) = undefined
+  ) {}
 
   static async fromFile(file: PathLike): Promise<AsciiFont> {
     const key = file.toString();
@@ -60,7 +60,9 @@ export class AsciiFont {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const meta: any = {};
     if (!source.startsWith('---')) {
-      throw new Error(`Expect meta area, but starts with ${source.substring(0, 5)}...`);
+      throw new Error(
+        `Expect meta area, but starts with ${source.substring(0, 5)}...`
+      );
     }
     const metaEnd = source.indexOf('---', 4);
     if (metaEnd === -1) {
@@ -69,16 +71,16 @@ export class AsciiFont {
     const metaSet = source
       .substring(3, metaEnd)
       .split('\n')
-      .map(s => s.trim())
+      .map((s) => s.trim())
       .filter(Boolean)
-      .map(s => s.split('='));
+      .map((s) => s.split('='));
 
     for (const metaItem of metaSet) {
       if (metaItem.length !== 2) {
         throw new Error(`Invalid meta item: ${metaItem.join('=')}`);
       }
       let target = meta;
-      const keys = metaItem[0].split('.').map(s => s.trim());
+      const keys = metaItem[0].split('.').map((s) => s.trim());
       while (keys.length > 1) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const key = keys.shift()!;
@@ -94,7 +96,9 @@ export class AsciiFont {
       if (!isNaN(Number(v))) {
         target[k] = Number(v);
       } else if (v.includes(',')) {
-        target[k] = v.split(',').map(s => !isNaN(Number(s)) ? Number(s) : s.trim());
+        target[k] = v
+          .split(',')
+          .map((s) => (!isNaN(Number(s)) ? Number(s) : s.trim()));
       } else if (v === 'true' || v === 'false') {
         target[k] = Boolean(v);
       } else {
@@ -102,8 +106,8 @@ export class AsciiFont {
       }
     }
 
-    const width = meta.width as number ?? 8;
-    const height = meta.height as number ?? 8;
+    const width = (meta.width as number) ?? 8;
+    const height = (meta.height as number) ?? 8;
 
     const data = [] as AsciiFontData;
     let index = 0;
@@ -141,7 +145,9 @@ export class AsciiFont {
     if (other === undefined) {
       return this;
     } else if (this.width !== other.width || this.height !== other.height) {
-      throw new Error(`Cannot combine tiles: this=${this.width}x${this.height}, other=${other.width}x${other.height}`);
+      throw new Error(
+        `Cannot combine tiles: this=${this.width}x${this.height}, other=${other.width}x${other.height}`
+      );
     } else {
       const union = [...this.data];
       for (const [x, y] of other.data) {
@@ -151,22 +157,22 @@ export class AsciiFont {
           union.push([x, y]);
         }
       }
-      return new AsciiFont(
-        {},
-        this.width,
-        this.height,
-        union,
-        () => this.renderPath().unite(other.renderPath()),
+      return new AsciiFont({}, this.width, this.height, union, () =>
+        this.renderPath().unite(other.renderPath())
       );
     }
   }
 
   renderAsciiFont(): string {
-    return Array.from({ length: this.height }).map((_, y) =>
-      Array.from({ length: this.width }).map((_, x) =>
-        this.data.some(([ox, oy]) => ox === x && oy === y) ? '#' : '.'
-      ).join(' ')
-    ).join('\n');
+    return Array.from({ length: this.height })
+      .map((_, y) =>
+        Array.from({ length: this.width })
+          .map((_, x) =>
+            this.data.some(([ox, oy]) => ox === x && oy === y) ? '#' : '.'
+          )
+          .join(' ')
+      )
+      .join('\n');
   }
 
   renderPath(): Path {

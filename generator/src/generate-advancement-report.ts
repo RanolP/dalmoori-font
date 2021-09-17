@@ -1,6 +1,12 @@
 import endent from 'endent';
 import { load, Font } from 'opentype.js';
-import { BLOCKS, BLOCKS_NAME_MAP, findCharacter, fullCodepointsOf, UnicodeBlock } from './util/unidata';
+import {
+  BLOCKS,
+  BLOCKS_NAME_MAP,
+  findCharacter,
+  fullCodepointsOf,
+  UnicodeBlock,
+} from './util/unidata';
 import { Paths } from './constants';
 import { createProgressIndicator, formatHex } from './util/format';
 import { join, mkdirs, PathLike, writeFile } from './util/fs';
@@ -13,7 +19,10 @@ export interface FontInfo {
   commitHash: string;
 }
 
-export async function generateAdvancementReport(old: FontInfo, current: FontInfo): Promise<void> {
+export async function generateAdvancementReport(
+  old: FontInfo,
+  current: FontInfo
+): Promise<void> {
   const oldFont = await load(old.path.toString());
   const currentFont = await load(current.path.toString());
 
@@ -22,7 +31,9 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
   const report = endent`
     ## Advancement Report
 
-    Comparison between ${old.commitHash} (${oldFont.names.version['en']}) and ${current.commitHash} (${currentFont.names.version['en']}).
+    Comparison between ${old.commitHash} (${oldFont.names.version['en']}) and ${
+    current.commitHash
+  } (${currentFont.names.version['en']}).
 
     ### Summary
 
@@ -30,23 +41,30 @@ export async function generateAdvancementReport(old: FontInfo, current: FontInfo
 
     ### Details
 
-    ${Object.values(analysisResult.blocks).map(renderBlockDetail).join('\n').trim()}
+    ${Object.values(analysisResult.blocks)
+      .map(renderBlockDetail)
+      .join('\n')
+      .trim()}
   `;
 
   await mkdirs(Paths.artifacts);
-  await writeFile(join(Paths.artifacts, 'advancement-report.md'), report, 'utf8');
+  await writeFile(
+    join(Paths.artifacts, 'advancement-report.md'),
+    report,
+    'utf8'
+  );
 }
 
 type Codepoint = number;
 type UnsupportedCodepointSet = Set<number>;
 
 interface BlockAnalysis {
-  block: UnicodeBlock,
-  old: UnsupportedCodepointSet,
-  current: UnsupportedCodepointSet,
-  removed: Set<Codepoint>,
-  added: Set<Codepoint>,
-  changed: Set<Codepoint>,
+  block: UnicodeBlock;
+  old: UnsupportedCodepointSet;
+  current: UnsupportedCodepointSet;
+  removed: Set<Codepoint>;
+  added: Set<Codepoint>;
+  changed: Set<Codepoint>;
 }
 
 interface AnalysisResult {
@@ -59,25 +77,35 @@ interface FontAnalysisResult {
   supportRanges: Record<string, UnsupportedCodepointSet>;
 }
 
-async function analyze(oldFont: Font, currentFont: Font): Promise<AnalysisResult> {
+async function analyze(
+  oldFont: Font,
+  currentFont: Font
+): Promise<AnalysisResult> {
   const oldFontResult = analyzeFont(oldFont);
   const currentFontResult = analyzeFont(currentFont);
 
   const supportRangeUnion = Array.from(
     new Set([
       ...Object.keys(oldFontResult.supportRanges),
-      ...Object.keys(currentFontResult.supportRanges)
+      ...Object.keys(currentFontResult.supportRanges),
     ])
   )
-    .map(name => BLOCKS_NAME_MAP[name])
+    .map((name) => BLOCKS_NAME_MAP[name])
     .sort((a, b) => a.startCode - b.startCode);
 
   const blocks: Array<[string, BlockAnalysis]> = [];
 
   for (const block of supportRangeUnion) {
-    const old = oldFontResult.supportRanges[block.name] ?? new Set(fullCodepointsOf(block));
-    const current = currentFontResult.supportRanges[block.name] ?? new Set(fullCodepointsOf(block));
-    const { tick } = createProgressIndicator(`Create Report for ${block.name}`, block.characterCount);
+    const old =
+      oldFontResult.supportRanges[block.name] ??
+      new Set(fullCodepointsOf(block));
+    const current =
+      currentFontResult.supportRanges[block.name] ??
+      new Set(fullCodepointsOf(block));
+    const { tick } = createProgressIndicator(
+      `Create Report for ${block.name}`,
+      block.characterCount
+    );
     const changed: Array<Codepoint | null> = await execute(
       function* () {
         for (const codepoint of fullCodepointsOf(block)) {
@@ -88,7 +116,10 @@ async function analyze(oldFont: Font, currentFont: Font): Promise<AnalysisResult
           const oldGlyph = oldFont.charToGlyph(ch);
           const currentGlyph = currentFont.charToGlyph(ch);
           yield async () => {
-            const [oldGlyphPath, currentGlyphPath] = makePathsForComparison(oldGlyph, currentGlyph);
+            const [oldGlyphPath, currentGlyphPath] = makePathsForComparison(
+              oldGlyph,
+              currentGlyph
+            );
             if (pathItemEquals(oldGlyphPath, currentGlyphPath)) {
               return null;
             }
@@ -97,14 +128,14 @@ async function analyze(oldFont: Font, currentFont: Font): Promise<AnalysisResult
         }
       },
       64,
-      tick,
+      tick
     );
     const blockAnalysis: BlockAnalysis = {
       block,
       old,
       current,
-      removed: new Set(Array.from(current).filter(v => !old.has(v))),
-      added: new Set(Array.from(old).filter(v => !current.has(v))),
+      removed: new Set(Array.from(current).filter((v) => !old.has(v))),
+      added: new Set(Array.from(old).filter((v) => !current.has(v))),
       changed: new Set(changed.filter(Boolean) as Codepoint[]),
     };
     blocks.push([block.name, blockAnalysis]);
@@ -135,13 +166,10 @@ function analyzeFont(font: Font): FontAnalysisResult {
 
   return {
     supportRanges: Object.fromEntries(
-      Object.entries(unicodeSupport)
-        .map(
-          ([name, unsupportedCodepoints]) => [
-            name,
-            unsupportedCodepoints
-          ]
-        )
+      Object.entries(unicodeSupport).map(([name, unsupportedCodepoints]) => [
+        name,
+        unsupportedCodepoints,
+      ])
     ),
   };
 }
@@ -152,22 +180,42 @@ function renderSummary(analysisResult: AnalysisResult): string {
     .join('\n');
 }
 
-function renderSupportRange({ block, current, removed, added }: BlockAnalysis): string {
+function renderSupportRange({
+  block,
+  current,
+  removed,
+  added,
+  changed,
+}: BlockAnalysis): string {
   const differenceResult =
-    removed.size === 0 && added.size === 0
+    removed.size === 0 && added.size === 0 && changed.size === 0
       ? 'no changes'
-      : [removed.size && `-${removed.size}`, added.size && `+${added.size}`].filter(Boolean).join(', ')
-    ;
+      : [
+          removed.size && `-${removed.size}`,
+          added.size && `+${added.size}`,
+          changed.size && `*${changed.size}`,
+        ]
+          .filter(Boolean)
+          .join(', ');
   return endent`
-    - ${block.name}: ${block.characterCount - current.size}/${block.characterCount} (${differenceResult})
+    - ${block.name}: ${block.characterCount - current.size}/${
+    block.characterCount
+  } (${differenceResult})
   `;
 }
 
 function renderBlockDetail(block: BlockAnalysis): string {
   const entries = [
-    block.removed.size && `**Removed**: ${Array.from(block.removed).map(renderCharacter).join(', ')}`,
-    block.added.size && `**Added**: ${Array.from(block.added).map(renderCharacter).join(', ')}`,
-    block.changed.size && `**Changed**: ${Array.from(block.changed).map(renderCharacter).join(', ')}`,
+    block.removed.size &&
+      `**Removed**: ${Array.from(block.removed)
+        .map(renderCharacter)
+        .join(', ')}`,
+    block.added.size &&
+      `**Added**: ${Array.from(block.added).map(renderCharacter).join(', ')}`,
+    block.changed.size &&
+      `**Changed**: ${Array.from(block.changed)
+        .map(renderCharacter)
+        .join(', ')}`,
   ].filter(Boolean);
   if (entries.length > 0) {
     return endent`
