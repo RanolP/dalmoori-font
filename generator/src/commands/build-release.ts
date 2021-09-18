@@ -18,6 +18,7 @@ import { generateAdvancementReport } from '../generate-advancement-report';
 import { join } from '../util/fs';
 import { Paths } from '../constants';
 import { generateArtifactZip } from '../generate-artifact-zip';
+import { generateAsciiFont } from '../generate-ascii-font';
 
 (async () => {
   const asciiFontMap = await renderAsciiFont();
@@ -60,6 +61,7 @@ import { generateArtifactZip } from '../generate-artifact-zip';
     latestTag === latestCommit ? '' : `beta_build${curr - begin}`;
 
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
+  await generateAsciiFont(asciiFontMap);
   await copyFiles();
   if (previousWorkflow !== null && previousArtifact !== null) {
     console.log(

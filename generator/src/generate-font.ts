@@ -3,28 +3,68 @@ import SVGIcons2SVGFont, { Glyphs } from 'svgicons2svgfont';
 import { Readable } from 'stream';
 import { AsciiFont } from './core/ascii-font';
 import { createWriteStream } from 'fs';
-import { join, mkdirs, readFile, writeFile } from './util/fs';
+import { exists, join, mkdirs, readFile, writeFile } from './util/fs';
 import { OnePixel, Paths, Version } from './constants';
 import { createProgressIndicator, formatHex } from './util/format';
 import { execute } from './util/executor';
 import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
+import { createHash } from 'crypto';
 
-export async function generateFont(map: Record<string, AsciiFont>, versionExtraInfo: string, ts?: number): Promise<void> {
+function hash(s: string): string {
+  return createHash('sha256').update(s).digest('hex');
+}
+
+export async function generateFont(
+  map: Record<string, AsciiFont>,
+  versionExtraInfo: string,
+  ts?: number
+): Promise<void> {
   const entries = Object.entries(map);
-  const { tick } = createProgressIndicator('Render SVG', entries.length,);
+  const { tick } = createProgressIndicator('Render SVG', entries.length);
   const svgFontStream = new SVGIcons2SVGFont({
     fontName: 'dalmoori',
     descent: OnePixel,
-    log: () => { /* do nothing */ },
+    log: () => {
+      /* do nothing */
+    },
   });
 
   const glyphList: Glyphs[] = await execute(
     function* () {
       for (const [character, font] of Object.entries(map)) {
         yield async () => {
+          const page = formatHex(character.charCodeAt(0) >> 8, 2);
           const id = formatHex(character.charCodeAt(0), 4);
-          const glyphs = Readable.from(await font.renderSvg()) as Glyphs;
+
+          const path = join(Paths.build, 'svg', page);
+          await mkdirs(path);
+
+          const file = join(path, `${id}.txt`);
+
+          const newHash = hash(font.renderAsciiFont());
+
+          let svgCache: string | null = null;
+
+          if (await exists(file)) {
+            const content = await readFile(file, { encoding: 'utf-8' });
+            const firstLinefeed = content.indexOf('\n');
+            const oldHash = content.substring(0, firstLinefeed);
+
+            if (oldHash === newHash) {
+              svgCache = content.substring(firstLinefeed);
+            }
+          }
+
+          const svg = svgCache ?? (await font.renderSvg());
+
+          if (svgCache === null) {
+            await writeFile(join(path, `${id}.txt`), newHash + '\n' + svg, {
+              encoding: 'utf8',
+            });
+          }
+
+          const glyphs = Readable.from(svg) as Glyphs;
           glyphs.metadata = {
             name: 'uni' + id,
             unicode: [...character],
@@ -35,7 +75,7 @@ export async function generateFont(map: Record<string, AsciiFont>, versionExtraI
       }
     },
     64,
-    tick,
+    tick
   );
 
   glyphList.sort((a, b) => a.metadata.name.localeCompare(b.metadata.name));
@@ -53,7 +93,8 @@ export async function generateFont(map: Record<string, AsciiFont>, versionExtraI
   const svgFontPath = join(fontPath, 'dalmoori.svg');
 
   await new Promise<void>((resolve, reject) => {
-    svgFontStream.pipe(createWriteStream(svgFontPath))
+    svgFontStream
+      .pipe(createWriteStream(svgFontPath))
       .on('finish', () => {
         resolve();
       })

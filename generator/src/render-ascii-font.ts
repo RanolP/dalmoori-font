@@ -38,7 +38,15 @@ export async function renderAsciiFont(): Promise<AsciiFontMap> {
               try {
                 font = await AsciiFont.fromFile(join(Paths.glyphBase, block.id, `U+${id}.txt`));
               } catch {
-                /* do nothing */
+                try {
+                  font = await AsciiFont.fromFile(join(Paths.glyphBase, block.id, id.substring(0, 2), `${char}.txt`));
+                } catch {
+                  try {
+                    font = await AsciiFont.fromFile(join(Paths.glyphBase, block.id, id.substring(0, 2), `U+${id}.txt`));
+                  } catch {
+                    /* do nothing */
+                  }
+                }
               }
             }
             if (font !== undefined) {

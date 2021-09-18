@@ -31,6 +31,7 @@
         width: calc(100vw - 2 * 4rem);
         margin: 4rem;
         margin-bottom: 2rem;
+        padding-bottom: 0.2rem;
       }
 
       #old {
@@ -67,6 +68,9 @@ r#Æ
 슬r#픈 생각 r#든 때
 r#뜬 구름 잡는 소리r#는 그만
 r#은혜 갚은 까치
+r#롤린r#롤린r#롤린r#룔
+
+家活合品甲
     </textarea>
     <div id="pane">
       <div id="old"></div>
@@ -80,7 +84,7 @@ r#은혜 갚은 까치
     const $new = document.getElementById('new');
 
     function update() {
-      $input.style.height = $input.scrollHeight + 8 + 'px';
+      $input.style.height = $input.scrollHeight + 'px';
       const html = $input.value
         .replace(/r#(.)/g, (_, [a]) => `<span class="replaced">${a}</span>`)
         .replace(/\n/g, '<br />');
