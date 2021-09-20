@@ -19,6 +19,7 @@ import { join } from '../util/fs';
 import { Paths } from '../constants';
 import { generateArtifactZip } from '../generate-artifact-zip';
 import { generateAsciiFont } from '../generate-ascii-font';
+import { generateStatus } from '../generate-status';
 
 (async () => {
   const asciiFontMap = await renderAsciiFont();
@@ -63,6 +64,7 @@ import { generateAsciiFont } from '../generate-ascii-font';
   await generateFont(asciiFontMap, versionExtraInfo, latestCommitDate);
   await generateAsciiFont(asciiFontMap);
   await copyFiles();
+  await generateStatus(asciiFontMap);
   if (previousWorkflow !== null && previousArtifact !== null) {
     console.log(
       `Downloading previous artifact (#${

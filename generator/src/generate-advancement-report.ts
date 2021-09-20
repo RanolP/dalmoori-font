@@ -41,10 +41,7 @@ export async function generateAdvancementReport(
 
     ### Details
 
-    ${Object.values(analysisResult.blocks)
-      .map(renderBlockDetail)
-      .join('\n')
-      .trim()}
+    ${Object.values(analysisResult.blocks).map(renderBlockDetail).join('\n').trim()}
   `;
 
   await mkdirs(Paths.artifacts);
@@ -191,12 +188,12 @@ function renderSupportRange({
     removed.size === 0 && added.size === 0 && changed.size === 0
       ? 'no changes'
       : [
-          removed.size && `-${removed.size}`,
-          added.size && `+${added.size}`,
-          changed.size && `*${changed.size}`,
-        ]
-          .filter(Boolean)
-          .join(', ');
+        removed.size && `-${removed.size}`,
+        added.size && `+${added.size}`,
+        changed.size && `*${changed.size}`,
+      ]
+        .filter(Boolean)
+        .join(', ');
   return endent`
     - ${block.name}: ${block.characterCount - current.size}/${
     block.characterCount

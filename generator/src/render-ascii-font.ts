@@ -1,7 +1,7 @@
 import { Syllable } from './core/hangul-syllable';
 import { AsciiFont } from './core/ascii-font';
 import { Paths } from './constants';
-import { AllUnicodeBlocks } from './core/unicode-block';
+import { AllUnicodeBlocks, Language } from './core/unicode-block';
 import { join } from './util/fs';
 import { createProgressIndicator, formatHex } from './util/format';
 import { execute } from './util/executor';
@@ -22,8 +22,11 @@ export async function renderAsciiFont(): Promise<AsciiFontMap> {
   const asciiFontMap: AsciiFontMap = {};
 
   for (const block of AllUnicodeBlocks) {
+    if (block.id === 'hangul-syllable') {
+      continue;
+    }
     const length = block.to - block.from + 1;
-    const { tick } = createProgressIndicator(`Render ${block.name}`, length);
+    const { tick } = createProgressIndicator(`Render ${block.name[Language.English]}`, length);
 
     await execute(
       function* () {
