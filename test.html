@@ -70,10 +70,12 @@ r#뜬 구름 잡는 소리r#는 그만
 r#은혜 갚은 까치
 r#롤린r#롤린r#롤린r#룔
 
-家甲客骨吉
+家甲客更骨吉
 女年
 來冷立
-末未
+末木未
+法別本北
+三生十
 品
 合活
     </textarea>
@@ -89,7 +91,8 @@ r#롤린r#롤린r#롤린r#룔
     const $new = document.getElementById('new');
 
     function update() {
-      $input.style.height = $input.scrollHeight + 'px';
+      $input.style.height = 'auto';
+      $input.style.height = `${$input.scrollHeight + 4}px`;
       const html = $input.value
         .replace(/r#(.)/g, (_, [a]) => `<span class="replaced">${a}</span>`)
         .replace(/\n/g, '<br />');
