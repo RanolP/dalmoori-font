@@ -55,7 +55,7 @@ export async function request<T>(
   if (response.status !== 200) {
     return null;
   }
-  return await response.json();
+  return (await response.json()) as T;
 }
 
 export async function* listWorkflowRuns(

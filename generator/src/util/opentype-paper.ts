@@ -1,6 +1,6 @@
 import paper from 'paper';
 import opentype from 'opentype.js';
-import Svgo from 'svgo';
+import { optimize, OptimizeOptions } from 'svgo';
 import endent from 'endent';
 
 export type PathItem = paper.PathItem;
@@ -77,33 +77,35 @@ type RenderSvgOption = Partial<{
 }>;
 
 export async function renderSvg(path: paper.Item, { keepColor, svgSize, svgParams }: RenderSvgOption): Promise<string> {
-  const rendered = path.exportSVG({ asString: true });
-  const svgoToUse = new Svgo({
+  const rendered = path.exportSVG({ asString: true }).toString();
+  const svgoOptions: OptimizeOptions = {
     plugins: [
       {
-        removeAttrs: {
+        name: 'removeAttrs',
+        params: {
           attrs: [
-            !keepColor && 'fill',
+            ...(!keepColor ? ['fill'] : []),
             'font-family',
             'font-weight',
             'font-size',
             'text-anchor',
             'style',
             'stroke-miterlimit',
-          ].filter(Boolean)
+          ]
         }
       }
     ]
-  });
+  };
   return (
-    await svgoToUse.optimize(
+    optimize(
       svgSize
         ? endent`
             <svg viewBox="0 0 ${svgSize[0]} ${svgSize[1]}" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" ${svgParams ?? ''}>
               ${rendered}
             </svg>
           `
-        : rendered
+        : rendered,
+      svgoOptions
     )
   ).data;
 }

@@ -118,7 +118,7 @@ export async function generateFont(
 
   console.log('Writing woff font...');
   const { buffer: woffBuffer } = ttf2woff(ttfBuffer);
-  await writeFile(join(fontPath, 'dalmoori.woff'), woffBuffer);
+  await writeFile(join(fontPath, 'dalmoori.woff'), Buffer.from(woffBuffer));
 
   console.log('Writing woff2 font...');
   const woff2Buffer = ttf2woff2(ttfBuffer);

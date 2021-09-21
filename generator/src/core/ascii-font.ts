@@ -1,13 +1,14 @@
 import { PathLike, readFile } from 'fs';
-import Svgo from 'svgo';
+import { optimize, OptimizeOptions } from 'svgo';
 import { Path } from './path';
 
 export type AsciiFontData = Array<[x: number, y: number]>;
 
-const svgo = new Svgo({
+const svgoOptions: OptimizeOptions = {
   plugins: [
     {
-      removeAttrs: {
+      name: 'removeAttrs',
+      params: {
         attrs: [
           'fill',
           'font-family',
@@ -19,7 +20,7 @@ const svgo = new Svgo({
       },
     },
   ],
-});
+};
 
 export class AsciiFont {
   private static FileCache: Record<string, AsciiFont> = {};
@@ -184,7 +185,7 @@ export class AsciiFont {
 
   async renderSvg(): Promise<string> {
     const path = this.renderPath();
-    const optimized = await svgo.optimize(path.renderToSvg());
+    const optimized = optimize(path.renderToSvg(), svgoOptions);
     return optimized.data;
   }
 }

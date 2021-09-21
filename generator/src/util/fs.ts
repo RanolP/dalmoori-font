@@ -22,7 +22,8 @@ export const exists = async (path: PathLike): Promise<boolean> => {
   try {
     await access(resolve(path.toString()), constants.F_OK);
     return true;
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     if (error && error.code === 'ENOENT') {
       return false;
     } else {
