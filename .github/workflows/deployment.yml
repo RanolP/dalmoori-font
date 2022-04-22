@@ -13,9 +13,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2.1.0
+      - uses: pnpm/action-setup@v2
         with:
-          version: 6.0.2
+          version: 6.32.9
       - uses: actions/setup-node@v3
         with:
           node-version: 14.x
