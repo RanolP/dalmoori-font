@@ -1,5 +1,5 @@
 import fetch, { Response } from 'node-fetch';
-import { dirname, join, mkdirs, PathLike, writeFile } from '../util/fs';
+import { dirname, join, mkdirs, PathLike, writeFile } from '../util/fs.js';
 import JSZip from 'jszip';
 import { Octokit } from '@octokit/rest';
 

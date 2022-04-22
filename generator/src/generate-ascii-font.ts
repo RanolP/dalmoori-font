@@ -1,8 +1,8 @@
-import { join, mkdirs, writeFile } from './util/fs';
-import { AsciiFont } from './core/ascii-font';
-import { Paths } from './constants';
-import { formatHex, createProgressIndicator } from './util/format';
-import { execute } from './util/executor';
+import { join, mkdirs, writeFile } from './util/fs.js';
+import { AsciiFont } from './core/ascii-font.js';
+import { Paths } from './constants.js';
+import { formatHex, createProgressIndicator } from './util/format.js';
+import { execute } from './util/executor.js';
 
 export async function generateAsciiFont(map: Record<string, AsciiFont>): Promise<void> {
   const entries = Object.entries(map);

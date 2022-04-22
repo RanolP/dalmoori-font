@@ -1,7 +1,7 @@
-import { PathLike, join } from '../util/fs';
-import { AsciiFont } from './ascii-font';
-import { combine } from './combine';
-import { Coda, Consonant, Nucleus, Onset } from './hangul-phoneme';
+import { PathLike, join } from '../util/fs.js';
+import { AsciiFont } from './ascii-font.js';
+import { combine } from './combine.js';
+import { Coda, Consonant, Nucleus, Onset } from './hangul-phoneme.js';
 
 export class Syllable {
   private constructor(

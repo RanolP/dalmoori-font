@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import ProgressBar from 'progress';
-import { IsCI } from '../constants';
+import { IsCI } from '../constants.js';
 
 export const LabelWidth = 35;
 export const TotalBarWidth = 150;

@@ -1,10 +1,10 @@
-import { Syllable } from './core/hangul-syllable';
-import { AsciiFont } from './core/ascii-font';
-import { Paths } from './constants';
-import { AllUnicodeBlocks, Language } from './core/unicode-block';
-import { join } from './util/fs';
-import { createProgressIndicator, formatHex } from './util/format';
-import { execute } from './util/executor';
+import { Syllable } from './core/hangul-syllable.js';
+import { AsciiFont } from './core/ascii-font.js';
+import { Paths } from './constants.js';
+import { AllUnicodeBlocks, Language } from './core/unicode-block.js';
+import { join } from './util/fs.js';
+import { createProgressIndicator, formatHex } from './util/format.js';
+import { execute } from './util/executor.js';
 
 function* hangulPhonemeCombination(): Generator<[onset: string, nucleus: string, coda: string | undefined]> {
   for (const onset of 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ') {

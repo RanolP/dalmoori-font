@@ -1,4 +1,3 @@
-import endent from 'endent';
 import { load, Font } from 'opentype.js';
 import {
   BLOCKS,
@@ -6,13 +5,16 @@ import {
   findCharacter,
   fullCodepointsOf,
   UnicodeBlock,
-} from './util/unidata';
-import { Paths } from './constants';
-import { createProgressIndicator, formatHex } from './util/format';
-import { join, mkdirs, PathLike, writeFile } from './util/fs';
+} from './util/unidata.js';
+import { Paths } from './constants.js';
+import { createProgressIndicator, formatHex } from './util/format.js';
+import { join, mkdirs, PathLike, writeFile } from './util/fs.js';
 import { encodeHTML } from 'entities';
-import { pathItemEquals, makePathsForComparison } from './util/opentype-paper';
-import { execute } from './util/executor';
+import { pathItemEquals, makePathsForComparison } from './util/opentype-paper.js';
+import { execute } from './util/executor.js';
+import endentModule from 'endent';
+const endent = (endentModule as unknown as { default: typeof endentModule }).default;
+
 
 export interface FontInfo {
   path: PathLike;

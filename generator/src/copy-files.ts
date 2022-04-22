@@ -1,5 +1,5 @@
-import { Paths } from './constants';
-import { copyFile, join, mkdirs, rimraf } from './util/fs';
+import { Paths } from './constants.js';
+import { copyFile, join, mkdirs, rimraf } from './util/fs.js';
 
 export async function copyFiles(): Promise<void> {
   await rimraf(Paths.artifacts);

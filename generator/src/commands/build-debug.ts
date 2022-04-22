@@ -1,6 +1,6 @@
-import { generateFont } from '../generate-font';
-import { generateAsciiFont } from '../generate-ascii-font';
-import { renderAsciiFont } from '../render-ascii-font';
+import { generateFont } from '../generate-font.js';
+import { generateAsciiFont } from '../generate-ascii-font.js';
+import { renderAsciiFont } from '../render-ascii-font.js';
 
 (async () => {
   const asciiFontMap = await renderAsciiFont();

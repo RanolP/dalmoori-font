@@ -1,6 +1,6 @@
 import { PathLike, readFile } from 'fs';
 import { optimize, OptimizeOptions } from 'svgo';
-import { Path } from './path';
+import { Path } from './path.js';
 
 export type AsciiFontData = Array<[x: number, y: number]>;
 

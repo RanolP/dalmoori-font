@@ -1,6 +1,6 @@
-import { generateAdvancementReport } from '../generate-advancement-report';
-import { join } from '../util/fs';
-import { Paths } from '../constants';
+import { generateAdvancementReport } from '../generate-advancement-report.js';
+import { join } from '../util/fs.js';
+import { Paths } from '../constants.js';
 
 (async () => {
   await generateAdvancementReport(

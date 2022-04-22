@@ -1,5 +1,5 @@
 import { Character, getBlocks, getCharacters } from 'unidata';
-import { binarySearch, range } from './algorithm';
+import { binarySearch, range } from './algorithm.js';
 
 export interface UnicodeBlock {
   name: string;

@@ -1,5 +1,5 @@
-import { Paths } from '../constants';
-import { rimraf } from '../util/fs';
+import { Paths } from '../constants.js';
+import { rimraf } from '../util/fs.js';
 
 export async function clean(): Promise<void> {
   console.log(`Cleaning ${Paths.build}`);

@@ -1,25 +1,25 @@
-import { generateFont } from '../generate-font';
-import { renderAsciiFont } from '../render-ascii-font';
+import { generateFont } from '../generate-font.js';
+import { renderAsciiFont } from '../render-ascii-font.js';
 import {
   getLatestCommitHash,
   getLatestCommitUnixtime,
   getLatestTagCommitHash,
   shortenCommitHash,
-} from '../vendors/git';
+} from '../vendors/git.js';
 import {
   downloadArtifact,
   listWorkflowRuns,
   WorkflowRun,
   Artifact,
   downloadLatestRelease,
-} from '../vendors/github';
-import { copyFiles } from '../copy-files';
-import { generateAdvancementReport } from '../generate-advancement-report';
-import { join } from '../util/fs';
-import { Paths } from '../constants';
-import { generateArtifactZip } from '../generate-artifact-zip';
-import { generateAsciiFont } from '../generate-ascii-font';
-import { generateStatus } from '../generate-status';
+} from '../vendors/github.js';
+import { copyFiles } from '../copy-files.js';
+import { generateAdvancementReport } from '../generate-advancement-report.js';
+import { join } from '../util/fs.js';
+import { Paths } from '../constants.js';
+import { generateArtifactZip } from '../generate-artifact-zip.js';
+import { generateAsciiFont } from '../generate-ascii-font.js';
+import { generateStatus } from '../generate-status.js';
 
 (async () => {
   const asciiFontMap = await renderAsciiFont();

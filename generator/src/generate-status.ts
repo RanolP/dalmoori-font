@@ -1,7 +1,7 @@
-import { Paths } from './constants';
-import { join, mkdirs, writeFile } from './util/fs';
-import { AsciiFont } from './core/ascii-font';
-import { AllUnicodeBlocks, Language } from './core/unicode-block';
+import { Paths } from './constants.js';
+import { join, mkdirs, writeFile } from './util/fs.js';
+import { AsciiFont } from './core/ascii-font.js';
+import { AllUnicodeBlocks, Language } from './core/unicode-block.js';
 
 export interface BlockStatus {
   currentlySupport: number;

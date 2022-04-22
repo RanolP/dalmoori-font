@@ -1,12 +1,12 @@
 import svg2ttf from 'svg2ttf';
 import SVGIcons2SVGFont, { Glyphs } from 'svgicons2svgfont';
 import { Readable } from 'stream';
-import { AsciiFont } from './core/ascii-font';
+import { AsciiFont } from './core/ascii-font.js';
 import { createWriteStream } from 'fs';
-import { exists, join, mkdirs, readFile, writeFile } from './util/fs';
-import { OnePixel, Paths, Version } from './constants';
-import { createProgressIndicator, formatHex } from './util/format';
-import { execute } from './util/executor';
+import { exists, join, mkdirs, readFile, writeFile } from './util/fs.js';
+import { OnePixel, Paths, Version } from './constants.js';
+import { createProgressIndicator, formatHex } from './util/format.js';
+import { execute } from './util/executor.js';
 import ttf2woff from 'ttf2woff';
 import ttf2woff2 from 'ttf2woff2';
 import { createHash } from 'crypto';

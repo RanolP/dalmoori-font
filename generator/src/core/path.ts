@@ -1,12 +1,13 @@
-import { AsciiFont } from './ascii-font';
-import { FullWidthSize } from '../constants';
+import { AsciiFont } from './ascii-font.js';
+import { FullWidthSize } from '../constants.js';
 import {
   createProject,
   PathItem,
   Shape,
   CompoundPath,
-} from '../util/opentype-paper';
-import endent from 'endent';
+} from '../util/opentype-paper.js';
+import endentModule from 'endent';
+const endent = (endentModule as unknown as { default: typeof endentModule }).default;
 
 export class Path {
   private readonly actualWidth: number;

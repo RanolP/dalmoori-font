@@ -1,7 +1,8 @@
 import paper from 'paper';
 import opentype from 'opentype.js';
 import { optimize, OptimizeOptions } from 'svgo';
-import endent from 'endent';
+import endentModule from 'endent';
+const endent = (endentModule as unknown as { default: typeof endentModule }).default;
 
 export type PathItem = paper.PathItem;
 export const PathItem = paper.PathItem;

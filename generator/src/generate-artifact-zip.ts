@@ -1,6 +1,6 @@
 import JSZip from 'jszip';
-import { Paths } from './constants';
-import { exists, join, readFile, writeFile } from './util/fs';
+import { Paths } from './constants.js';
+import { exists, join, readFile, writeFile } from './util/fs.js';
 
 export async function generateArtifactZip(): Promise<void> {
   const zip = new JSZip();
