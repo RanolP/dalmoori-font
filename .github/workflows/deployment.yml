@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 14.x
           cache: pnpm
-          cache-dependency-path: 'generator/package.json'
+          cache-dependency-path: 'generator/pnpm-lock.yaml'
 
       - name: Install
         working-directory: ./generator
