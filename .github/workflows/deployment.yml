@@ -19,11 +19,11 @@ jobs:
 
       - name: Install
         working-directory: ./generator
-        run: npm install
+        run: pnpm install
 
       - name: Build
         working-directory: ./generator
-        run: npm run build:release
+        run: pnpm run build:release
         env:
           REPO_ACCESS_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
 

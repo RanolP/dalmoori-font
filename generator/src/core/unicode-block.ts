@@ -75,11 +75,31 @@ export const CjkUnifiedIdeographs: UnicodeBlock = {
     [Language.Korean]: '대한민국 중고등학교 기초한자 1800자 향해서!',
   },
 };
+export const Hiragana: UnicodeBlock = {
+  name: {
+    [Language.English]: 'Hiragana',
+    [Language.Korean]: '히라가나',
+  },
+  id: 'hiragana',
+  from: 0x3040,
+  to: 0x309f,
+};
+export const Katakana: UnicodeBlock = {
+  name: {
+    [Language.English]: 'Katakana',
+    [Language.Korean]: '가타카나',
+  },
+  id: 'katakana',
+  from: 0x30a0,
+  to: 0x30ff,
+};
 
 export const AllUnicodeBlocks = [
   BasicLatin,
   Latin1Supplement,
   HangulCompatiblityJamo,
   HangulSyllable,
+  Hiragana,
+  Katakana,
   CjkUnifiedIdeographs,
 ];

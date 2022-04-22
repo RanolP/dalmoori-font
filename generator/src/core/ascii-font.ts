@@ -31,7 +31,7 @@ export class AsciiFont {
     public readonly width: number,
     public readonly height: number,
     public readonly data: AsciiFontData,
-    private pathGetter: undefined | (() => Path) = undefined
+    private pathGetter: undefined | (() => Path) = undefined,
   ) {}
 
   static async fromFile(file: PathLike): Promise<AsciiFont> {
@@ -62,7 +62,7 @@ export class AsciiFont {
     const meta: any = {};
     if (!source.startsWith('---')) {
       throw new Error(
-        `Expect meta area, but starts with ${source.substring(0, 5)}...`
+        `Expect meta area, but starts with ${source.substring(0, 5)}...`,
       );
     }
     const metaEnd = source.indexOf('---', 4);
@@ -147,7 +147,7 @@ export class AsciiFont {
       return this;
     } else if (this.width !== other.width || this.height !== other.height) {
       throw new Error(
-        `Cannot combine tiles: this=${this.width}x${this.height}, other=${other.width}x${other.height}`
+        `Cannot combine tiles: this=${this.width}x${this.height}, other=${other.width}x${other.height}`,
       );
     } else {
       const union = [...this.data];
@@ -159,7 +159,7 @@ export class AsciiFont {
         }
       }
       return new AsciiFont({}, this.width, this.height, union, () =>
-        this.renderPath().unite(other.renderPath())
+        this.renderPath().unite(other.renderPath()),
       );
     }
   }
@@ -169,9 +169,9 @@ export class AsciiFont {
       .map((_, y) =>
         Array.from({ length: this.width })
           .map((_, x) =>
-            this.data.some(([ox, oy]) => ox === x && oy === y) ? '#' : '.'
+            this.data.some(([ox, oy]) => ox === x && oy === y) ? '#' : '.',
           )
-          .join(' ')
+          .join(' '),
       )
       .join('\n');
   }
@@ -186,6 +186,10 @@ export class AsciiFont {
   async renderSvg(): Promise<string> {
     const path = this.renderPath();
     const optimized = optimize(path.renderToSvg(), svgoOptions);
-    return optimized.data;
+    if ('data' in optimized) {
+      return optimized.data;
+    } else {
+      throw new Error(optimized.error);
+    }
   }
 }

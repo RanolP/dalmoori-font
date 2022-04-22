@@ -28,15 +28,10 @@ export function createProgressIndicator(label: string, total: number): AbstractP
       [
         label.padEnd(LabelWidth),
         ':bar',
-        '·',
         chalk.green(':current / :total'),
-        '·',
         chalk.magenta(':percent'),
-        '·',
         chalk.yellow(':rate char/s'),
-        '·',
         chalk.blue('ETA :etas'),
-        '·',
         ':elapseds used',
       ].join(' '),
       {
